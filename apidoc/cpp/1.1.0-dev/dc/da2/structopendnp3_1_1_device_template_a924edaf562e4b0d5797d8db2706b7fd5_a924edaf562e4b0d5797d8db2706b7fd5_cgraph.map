@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$df/d55/classopendnp3_1_1_i_data_observer_a485777a1e4f65d22ead2da560a8f5035.html#a485777a1e4f65d22ead2da560a8f5035" title="Update or receive a Binary measurement, must have transaction started." alt="" coords="335,32,575,61"/>
+<area shape="rect" id="node5" href="$d0/d64/classopendnp3_1_1_i_transactable_ae371bd60c9febd801f113774ee33be38.html#ae371bd60c9febd801f113774ee33be38" title="opendnp3::ITransactable::InProgress" alt="" coords="625,5,876,35"/>
+<area shape="rect" id="node7" href="$df/d55/classopendnp3_1_1_i_data_observer_a63c466b664b0dd9316a327d4d5c63ebb.html#a63c466b664b0dd9316a327d4d5c63ebb" title="opendnp3::IDataObserver::_Update" alt="" coords="627,59,875,88"/>
+</map>

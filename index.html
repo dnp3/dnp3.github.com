@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>open source dnp3</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <img src="images/opendnp3.png" class="dnp"/>
+        <h2>open source for the smart grid</h2>                       
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+        
+<h3>Welcome to opendnp3</h3>
+
+This is a commerically supported, rigorously tested, open source implementation of <a href="http://standards.ieee.org/findstds/standard/1815-2012.html">IEEE-1815</a> (dnp3). The core library
+is C++ that can target many server and embedded platforms. Java and .NET bindings are provided. 
+
+<h3>open source tools</h3>
+
+<ul>
+	<li><a href="http://github.com/automatakllc/dnp3">opendnp3</a> - the core library</li>
+	<li><a href="http://github.com/automatakllc/psimulator">psimulator</a> - a dnp3 simulator / test set</li>
+	<li><a href="http://github.com/automatakllc/dnp4s">dnp4s</a> - conformance and security testing</li>
+</ul>
+
+<h3>Why would I use this over a competitor?</h3>
+
+<ul>
+	<li>Zero cost evaluation</li>
+	<li>Free, open tools</li>
+	<li>More affordable licensing and maintaince costs</li>
+	<li>Written in modern C++ and designed to target an OS</li>
+	<li>Non-blocking, event-driven architecture with <a href="https://github.com/automatakllc/dnp3/wiki/Where%27s-the-super-loop%3F">better efficiency and lower latency than competitors</a></li>
+	<li>Multi-core scalability for large frontends and device simulations</li>		
+	<li>Simple, consistent programming model that lowers time to market</li>		
+</ul>
+
+<h3>How is it licensed?</h3>
+<p>
+Automatak's <a href="http://www.github.com/automatakllc/dnp3">repository</a> is licensed under a combination of the Affero GNU Public License v3 (<a href="http://www.gnu.org/licenses/agpl-3.0.html">AGPLv3</a>) and the
+Apache2 license. AGPLv3 has a strong <a href ="http://en.wikipedia.org/wiki/Copyleft">copyleft</a> clause that is triggered even if the code is only used in a network application to communicate with a 3rd party. 
+If your organization can abide by the rules of the original Apache2 license and AGPLv3, then the software is of no cost.
+</p>
+
+<h3>How can I use this in my proprietary codebase?</h3>
+
+<p>Purchase a per-machine, per-product, or enterprise-wide commercial license from <a href="mailto:jadamcrain@automatak.com">Automatak</a>.</p>
+
+<h3>What services does Automatak offer?</h3>
+<ul>
+	<li>Low-cost subscriptions for updates and technical support</li>
+	<li>Contract software engineering services to integrate opendnp3 into your products</li>
+	<li>On-site dnp3 consultation and training</li>
+	<li>conformance testing</li>
+	<li>security audits with code coverage reports</li>
+</ul>
+
+<h3>How long has this library been around?</h3>
+
+<p>	
+It's a commercial fork of <a href="http://code.google.com/p/dnp3">this project</a>. The library has been in use since 2006 and has been deployed extensively across the industry since the open source release in 2010. This fork is maintained and supported by Automatak, LLC. We have modified the library as described below. These improvements are based on almost 7 years of user feedback and real world deployment experience.  
+</p>
+
+<h3>Why would I use this over the original project?</h3>
+
+<p> 
+	Many engineering hours have gone into improving the original codebase. Here's a short list:
+	<ul>		
+		<li>Defect-free custom Java bindings</li>
+		<li>Mutli-core support improves responsiveness and scalability</li>		
+		<li>Extensive online documentation</li>
+		<li>Object model for managing channels, masters, and outstations </li>		
+		<li>Masters and outstations independently handle all control functions and types</li>
+		<li>There is only one library with one namespace: opendnp3</li>
+		<li>Updated build systems (GNU autotools and Visual Studio)</li>
+		<li>Size reduction for embedded systems</li>
+		<li>Aggressive release cycle and compliance maintainence</li>
+		<li>Additional security testing</li>
+	</ul> 
+</p> 
+
+</section>
+
+        <aside id="sidebar">
+        	<h2>Links</h2>
+          	<h3><a href="http://groups.google.com/group/automatak-opendnp3">support list</a></h3>
+        	<h3><a href="http://www.github.com/automatakllc/dnp3">source code</a></h3>
+        	<h3><a href="http://www.github.com/automatakllc/dnp3/wiki">getting started</a></h3>
+		<h3><a href="./apidoc/java/1.1.0-SNAPSHOT/index.html">java docs</a></h3>
+		<h3><a href="./apidoc/clr/1.1.0-dev/Index.html">.NET docs</a></h3>		
+		<h3><a href="./apidoc/cpp/1.1.0-dev/index.html">C++ docs</a></h3>
+          	<h3><a href="http://www.dnp.org">dnp3 user's group</a></h3>          	          	
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-38232316-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

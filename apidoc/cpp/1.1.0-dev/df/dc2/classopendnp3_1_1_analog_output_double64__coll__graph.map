@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$de/d0e/classopendnp3_1_1_analog_output.html" title="{opendnp3::AnalogOutput\&lt; double \&gt;\n|+ mStatus\l# mValue\l|+ AnalogOutput()\l+ GetValue()\l+ ToString()\l}" alt="" coords="5,363,259,501"/>
+<area shape="rect" id="node4" href="$df/de6/classdouble.html" title="{double\n||}" alt="" coords="20,184,84,269"/>
+<area shape="rect" id="node8" href="$de/d0e/classopendnp3_1_1_analog_output.html" title="The object to represent a setpoint request from the master." alt="" coords="216,158,435,295"/>
+</map>

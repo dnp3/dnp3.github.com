@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node7" href="$d9/d6d/classopendnp3_1_1_null_data_observer.html" title="Singleton IDataObserver that ignores all messages." alt="" coords="5,805,211,891"/>
+<area shape="rect" id="node9" href="$d4/df6/classopendnp3_1_1_printing_data_observer.html" title="Singleton IDataObserver that prints all measurements to the console." alt="" coords="235,805,464,891"/>
+<area shape="rect" id="node2" href="$df/d55/classopendnp3_1_1_i_data_observer.html" title="IDataObserver is the key interface between master/outstation and the &quot;application&quot; code..." alt="" coords="135,243,321,501"/>
+<area shape="rect" id="node4" href="$d0/d64/classopendnp3_1_1_i_transactable.html" title="A Transaction is a group of point Updates that occur together." alt="" coords="140,5,316,195"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$de/d15/classopendnp3_1_1_indexed_object.html" title="A common base class for all objects that must have an index associated with them." alt="" coords="199,287,383,372"/>
+<area shape="rect" id="node15" href="$da/d41/classopendnp3_1_1_place_holder_object.html" title="A dummy object that acts like a placeholder for a group/variation identifier." alt="" coords="407,278,617,381"/>
+<area shape="rect" id="node5" href="$d2/d89/classopendnp3_1_1_bitfield_object.html" title="{opendnp3::BitfieldObject\n||+ GetSize()\l+ GetType()\l+ Read()\l+ Write()\l+ Zero()\l+ StaticRead()\l+ StaticWrite()\l}" alt="" coords="5,429,184,619"/>
+<area shape="rect" id="node7" href="$d5/de7/classopendnp3_1_1_fixed_object.html" title="{opendnp3::FixedObject\n||+ GetSize()\l+ GetType()\l}" alt="" coords="208,473,373,575"/>
+<area shape="rect" id="node13" href="$de/ddc/classopendnp3_1_1_size_by_variation_object.html" title="Represents a byte stream object whose size is encoded by its variation." alt="" coords="397,464,632,584"/>
+<area shape="rect" id="node9" href="$d1/d73/classopendnp3_1_1_stream_object.html" title="{opendnp3::StreamObject\&lt; T \&gt;\n||+ HasQuality()\l+ Read()\l+ Write()\l}" alt="" coords="181,667,400,787"/>
+<area shape="rect" id="node11" href="$d4/d59/classopendnp3_1_1_command_object.html" title="{opendnp3::CommandObject\&lt; T \&gt;\n||+ GetValueBytes()\l}" alt="" coords="172,835,409,920"/>
+</map>

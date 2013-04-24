@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$d1/d73/classopendnp3_1_1_stream_object.html" title="{opendnp3::StreamObject\&lt; T \&gt;\n||+ HasQuality()\l+ Read()\l+ Write()\l}" alt="" coords="15,563,233,683"/>
+<area shape="rect" id="node4" href="$d5/de7/classopendnp3_1_1_fixed_object.html" title="{opendnp3::FixedObject\n||+ GetSize()\l+ GetType()\l}" alt="" coords="41,411,207,514"/>
+<area shape="rect" id="node6" href="$de/d15/classopendnp3_1_1_indexed_object.html" title="A common base class for all objects that must have an index associated with them." alt="" coords="32,277,216,363"/>
+<area shape="rect" id="node8" href="$dc/d45/classopendnp3_1_1_object_base.html" title="A class that represents a very generic DNP3 object." alt="" coords="41,5,207,229"/>
+</map>
