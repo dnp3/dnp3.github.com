@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/src/opendnp3/Master.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/src/opendnp3</a> - Master.h<span style="font-size: 80%;"> (source / <a href="Master.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">71</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">162</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #ifndef __MASTER_H_
+<span class="lineNum">      30 </span>                :            : #define __MASTER_H_
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :            : #include &lt;opendnp3/MasterConfig.h&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;opendnp3/ObjectInterfaces.h&gt;
+<span class="lineNum">      34 </span>                :            : #include &lt;opendnp3/Visibility.h&gt;
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :            : #include &quot;Loggable.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;TimeSource.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;IExecutor.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;APDU.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;AppInterfaces.h&quot;
+<span class="lineNum">      41 </span>                :            : #include &quot;ObjectReadIterator.h&quot;
+<span class="lineNum">      42 </span>                :            : #include &quot;MasterSchedule.h&quot;
+<span class="lineNum">      43 </span>                :            : #include &quot;VtoReader.h&quot;
+<span class="lineNum">      44 </span>                :            : #include &quot;VtoWriter.h&quot;
+<span class="lineNum">      45 </span>                :            : #include &quot;QueuedCommandProcessor.h&quot;
+<span class="lineNum">      46 </span>                :            : #include &quot;CommandHelpers.h&quot;
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :            : // includes for tasks
+<span class="lineNum">      49 </span>                :            : #include &quot;StartupTasks.h&quot;
+<span class="lineNum">      50 </span>                :            : #include &quot;DataPoll.h&quot;
+<span class="lineNum">      51 </span>                :            : #include &quot;VtoTransmitTask.h&quot;
+<span class="lineNum">      52 </span>                :            : #include &quot;CommandTask.h&quot;
+<span class="lineNum">      53 </span>                :            : #include &quot;StackBase.h&quot;
+<span class="lineNum">      54 </span>                :            : 
+<span class="lineNum">      55 </span>                :            : namespace opendnp3
+<span class="lineNum">      56 </span>                :            : {
+<span class="lineNum">      57 </span>                :            : 
+<span class="lineNum">      58 </span>                :            : class IDataObserver;
+<span class="lineNum">      59 </span>                :            : class ITask;
+<span class="lineNum">      60 </span>                :            : class AsyncTaskGroup;
+<span class="lineNum">      61 </span>                :            : class IExecutor;
+<span class="lineNum">      62 </span>                :            : class ITimeSource;
+<span class="lineNum">      63 </span>                :            : class AsyncTaskContinuous;
+<span class="lineNum">      64 </span>                :            : class AsyncTaskBase;
+<span class="lineNum">      65 </span>                :            : class CopyableBuffer;
+<span class="lineNum">      66 </span>                :            : class AMS_Base;
+<span class="lineNum">      67 </span>                :            : 
+<span class="lineNum">      68 </span>                :            : /**
+<span class="lineNum">      69 </span>                :            :  * Represents a DNP3 Master endpoint. The tasks functions can perform all the
+<span class="lineNum">      70 </span>                :            :  * various things that a Master might need to do.
+<span class="lineNum">      71 </span>                :            :  *
+<span class="lineNum">      72 </span>                :            :  * Coordination of tasks is handled by a higher level task scheduler.
+<span class="lineNum">      73 </span>                :            :  */
+<span class="lineNum">      74 </span>                :            : class DLL_LOCAL Master : public Loggable, public IAppUser, public StackBase, private ICommandProcessor
+<span class="lineNum">      75 </span>                :            : {
+<span class="lineNum">      76 </span>                :            :         friend class AMS_Base;
+<span class="lineNum">      77 </span>                :            :         friend class AMS_Idle;
+<span class="lineNum">      78 </span>                :            :         friend class AMS_OpenBase;
+<span class="lineNum">      79 </span>                :            :         friend class AMS_Waiting;
+<span class="lineNum">      80 </span>                :            :         friend class MasterSchedule;
+<span class="lineNum">      81 </span>                :            : 
+<span class="lineNum">      82 </span>                :            : public:
+<a name="83"><span class="lineNum">      83 </span>                :            : </a>
+<span class="lineNum">      84 </span>                :<span class="lineNoCov">          0 :         Master(Logger*, MasterConfig aCfg, IAppLayer*, IDataObserver*, AsyncTaskGroup*, IExecutor*, ITimeSource* apTimeSrc = TimeSource::Inst());</span>
+<a name="85"><span class="lineNum">      85 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :         virtual ~Master() {}</span></a>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 15 was not executed"> # </span>][<span class="branchNoExec" title="Branch 20 was not executed"> # </span><span class="branchNoExec" title="Branch 21 was not executed"> # </span>]
+<span class="lineNum">      86 </span>                :            : 
+<span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 :         ICommandProcessor* GetCommandProcessor() {</span>
+<span class="lineNum">      88 </span>                :<span class="lineNoCov">          0 :                 return &amp;mCommandQueue;</span>
+<span class="lineNum">      89 </span>                :            :         }
+<span class="lineNum">      90 </span>                :            : 
+<span class="lineNum">      91 </span>                :            :         /**
+<span class="lineNum">      92 </span>                :            :          * Returns a pointer to the VTO reader object.  This should only be
+<span class="lineNum">      93 </span>                :            :          * used by internal subsystems in the library.  External user
+<span class="lineNum">      94 </span>                :            :          * applications should associate IVtoCallbacks objects using the
+<span class="lineNum">      95 </span>                :            :          * AsyncStackManager.
+<span class="lineNum">      96 </span>                :            :          *
+<a name="97"><span class="lineNum">      97 </span>                :            :          * @return                      a pointer to the VtoReader instance for this stack</a>
+<span class="lineNum">      98 </span>                :            :          */
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :         VtoReader* GetVtoReader() {</span>
+<span class="lineNum">     100 </span>                :<span class="lineNoCov">          0 :                 return &amp;mVtoReader;</span>
+<span class="lineNum">     101 </span>                :            :         }
+<span class="lineNum">     102 </span>                :            : 
+<span class="lineNum">     103 </span>                :            :         /**
+<span class="lineNum">     104 </span>                :            :          * Returns a pointer to the VtoWriter instance for this stack.
+<span class="lineNum">     105 </span>                :            :          * External user applications should use this hook to write new data
+<span class="lineNum">     106 </span>                :            :          * to the Slave (outstation) via the Master.
+<span class="lineNum">     107 </span>                :            :          *
+<a name="108"><span class="lineNum">     108 </span>                :            :          * @return                      a pointer to the VtoWriter instance for this stack</a>
+<span class="lineNum">     109 </span>                :            :          */
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :         IVtoWriter* GetVtoWriter() {</span>
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 :                 return &amp;mVtoWriter;</span>
+<span class="lineNum">     112 </span>                :            :         }
+<span class="lineNum">     113 </span>                :            : 
+<span class="lineNum">     114 </span>                :            :         /* Implement IAppUser - callbacks from the app layer */
+<span class="lineNum">     115 </span>                :            : 
+<span class="lineNum">     116 </span>                :            :         void OnLowerLayerUp();
+<span class="lineNum">     117 </span>                :            :         void OnLowerLayerDown();
+<span class="lineNum">     118 </span>                :            : 
+<span class="lineNum">     119 </span>                :            :         void OnSolSendSuccess();
+<span class="lineNum">     120 </span>                :            :         void OnSolFailure();
+<span class="lineNum">     121 </span>                :            : 
+<span class="lineNum">     122 </span>                :            :         void OnUnsolSendSuccess();
+<span class="lineNum">     123 </span>                :            :         void OnUnsolFailure();
+<span class="lineNum">     124 </span>                :            : 
+<span class="lineNum">     125 </span>                :            :         // override the response functions
+<span class="lineNum">     126 </span>                :            :         void OnPartialResponse(const APDU&amp;);
+<span class="lineNum">     127 </span>                :            :         void OnFinalResponse(const APDU&amp;);
+<span class="lineNum">     128 </span>                :            :         void OnUnsolResponse(const APDU&amp;);
+<span class="lineNum">     129 </span>                :            : 
+<span class="lineNum">     130 </span>                :            :         /**
+<span class="lineNum">     131 </span>                :            :          * Implements IAppUser::IsMaster().
+<span class="lineNum">     132 </span>                :            :          *
+<a name="133"><span class="lineNum">     133 </span>                :            :          * @return                      'true' since this is a Master implementation</a>
+<span class="lineNum">     134 </span>                :            :          */
+<span class="lineNum">     135 </span>                :<span class="lineNoCov">          0 :         bool IsMaster() {</span>
+<span class="lineNum">     136 </span>                :<span class="lineNoCov">          0 :                 return true;</span>
+<span class="lineNum">     137 </span>                :            :         }
+<span class="lineNum">     138 </span>                :            : 
+<span class="lineNum">     139 </span>                :            :         // These methods are inherited privately
+<span class="lineNum">     140 </span>                :            :         void SelectAndOperate(const ControlRelayOutputBlock&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     141 </span>                :            :         void DirectOperate(const ControlRelayOutputBlock&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     142 </span>                :            : 
+<span class="lineNum">     143 </span>                :            :         void SelectAndOperate(const AnalogOutputInt16&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     144 </span>                :            :         void DirectOperate(const AnalogOutputInt16&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     145 </span>                :            : 
+<span class="lineNum">     146 </span>                :            :         void SelectAndOperate(const AnalogOutputInt32&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     147 </span>                :            :         void DirectOperate(const AnalogOutputInt32&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     148 </span>                :            : 
+<span class="lineNum">     149 </span>                :            :         void SelectAndOperate(const AnalogOutputFloat32&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     150 </span>                :            :         void DirectOperate(const AnalogOutputFloat32&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     151 </span>                :            : 
+<span class="lineNum">     152 </span>                :            :         void SelectAndOperate(const AnalogOutputDouble64&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     153 </span>                :            :         void DirectOperate(const AnalogOutputDouble64&amp; arCommand, size_t aIndex, std::function&lt;void (CommandResponse)&gt; aCallback);
+<span class="lineNum">     154 </span>                :            : 
+<span class="lineNum">     155 </span>                :            : private:
+<a name="156"><span class="lineNum">     156 </span>                :            : </a>
+<a name="157"><span class="lineNum">     157 </span>                :            :         template &lt;class T&gt;</a>
+<span class="lineNum">     158 </span>                :<span class="lineNoCov">          0 :         void ConfigureCommandTask(const T&amp; arCommand, size_t aIndex, CommandObject&lt;T&gt;* apObj, std::function&lt;void (CommandResponse)&gt; aCallback) {</span>
+<span class="lineNum">     159 </span>                :<span class="lineNoCov">          0 :                 auto formatter = [ = ](APDU &amp; arAPDU, FunctionCodes aCode) {</span>
+<a name="160"><span class="lineNum">     160 </span>                :<span class="lineNoCov">          0 :                         return CommandHelpers::ConfigureRequest(arAPDU, aCode, arCommand, aIndex, apObj);</span></a>
+<a name="161"><span class="lineNum">     161 </span>                :<span class="lineNoCov">          0 :                 };</span></a>
+<span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 :                 auto responder = [ = ](CommandStatus aStatus) {</span>
+<span class="lineNum">     163 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         mpExecutor-&gt;Post([ = ]() {</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>][<span class="branchNoExec" title="Branch 20 was not executed"> # </span><span class="branchNoExec" title="Branch 21 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 23 was not executed"> # </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span>][<span class="branchNoExec" title="Branch 26 was not executed"> # </span><span class="branchNoExec" title="Branch 27 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 29 was not executed"> # </span><span class="branchNoExec" title="Branch 30 was not executed"> # </span>][<span class="branchNoExec" title="Branch 32 was not executed"> # </span><span class="branchNoExec" title="Branch 33 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 40 was not executed"> # </span><span class="branchNoExec" title="Branch 41 was not executed"> # </span>][<span class="branchNoExec" title="Branch 43 was not executed"> # </span><span class="branchNoExec" title="Branch 44 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 46 was not executed"> # </span><span class="branchNoExec" title="Branch 47 was not executed"> # </span>][<span class="branchNoExec" title="Branch 49 was not executed"> # </span><span class="branchNoExec" title="Branch 50 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 52 was not executed"> # </span><span class="branchNoExec" title="Branch 53 was not executed"> # </span>][<span class="branchNoExec" title="Branch 60 was not executed"> # </span><span class="branchNoExec" title="Branch 61 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 63 was not executed"> # </span><span class="branchNoExec" title="Branch 64 was not executed"> # </span>][<span class="branchNoExec" title="Branch 66 was not executed"> # </span><span class="branchNoExec" title="Branch 67 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 69 was not executed"> # </span><span class="branchNoExec" title="Branch 70 was not executed"> # </span>][<span class="branchNoExec" title="Branch 72 was not executed"> # </span><span class="branchNoExec" title="Branch 73 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 80 was not executed"> # </span><span class="branchNoExec" title="Branch 81 was not executed"> # </span>][<span class="branchNoExec" title="Branch 83 was not executed"> # </span><span class="branchNoExec" title="Branch 84 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 86 was not executed"> # </span><span class="branchNoExec" title="Branch 87 was not executed"> # </span>][<span class="branchNoExec" title="Branch 89 was not executed"> # </span><span class="branchNoExec" title="Branch 90 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 92 was not executed"> # </span><span class="branchNoExec" title="Branch 93 was not executed"> # </span>]
+<span class="lineNum">     164 </span>[<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]:<span class="lineNoCov">          0 :                                 aCallback(CommandResponse(aStatus));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 17 was not executed"> # </span><span class="branchNoExec" title="Branch 18 was not executed"> # </span>][<span class="branchNoExec" title="Branch 24 was not executed"> # </span><span class="branchNoExec" title="Branch 25 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 31 was not executed"> # </span><span class="branchNoExec" title="Branch 32 was not executed"> # </span>]
+<span class="lineNum">     165 </span>                :<span class="lineNoCov">          0 :                         });</span>
+<span class="lineNum">     166 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 };</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>]
+<span class="lineNum">     167 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 mCommandTask.Configure(formatter, responder);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 19 was not executed"> # </span><span class="branchNoExec" title="Branch 20 was not executed"> # </span>][<span class="branchNoExec" title="Branch 22 was not executed"> # </span><span class="branchNoExec" title="Branch 23 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 30 was not executed"> # </span><span class="branchNoExec" title="Branch 31 was not executed"> # </span>][<span class="branchNoExec" title="Branch 33 was not executed"> # </span><span class="branchNoExec" title="Branch 34 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 37 was not executed"> # </span><span class="branchNoExec" title="Branch 38 was not executed"> # </span>][<span class="branchNoExec" title="Branch 40 was not executed"> # </span><span class="branchNoExec" title="Branch 41 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 43 was not executed"> # </span><span class="branchNoExec" title="Branch 44 was not executed"> # </span>][<span class="branchNoExec" title="Branch 46 was not executed"> # </span><span class="branchNoExec" title="Branch 47 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 49 was not executed"> # </span><span class="branchNoExec" title="Branch 50 was not executed"> # </span>][<span class="branchNoExec" title="Branch 52 was not executed"> # </span><span class="branchNoExec" title="Branch 53 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 60 was not executed"> # </span><span class="branchNoExec" title="Branch 61 was not executed"> # </span>][<span class="branchNoExec" title="Branch 63 was not executed"> # </span><span class="branchNoExec" title="Branch 64 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 67 was not executed"> # </span><span class="branchNoExec" title="Branch 68 was not executed"> # </span>][<span class="branchNoExec" title="Branch 70 was not executed"> # </span><span class="branchNoExec" title="Branch 71 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 73 was not executed"> # </span><span class="branchNoExec" title="Branch 74 was not executed"> # </span>][<span class="branchNoExec" title="Branch 76 was not executed"> # </span><span class="branchNoExec" title="Branch 77 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 79 was not executed"> # </span><span class="branchNoExec" title="Branch 80 was not executed"> # </span>][<span class="branchNoExec" title="Branch 82 was not executed"> # </span><span class="branchNoExec" title="Branch 83 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 90 was not executed"> # </span><span class="branchNoExec" title="Branch 91 was not executed"> # </span>][<span class="branchNoExec" title="Branch 93 was not executed"> # </span><span class="branchNoExec" title="Branch 94 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 97 was not executed"> # </span><span class="branchNoExec" title="Branch 98 was not executed"> # </span>][<span class="branchNoExec" title="Branch 100 was not executed"> # </span><span class="branchNoExec" title="Branch 101 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 103 was not executed"> # </span><span class="branchNoExec" title="Branch 104 was not executed"> # </span>][<span class="branchNoExec" title="Branch 106 was not executed"> # </span><span class="branchNoExec" title="Branch 107 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 109 was not executed"> # </span><span class="branchNoExec" title="Branch 110 was not executed"> # </span>][<span class="branchNoExec" title="Branch 112 was not executed"> # </span><span class="branchNoExec" title="Branch 113 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 120 was not executed"> # </span><span class="branchNoExec" title="Branch 121 was not executed"> # </span>][<span class="branchNoExec" title="Branch 123 was not executed"> # </span><span class="branchNoExec" title="Branch 124 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 126 was not executed"> # </span><span class="branchNoExec" title="Branch 127 was not executed"> # </span>][<span class="branchNoExec" title="Branch 129 was not executed"> # </span><span class="branchNoExec" title="Branch 130 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 132 was not executed"> # </span><span class="branchNoExec" title="Branch 133 was not executed"> # </span>][<span class="branchNoExec" title="Branch 135 was not executed"> # </span><span class="branchNoExec" title="Branch 136 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 138 was not executed"> # </span><span class="branchNoExec" title="Branch 139 was not executed"> # </span>][<span class="branchNoExec" title="Branch 141 was not executed"> # </span><span class="branchNoExec" title="Branch 142 was not executed"> # </span>]
+<span class="lineNum">     168 </span>                :<span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     169 </span>                :            : 
+<span class="lineNum">     170 </span>                :            :         void UpdateState(StackState aState);
+<span class="lineNum">     171 </span>                :            : 
+<span class="lineNum">     172 </span>                :            :         /* Task functions used for scheduling */
+<span class="lineNum">     173 </span>                :            : 
+<span class="lineNum">     174 </span>                :            :         void WriteIIN(ITask* apTask);
+<span class="lineNum">     175 </span>                :            :         void IntegrityPoll(ITask* apTask);
+<span class="lineNum">     176 </span>                :            :         void EventPoll(ITask* apTask, int aClassMask);
+<span class="lineNum">     177 </span>                :            :         void ChangeUnsol(ITask* apTask, bool aEnable, int aClassMask);
+<span class="lineNum">     178 </span>                :            :         void SyncTime(ITask* apTask);
+<span class="lineNum">     179 </span>                :            :         void ProcessCommand(ITask* apTask);
+<span class="lineNum">     180 </span>                :            :         void TransmitVtoData(ITask* apTask);
+<span class="lineNum">     181 </span>                :            : 
+<span class="lineNum">     182 </span>                :            :         IINField mLastIIN;                                              // last IIN received from the outstation
+<span class="lineNum">     183 </span>                :            : 
+<span class="lineNum">     184 </span>                :            :         void ProcessIIN(const IINField&amp; arIIN);     // Analyze IIN bits and react accordingly
+<span class="lineNum">     185 </span>                :            :         void ProcessDataResponse(const APDU&amp;);      // Read data output of solicited or unsolicited response and publish
+<span class="lineNum">     186 </span>                :            :         void StartTask(MasterTaskBase*, bool aInit);    // Starts a task running
+<span class="lineNum">     187 </span>                :            : 
+<span class="lineNum">     188 </span>                :            :         QueuedCommandProcessor mCommandQueue;                           // Threadsafe queue for buffering command requests
+<span class="lineNum">     189 </span>                :            : 
+<span class="lineNum">     190 </span>                :            :         /**
+<span class="lineNum">     191 </span>                :            :          * The VtoReader instance for this stack which will direct received
+<span class="lineNum">     192 </span>                :            :          * VTO data to the user application.  The user application should
+<span class="lineNum">     193 </span>                :            :          * register an IVtoCallbacks instance for the desired virtual channel
+<span class="lineNum">     194 </span>                :            :          * id(s) using AsyncStackManager::AddVtoChannel().
+<span class="lineNum">     195 </span>                :            :          */
+<span class="lineNum">     196 </span>                :            :         VtoReader mVtoReader;
+<span class="lineNum">     197 </span>                :            : 
+<span class="lineNum">     198 </span>                :            :         /**
+<span class="lineNum">     199 </span>                :            :          * The VtoWriter instance for this stack which will buffer new data
+<span class="lineNum">     200 </span>                :            :          * from the user application to the DNP3 stream.  This handler is
+<span class="lineNum">     201 </span>                :            :          * thread-safe.
+<span class="lineNum">     202 </span>                :            :          */
+<span class="lineNum">     203 </span>                :            :         VtoWriter mVtoWriter;
+<span class="lineNum">     204 </span>                :            : 
+<span class="lineNum">     205 </span>                :            :         APDU mRequest;                                                  // APDU that gets reused for requests
+<span class="lineNum">     206 </span>                :            : 
+<span class="lineNum">     207 </span>                :            :         IAppLayer* mpAppLayer;                                  // lower application layer
+<span class="lineNum">     208 </span>                :            :         IDataObserver* mpPublisher;                             // where the data measurements are pushed
+<span class="lineNum">     209 </span>                :            :         AsyncTaskGroup* mpTaskGroup;                    // How task execution is controlled
+<span class="lineNum">     210 </span>                :            :         ITimeSource* mpTimeSrc;                                 // Access to UTC, normally system time but can be a mock for testing
+<span class="lineNum">     211 </span>                :            : 
+<span class="lineNum">     212 </span>                :            :         AMS_Base* mpState;                                              // Pointer to active state, start in TLS_Closed
+<span class="lineNum">     213 </span>                :            :         MasterTaskBase* mpTask;                                 // The current master task
+<span class="lineNum">     214 </span>                :            :         ITask* mpScheduledTask;                                 // The current scheduled task
+<a name="215"><span class="lineNum">     215 </span>                :            :         StackState mState;                                              // Current state of the master</a>
+<span class="lineNum">     216 </span>                :            : 
+<span class="lineNum">     217 </span>                :<span class="lineNoCov">          0 :         StackState GetState() {</span>
+<span class="lineNum">     218 </span>                :<span class="lineNoCov">          0 :                 return mState;</span>
+<span class="lineNum">     219 </span>                :            :         }
+<span class="lineNum">     220 </span>                :            : 
+<span class="lineNum">     221 </span>                :            :         /* --- Task plumbing --- */
+<span class="lineNum">     222 </span>                :            : 
+<span class="lineNum">     223 </span>                :            :         MasterSchedule mSchedule;                               // The machinery needed for scheduling
+<span class="lineNum">     224 </span>                :            : 
+<span class="lineNum">     225 </span>                :            :         ClassPoll mClassPoll;                                   // used to perform integrity/exception scans
+<span class="lineNum">     226 </span>                :            :         ClearRestartIIN mClearRestart;                  // used to clear the restart
+<span class="lineNum">     227 </span>                :            :         ConfigureUnsol mConfigureUnsol;                 // manipulates how the outstation does unsolictied reporting
+<span class="lineNum">     228 </span>                :            :         TimeSync mTimeSync;                                             // performs time sync on the outstation
+<span class="lineNum">     229 </span>                :            :         CommandTask mCommandTask;                               // performs command execution
+<span class="lineNum">     230 </span>                :            :         VtoTransmitTask mVtoTransmitTask;               // used to transmit VTO data in mVtoWriter
+<span class="lineNum">     231 </span>                :            : 
+<span class="lineNum">     232 </span>                :            : };
+<span class="lineNum">     233 </span>                :            : 
+<span class="lineNum">     234 </span>                :            : }
+<span class="lineNum">     235 </span>                :            : 
+<span class="lineNum">     236 </span>                :            : /* vim: set ts=4 sw=4: */
+<span class="lineNum">     237 </span>                :            : 
+<span class="lineNum">     238 </span>                :            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

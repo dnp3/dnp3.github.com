@@ -1,0 +1,649 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/src/opendnp3/ResponseContext.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/src/opendnp3</a> - ResponseContext.h<span style="font-size: 80%;"> (source / <a href="ResponseContext.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">43</td>
+            <td class="headerCovTableEntry">119</td>
+            <td class="headerCovTableEntryLo">36.1 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntryLo">64.9 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">104</td>
+            <td class="headerCovTableEntry">558</td>
+            <td class="headerCovTableEntryLo">18.6 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #ifndef __RESPONSE_CONTEXT_H_
+<span class="lineNum">      30 </span>                :            : #define __RESPONSE_CONTEXT_H_
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :            : #include &lt;queue&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;functional&gt;
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            : #include &lt;boost/bind.hpp&gt;
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :            : #include &quot;Loggable.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;APDU.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;Database.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;SlaveEventBuffer.h&quot;
+<span class="lineNum">      41 </span>                :            : #include &quot;DNPDatabaseTypes.h&quot;
+<span class="lineNum">      42 </span>                :            : 
+<span class="lineNum">      43 </span>                :            : #include &lt;opendnp3/ClassMask.h&gt;
+<span class="lineNum">      44 </span>                :            : #include &lt;opendnp3/Location.h&gt;
+<span class="lineNum">      45 </span>                :            : 
+<span class="lineNum">      46 </span>                :            : namespace opendnp3
+<span class="lineNum">      47 </span>                :            : {
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : class Database;
+<span class="lineNum">      50 </span>                :            : class SlaveEventBuffer;
+<span class="lineNum">      51 </span>                :            : class ObjectBase;
+<span class="lineNum">      52 </span>                :            : class SlaveResponseTypes;
+<span class="lineNum">      53 </span>                :            : 
+<span class="lineNum">      54 </span>                :            : 
+<span class="lineNum">      55 </span>                :            : /**
+<span class="lineNum">      56 </span>                :            :  * Builds and tracks the state of responses. Interprets FC_READ requests or
+<span class="lineNum">      57 </span>                :            :  * can be prompted for an unsolicited response fragment.
+<span class="lineNum">      58 </span>                :            :  *
+<a name="59"><span class="lineNum">      59 </span>                :            :  * Coordinates the Database and SlaveEventBuffer.</a>
+<span class="lineNum">      60 </span>                :            :  */
+<span class="lineNum">      61 </span>                :<span class="lineCov">          1 : class DLL_LOCAL ResponseContext : public Loggable</span>
+<span class="lineNum">      62 </span>                :            : {
+<span class="lineNum">      63 </span>                :            :         enum Mode {
+<span class="lineNum">      64 </span>                :            :                 UNDEFINED,
+<span class="lineNum">      65 </span>                :            :                 SOLICITED,
+<span class="lineNum">      66 </span>                :            :                 UNSOLICITED
+<span class="lineNum">      67 </span>                :            :         };
+<span class="lineNum">      68 </span>                :            : 
+<span class="lineNum">      69 </span>                :            :         enum RequestType {
+<span class="lineNum">      70 </span>                :            :                 RT_STATIC = 0,
+<span class="lineNum">      71 </span>                :            :                 RT_EVENT = 1
+<span class="lineNum">      72 </span>                :            :         };
+<span class="lineNum">      73 </span>                :            : 
+<span class="lineNum">      74 </span>                :            :         //used as a key that decides in what order response headers are packed into APDUs
+<span class="lineNum">      75 </span>                :            :         struct ResponseKey {
+<span class="lineNum">      76 </span>                :            : 
+<span class="lineNum">      77 </span>                :            :                 ResponseKey();
+<span class="lineNum">      78 </span>                :            : 
+<span class="lineNum">      79 </span>                :            :                 ResponseKey(RequestType aType, size_t aOrder);
+<span class="lineNum">      80 </span>                :            : 
+<span class="lineNum">      81 </span>                :            :                 RequestType mType;
+<span class="lineNum">      82 </span>                :            :                 size_t mOrder;
+<span class="lineNum">      83 </span>                :            : 
+<span class="lineNum">      84 </span>                :            :                 // custom less than function used by STL
+<span class="lineNum">      85 </span>                :            :                 bool operator()(const ResponseKey&amp; a, const ResponseKey&amp; b) const;
+<span class="lineNum">      86 </span>                :            :         };
+<span class="lineNum">      87 </span>                :            : 
+<span class="lineNum">      88 </span>                :            : 
+<span class="lineNum">      89 </span>                :            :         /**
+<span class="lineNum">      90 </span>                :            :         * This function takes an APDU, writes some data to it, and modifies the current state of the
+<span class="lineNum">      91 </span>                :            :         * ResponseContext class. It returns true if all of the data was written before the APDU was full,
+<span class="lineNum">      92 </span>                :            :         * and false otherwise.
+<span class="lineNum">      93 </span>                :            :         */
+<span class="lineNum">      94 </span>                :            :         typedef std::function&lt;bool (APDU&amp;)&gt; WriteFunction;
+<span class="lineNum">      95 </span>                :            : 
+<span class="lineNum">      96 </span>                :            : public:
+<span class="lineNum">      97 </span>                :            :         ResponseContext(Logger*, Database*, SlaveResponseTypes* apRspTypes, const EventMaxConfig&amp; arEventMaxConfig);
+<span class="lineNum">      98 </span>                :            : 
+<span class="lineNum">      99 </span>                :            :         Mode GetMode() {
+<span class="lineNum">     100 </span>                :            :                 return mMode;
+<a name="101"><span class="lineNum">     101 </span>                :            :         }</a>
+<span class="lineNum">     102 </span>                :            : 
+<span class="lineNum">     103 </span>                :<span class="lineCov">          1 :         IEventBuffer* GetBuffer() {</span>
+<span class="lineNum">     104 </span>                :<span class="lineCov">          1 :                 return &amp;mBuffer;</span>
+<span class="lineNum">     105 </span>                :            :         }
+<span class="lineNum">     106 </span>                :            : 
+<span class="lineNum">     107 </span>                :            :         // Setup the response context with a new read request
+<span class="lineNum">     108 </span>                :            :         IINField Configure(const APDU&amp; arRequest);
+<span class="lineNum">     109 </span>                :            : 
+<span class="lineNum">     110 </span>                :            :         // Configure the APDU with response data for the next fragment
+<span class="lineNum">     111 </span>                :            :         void LoadResponse(APDU&amp;);
+<span class="lineNum">     112 </span>                :            : 
+<span class="lineNum">     113 </span>                :            :         bool HasEvents(ClassMask aMask);
+<span class="lineNum">     114 </span>                :            : 
+<span class="lineNum">     115 </span>                :            :         /** Configure the APDU with a FIR/FIN unsol packet based on
+<span class="lineNum">     116 </span>                :            :                 current state of the event buffer
+<span class="lineNum">     117 </span>                :            :         */
+<span class="lineNum">     118 </span>                :            :         void LoadUnsol(APDU&amp;, const IINField&amp; arIIN, ClassMask aMask);
+<a name="119"><span class="lineNum">     119 </span>                :            : </a>
+<span class="lineNum">     120 </span>                :            :         // @return TRUE is all of the response data has already been written
+<span class="lineNum">     121 </span>                :<span class="lineCov">      16245 :         bool IsComplete() {</span>
+<span class="lineNum">     122 </span>                :<span class="lineCov">      16245 :                 return IsEmpty();</span>
+<span class="lineNum">     123 </span>                :            :         }
+<span class="lineNum">     124 </span>                :            : 
+<span class="lineNum">     125 </span>                :            :         // Reset the state of the object to the initial state
+<span class="lineNum">     126 </span>                :            :         void Reset();
+<span class="lineNum">     127 </span>                :            : 
+<span class="lineNum">     128 </span>                :            :         // Tell the buffer to reset written events
+<span class="lineNum">     129 </span>                :            :         void ClearWritten();
+<span class="lineNum">     130 </span>                :            : 
+<span class="lineNum">     131 </span>                :            :         // Clear written events and reset the state of the object
+<span class="lineNum">     132 </span>                :            :         void ClearAndReset();
+<span class="lineNum">     133 </span>                :            : 
+<span class="lineNum">     134 </span>                :            : private:
+<span class="lineNum">     135 </span>                :            : 
+<span class="lineNum">     136 </span>                :            :         // configure the state for unsol, return true of events exist
+<span class="lineNum">     137 </span>                :            :         bool SelectUnsol(ClassMask aMask);
+<span class="lineNum">     138 </span>                :            : 
+<span class="lineNum">     139 </span>                :            :         SlaveEventBuffer mBuffer;
+<span class="lineNum">     140 </span>                :            : 
+<span class="lineNum">     141 </span>                :            :         Mode mMode;
+<span class="lineNum">     142 </span>                :            : 
+<span class="lineNum">     143 </span>                :            :         // @return TRUE if all of the data has been written
+<span class="lineNum">     144 </span>                :            :         bool LoadStaticData(APDU&amp;);
+<span class="lineNum">     145 </span>                :            : 
+<span class="lineNum">     146 </span>                :            :         /**
+<span class="lineNum">     147 </span>                :            :          * Loads the previously buffered events into the APDU response.
+<span class="lineNum">     148 </span>                :            :          *
+<span class="lineNum">     149 </span>                :            :          * @param arAPDU                        the APDU fragment that should be used to store
+<span class="lineNum">     150 </span>                :            :          *                                                      the events
+<span class="lineNum">     151 </span>                :            :          *
+<span class="lineNum">     152 </span>                :            :          * @return                                      'true' if all of the events were written, or
+<span class="lineNum">     153 </span>                :            :          *                                                      'false' if more events remain
+<span class="lineNum">     154 </span>                :            :          */
+<span class="lineNum">     155 </span>                :            :         bool LoadEventData(APDU&amp; arAPDU);
+<span class="lineNum">     156 </span>                :            : 
+<span class="lineNum">     157 </span>                :            :         void FinalizeResponse(APDU&amp;, bool aFIN);
+<span class="lineNum">     158 </span>                :            :         bool IsEmpty();
+<span class="lineNum">     159 </span>                :            : 
+<span class="lineNum">     160 </span>                :            :         bool IsStaticEmpty();
+<span class="lineNum">     161 </span>                :            :         bool IsEventEmpty();
+<span class="lineNum">     162 </span>                :            : 
+<span class="lineNum">     163 </span>                :            :         Database* mpDB;                         // Pointer to the database for static data
+<span class="lineNum">     164 </span>                :            :         bool mFIR;
+<span class="lineNum">     165 </span>                :            :         bool mFIN;
+<span class="lineNum">     166 </span>                :            :         SlaveResponseTypes* mpRspTypes;
+<span class="lineNum">     167 </span>                :            : 
+<span class="lineNum">     168 </span>                :            :         IINField mTempIIN;
+<span class="lineNum">     169 </span>                :            :         bool mLoadedEventData;
+<span class="lineNum">     170 </span>                :            : 
+<a name="171"><span class="lineNum">     171 </span>                :            :         template&lt;class T&gt;</a>
+<span class="lineNum">     172 </span>                :            :         struct EventRequest {
+<span class="lineNum">     173 </span>                :<span class="lineNoCov">          0 :                 EventRequest(const StreamObject&lt;T&gt;* apObj, size_t aCount = std::numeric_limits&lt;size_t&gt;::max()) :</span>
+<span class="lineNum">     174 </span>                :            :                         pObj(apObj),
+<span class="lineNum">     175 </span>                :<span class="lineNoCov">          0 :                         count(aCount)</span>
+<span class="lineNum">     176 </span>                :<span class="lineNoCov">          0 :                 {}</span>
+<span class="lineNum">     177 </span>                :            : 
+<span class="lineNum">     178 </span>                :            :                 const StreamObject&lt;T&gt;* pObj;              // Type to use to write
+<span class="lineNum">     179 </span>                :            :                 size_t count;                                           // Number of events to read
+<span class="lineNum">     180 </span>                :            :         };
+<a name="181"><span class="lineNum">     181 </span>                :            : </a>
+<span class="lineNum">     182 </span>                :            :         struct VtoEventRequest {
+<span class="lineNum">     183 </span>                :<span class="lineNoCov">          0 :                 VtoEventRequest(const SizeByVariationObject* apObj, size_t aCount = std::numeric_limits&lt;size_t&gt;::max()) :</span>
+<span class="lineNum">     184 </span>                :            :                         pObj(apObj),
+<span class="lineNum">     185 </span>                :<span class="lineNoCov">          0 :                         count(aCount)</span>
+<span class="lineNum">     186 </span>                :<span class="lineNoCov">          0 :                 {}</span>
+<span class="lineNum">     187 </span>                :            : 
+<span class="lineNum">     188 </span>                :            :                 const SizeByVariationObject* pObj;      // Type to use to write
+<span class="lineNum">     189 </span>                :            :                 size_t count;                                           // Number of events to read
+<span class="lineNum">     190 </span>                :            :         };
+<span class="lineNum">     191 </span>                :            : 
+<span class="lineNum">     192 </span>                :            :         typedef std::map &lt;ResponseKey, WriteFunction, ResponseKey &gt;       WriteMap;
+<span class="lineNum">     193 </span>                :            : 
+<span class="lineNum">     194 </span>                :            :         // the queue that tracks the pending static write operations
+<span class="lineNum">     195 </span>                :            :         WriteMap mStaticWriteMap;
+<span class="lineNum">     196 </span>                :            : 
+<span class="lineNum">     197 </span>                :            :         typedef std::deque&lt; EventRequest&lt;Binary&gt; &gt;                          BinaryEventQueue;
+<span class="lineNum">     198 </span>                :            :         typedef std::deque&lt; EventRequest&lt;Analog&gt; &gt;                          AnalogEventQueue;
+<span class="lineNum">     199 </span>                :            :         typedef std::deque&lt; EventRequest&lt;Counter&gt; &gt;                         CounterEventQueue;
+<span class="lineNum">     200 </span>                :            :         typedef std::deque&lt;VtoEventRequest&gt;                                               VtoEventQueue;
+<span class="lineNum">     201 </span>                :            : 
+<span class="lineNum">     202 </span>                :            :         //these queues track what events have been requested
+<span class="lineNum">     203 </span>                :            :         BinaryEventQueue mBinaryEvents;
+<span class="lineNum">     204 </span>                :            :         AnalogEventQueue mAnalogEvents;
+<span class="lineNum">     205 </span>                :            :         CounterEventQueue mCounterEvents;
+<span class="lineNum">     206 </span>                :            :         VtoEventQueue mVtoEvents;
+<span class="lineNum">     207 </span>                :            : 
+<span class="lineNum">     208 </span>                :            :         template &lt;class T&gt;
+<span class="lineNum">     209 </span>                :            :         bool LoadEvents(APDU&amp; arAPDU, std::deque&lt; EventRequest&lt;T&gt; &gt;&amp; arQueue);
+<span class="lineNum">     210 </span>                :            : 
+<span class="lineNum">     211 </span>                :            :         bool LoadVtoEvents(APDU&amp; arAPDU);
+<span class="lineNum">     212 </span>                :            : 
+<span class="lineNum">     213 </span>                :            :         //wrappers that select the event buffer and add to the event queues
+<span class="lineNum">     214 </span>                :            :         void SelectEvents(PointClass aClass, size_t aNum = std::numeric_limits&lt;size_t&gt;::max());
+<span class="lineNum">     215 </span>                :            : 
+<span class="lineNum">     216 </span>                :            :         template &lt;class T&gt;
+<span class="lineNum">     217 </span>                :            :         size_t SelectEvents(PointClass aClass, const StreamObject&lt;T&gt;* apObj, std::deque&lt; EventRequest&lt;T&gt; &gt;&amp; arQueue, size_t aNum = std::numeric_limits&lt;size_t&gt;::max());
+<span class="lineNum">     218 </span>                :            : 
+<span class="lineNum">     219 </span>                :            :         size_t SelectVtoEvents(PointClass aClass, const SizeByVariationObject* apObj, size_t aNum);
+<span class="lineNum">     220 </span>                :            : 
+<span class="lineNum">     221 </span>                :            : 
+<span class="lineNum">     222 </span>                :            :         // T is the event type
+<span class="lineNum">     223 </span>                :            :         template &lt;class T&gt;
+<span class="lineNum">     224 </span>                :            :         size_t IterateIndexed(EventRequest&lt;T&gt;&amp; arIters, typename EvtItr&lt; EventInfo&lt;T&gt; &gt;::Type&amp; arIter, APDU&amp; arAPDU);
+<span class="lineNum">     225 </span>                :            : 
+<span class="lineNum">     226 </span>                :            :         template &lt;class T&gt;
+<span class="lineNum">     227 </span>                :            :         size_t IterateCTO(const StreamObject&lt;T&gt;* apObj, size_t aCount, typename EvtItr&lt; EventInfo&lt;T&gt; &gt;::Type&amp; arIter, APDU&amp; arAPDU);
+<span class="lineNum">     228 </span>                :            : 
+<span class="lineNum">     229 </span>                :            :         template &lt;class T&gt;
+<span class="lineNum">     230 </span>                :            :         size_t CalcPossibleCTO(typename EvtItr&lt; EventInfo&lt;T&gt; &gt;::Type aIter, size_t aMax);
+<span class="lineNum">     231 </span>                :            : 
+<span class="lineNum">     232 </span>                :            :         size_t IterateIndexed(VtoEventRequest&amp; arRequest, VtoDataEventIter&amp; arIter, APDU&amp; arAPDU);
+<span class="lineNum">     233 </span>                :            : 
+<span class="lineNum">     234 </span>                :            : 
+<span class="lineNum">     235 </span>                :            :         // Static write functions
+<span class="lineNum">     236 </span>                :            : 
+<span class="lineNum">     237 </span>                :            :         template &lt;class T&gt;
+<span class="lineNum">     238 </span>                :            :         void RecordStaticObjects(StreamObject&lt;typename T::MeasType&gt;* apObject, const HeaderReadIterator&amp; arIter);
+<span class="lineNum">     239 </span>                :            : 
+<span class="lineNum">     240 </span>                :            :         template &lt;class T&gt;
+<span class="lineNum">     241 </span>                :            :         void RecordStaticObjectsByRange(StreamObject&lt;typename T::MeasType&gt;* apObject, size_t aStart, size_t aStop);
+<span class="lineNum">     242 </span>                :            : 
+<span class="lineNum">     243 </span>                :            :         template &lt;class T&gt;
+<span class="lineNum">     244 </span>                :            :         bool WriteStaticObjects(StreamObject&lt;typename T::MeasType&gt;* apObject, typename StaticIter&lt;T&gt;::Type&amp; arStart, typename StaticIter&lt;T&gt;::Type&amp; arStop, const ResponseKey&amp; arKey, APDU&amp; arAPDU);
+<span class="lineNum">     245 </span>                :            : };
+<a name="246"><span class="lineNum">     246 </span>                :            : </a>
+<span class="lineNum">     247 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     248 </span>                :<span class="lineCov">       2277 : size_t ResponseContext::SelectEvents(PointClass aClass, const StreamObject&lt;T&gt;* apObj, std::deque&lt; EventRequest&lt;T&gt; &gt;&amp; arQueue, size_t aNum)</span>
+<span class="lineNum">     249 </span>                :            : {
+<span class="lineNum">     250 </span>                :<span class="lineCov">       2277 :         size_t num = mBuffer.Select(Convert(T::MeasEnum), aClass, aNum);</span>
+<span class="lineNum">     251 </span>                :            : 
+<span class="lineNum">     252 </span>  [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 759 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 759 times"> + </span> :<span class="lineCov">       2277 :         if (num &gt; 0) {</span>
+<span class="lineNum">         </span>         <span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 759 times"> + </span>]
+<span class="lineNum">     253 </span>                :<span class="lineNoCov">          0 :                 EventRequest&lt;T&gt; r(apObj, aNum);</span>
+<span class="lineNum">     254 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 arQueue.push_back(r);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     255 </span>                :            :         }
+<span class="lineNum">     256 </span>                :            : 
+<span class="lineNum">     257 </span>                :<span class="lineCov">       2277 :         return num;</span>
+<span class="lineNum">     258 </span>                :            : }
+<a name="259"><span class="lineNum">     259 </span>                :            : </a>
+<span class="lineNum">     260 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     261 </span>                :<span class="lineCov">       1285 : void ResponseContext::RecordStaticObjects(StreamObject&lt;typename T::MeasType&gt;* apObject, const HeaderReadIterator&amp; arIter)</span>
+<span class="lineNum">     262 </span>                :            : {
+<span class="lineNum">     263 </span>                :<span class="lineCov">       1285 :         size_t num = mpDB-&gt;NumType(T::MeasType::MeasEnum);</span>
+<span class="lineNum">     264 </span>                :            : 
+<span class="lineNum">     265 </span>                :            :         //figure out what type of read request this is
+<span class="lineNum">     266 </span>  [<span class="branchCov" title="Branch 2 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span> :<span class="lineCov">       1285 :         switch(arIter-&gt;GetHeaderType()) {</span>
+<span class="lineNum">         </span><span class="branchCov" title="Branch 8 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 9 was not taken"> - </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchNoCov" title="Branch 11 was not taken"> - </span><span class="branchCov" title="Branch 14 was taken 257 times"> + </span> 
+<span class="lineNum">         </span><span class="branchNoCov" title="Branch 15 was not taken"> - </span><span class="branchNoCov" title="Branch 16 was not taken"> - </span><span class="branchNoCov" title="Branch 17 was not taken"> - </span><span class="branchCov" title="Branch 20 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 21 was not taken"> - </span> 
+<span class="lineNum">         </span><span class="branchNoCov" title="Branch 22 was not taken"> - </span><span class="branchNoCov" title="Branch 23 was not taken"> - </span><span class="branchCov" title="Branch 26 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 27 was not taken"> - </span><span class="branchNoCov" title="Branch 28 was not taken"> - </span> 
+<span class="lineNum">         </span>            <span class="branchNoCov" title="Branch 29 was not taken"> - </span>]
+<span class="lineNum">     267 </span>                :            :         case(OHT_ALL_OBJECTS): {
+<span class="lineNum">     268 </span>[<span class="branchCov" title="Branch 0 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       1285 :                         if(num &gt; 0) this-&gt;RecordStaticObjectsByRange&lt;T&gt;(apObject, 0, num - 1);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 12 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">     269 </span>                :            :                 }
+<span class="lineNum">     270 </span>                :<span class="lineCov">       1285 :                 break;</span>
+<span class="lineNum">     271 </span>                :            : 
+<span class="lineNum">     272 </span>                :            :         case(OHT_RANGED_2_OCTET):
+<span class="lineNum">     273 </span>                :            :         case(OHT_RANGED_4_OCTET):
+<span class="lineNum">     274 </span>                :            :         case(OHT_RANGED_8_OCTET): {
+<span class="lineNum">     275 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         if(num &gt; 0) {</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     276 </span>                :<span class="lineNoCov">          0 :                                 size_t max = num - 1;</span>
+<span class="lineNum">     277 </span>                :            :                                 RangeInfo ri;
+<span class="lineNum">     278 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                                 const IRangeHeader* pHeader = reinterpret_cast&lt;const IRangeHeader*&gt;(arIter-&gt;GetHeader());</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>][<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">     279 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                                 pHeader-&gt;GetRange(*arIter, ri);</span>
+<span class="lineNum">         </span>  [<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">         </span>  [<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>]
+<span class="lineNum">         </span>  [<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span>]
+<span class="lineNum">         </span>  [<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span><span class="branchNoExec" title="Branch 25 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 27 was not executed"> # </span><span class="branchNoExec" title="Branch 28 was not executed"> # </span>]
+<span class="lineNum">     280 </span>                :            : 
+<span class="lineNum">     281 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :                                 if(ri.Start &gt; max || ri.Stop &gt; max || ri.Start &gt; ri.Stop) this-&gt;mTempIIN.SetParameterError(true);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 15 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span>][<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 23 was not executed"> # </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span>][<span class="branchNoExec" title="Branch 25 was not executed"> # </span><span class="branchNoExec" title="Branch 26 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 28 was not executed"> # </span><span class="branchNoExec" title="Branch 29 was not executed"> # </span>][<span class="branchNoExec" title="Branch 30 was not executed"> # </span><span class="branchNoExec" title="Branch 31 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 32 was not executed"> # </span><span class="branchNoExec" title="Branch 33 was not executed"> # </span>]
+<span class="lineNum">     282 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                                 else this-&gt;RecordStaticObjectsByRange&lt;T&gt;(apObject, ri.Start, ri.Stop);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>]
+<span class="lineNum">     283 </span>                :            :                         }
+<span class="lineNum">     284 </span>                :<span class="lineNoCov">          0 :                         else this-&gt;mTempIIN.SetParameterError(true);</span>
+<span class="lineNum">     285 </span>                :            :                 }
+<span class="lineNum">     286 </span>                :<span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     287 </span>                :            : 
+<span class="lineNum">     288 </span>                :            :         case(OHT_COUNT_1_OCTET):
+<span class="lineNum">     289 </span>                :            :         case(OHT_COUNT_2_OCTET):
+<span class="lineNum">     290 </span>                :            :         case(OHT_COUNT_4_OCTET): {
+<span class="lineNum">     291 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         if(num &gt; 0) {</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     292 </span>                :<span class="lineNoCov">          0 :                                 size_t max = num - 1;</span>
+<span class="lineNum">     293 </span>                :<span class="lineNoCov">          0 :                                 size_t count = reinterpret_cast&lt;const ICountHeader*&gt;(arIter-&gt;GetHeader())-&gt;GetCount(*arIter);</span>
+<span class="lineNum">     294 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span> :<span class="lineNoCov">          0 :                                 if(count &gt; 0) {</span>
+<span class="lineNum">         </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span> 
+<span class="lineNum">         </span>            <span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     295 </span>                :<span class="lineNoCov">          0 :                                         size_t start = 0;</span>
+<span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 :                                         size_t stop = count - 1;</span>
+<span class="lineNum">     297 </span>                :            : 
+<span class="lineNum">     298 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :                                         if(start &gt; max || stop &gt; max || start &gt; stop) this-&gt;mTempIIN.SetParameterError(true);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 15 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span>][<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 23 was not executed"> # </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span>][<span class="branchNoExec" title="Branch 25 was not executed"> # </span><span class="branchNoExec" title="Branch 26 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 28 was not executed"> # </span><span class="branchNoExec" title="Branch 29 was not executed"> # </span>][<span class="branchNoExec" title="Branch 30 was not executed"> # </span><span class="branchNoExec" title="Branch 31 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 32 was not executed"> # </span><span class="branchNoExec" title="Branch 33 was not executed"> # </span>]
+<span class="lineNum">     299 </span>                :<span class="lineNoCov">          0 :                                         else this-&gt;RecordStaticObjectsByRange&lt;T&gt;(apObject, start, stop);</span>
+<span class="lineNum">     300 </span>                :            :                                 }
+<span class="lineNum">     301 </span>                :<span class="lineNoCov">          0 :                                 else this-&gt;mTempIIN.SetParameterError(true);</span>
+<span class="lineNum">     302 </span>                :            :                         }
+<span class="lineNum">     303 </span>                :<span class="lineNoCov">          0 :                         else this-&gt;mTempIIN.SetParameterError(true);</span>
+<span class="lineNum">     304 </span>                :            :                 }
+<span class="lineNum">     305 </span>                :<span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     306 </span>                :            :         }
+<span class="lineNum">     307 </span>                :<span class="lineCov">       1285 : }</span>
+<a name="308"><span class="lineNum">     308 </span>                :            : </a>
+<span class="lineNum">     309 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     310 </span>                :<span class="lineCov">       1285 : void ResponseContext::RecordStaticObjectsByRange(StreamObject&lt;typename T::MeasType&gt;* apObject, size_t aStart, size_t aStop)</span>
+<span class="lineNum">     311 </span>                :            : {
+<span class="lineNum">     312 </span>                :<span class="lineCov">       1285 :         typename StaticIter&lt;T&gt;::Type first;</span>
+<span class="lineNum">     313 </span>                :<span class="lineCov">       1285 :         typename StaticIter&lt;T&gt;::Type last;</span>
+<span class="lineNum">     314 </span>[<span class="branchCov" title="Branch 0 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       1285 :         mpDB-&gt;Begin(first);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 12 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">     315 </span>[<span class="branchCov" title="Branch 0 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       1285 :         last = first + aStop;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 12 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">     316 </span>[<span class="branchCov" title="Branch 0 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       1285 :         first = first + aStart;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 12 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">     317 </span>                :<span class="lineCov">       1285 :         ResponseKey key(RT_STATIC, this-&gt;mStaticWriteMap.size());</span>
+<span class="lineNum">     318 </span>        [<span class="branchCov" title="Branch 0 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1285 :         WriteFunction func = boost::bind(&amp;ResponseContext::WriteStaticObjects&lt;T&gt;, this, apObject, first, last, key, _1);</span>
+<span class="lineNum">         </span>  [<span class="branchCov" title="Branch 3 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">         </span>  [<span class="branchCov" title="Branch 9 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchCov" title="Branch 12 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">         </span>  [<span class="branchCov" title="Branch 15 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 16 was not taken"> - </span><span class="branchCov" title="Branch 18 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 19 was not taken"> - </span>]
+<span class="lineNum">         </span>  [<span class="branchCov" title="Branch 21 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 22 was not taken"> - </span><span class="branchCov" title="Branch 24 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 25 was not taken"> - </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 27 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 28 was not taken"> - </span>]
+<span class="lineNum">     319 </span>[<span class="branchCov" title="Branch 0 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       1285 :         this-&gt;mStaticWriteMap[key] = func;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 11 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 12 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 14 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 15 was not taken"> - </span>][<span class="branchCov" title="Branch 17 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 18 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 22 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 23 was not taken"> - </span>][<span class="branchCov" title="Branch 25 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 26 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 28 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 29 was not taken"> - </span>][<span class="branchCov" title="Branch 33 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 34 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 36 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 37 was not taken"> - </span>][<span class="branchCov" title="Branch 39 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 40 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 44 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 45 was not taken"> - </span>][<span class="branchCov" title="Branch 47 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 48 was not taken"> - </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 50 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 51 was not taken"> - </span>]
+<span class="lineNum">     320 </span>                :<span class="lineCov">       1285 : }</span>
+<a name="321"><span class="lineNum">     321 </span>                :            : </a>
+<span class="lineNum">     322 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     323 </span>                :<span class="lineCov">        482 : bool ResponseContext::WriteStaticObjects(StreamObject&lt;typename T::MeasType&gt;* apObject, typename StaticIter&lt;T&gt;::Type&amp; arStart, typename StaticIter&lt;T&gt;::Type&amp; arStop, const ResponseKey&amp; arKey, APDU&amp; arAPDU)</span>
+<span class="lineNum">     324 </span>                :            : {
+<span class="lineNum">     325 </span>                :<span class="lineCov">        482 :         size_t start = arStart-&gt;mIndex;</span>
+<span class="lineNum">     326 </span>                :<span class="lineCov">        482 :         size_t stop = arStop-&gt;mIndex;</span>
+<span class="lineNum">     327 </span>  [<span class="branchCov" title="Branch 0 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 98 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span> :<span class="lineCov">        482 :         ObjectWriteIterator owi = arAPDU.WriteContiguous(apObject, start, stop);</span>
+<span class="lineNum">         </span><span class="branchCov" title="Branch 6 was taken 98 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span><span class="branchCov" title="Branch 9 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchCov" title="Branch 12 was taken 98 times"> + </span> 
+<span class="lineNum">         </span>            <span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">     328 </span>                :            : 
+<span class="lineNum">     329 </span>[<span class="branchCov" title="Branch 0 was taken 470 times"> + </span><span class="branchCov" title="Branch 1 was taken 94 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 490 times"> + </span><span class="branchCov" title="Branch 3 was taken 98 times"> + </span>]:<span class="lineCov">       2884 :         for(size_t i = start; i &lt;= stop; ++i) {</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 4 was taken 486 times"> + </span><span class="branchCov" title="Branch 5 was taken 94 times"> + </span>][<span class="branchCov" title="Branch 6 was taken 470 times"> + </span><span class="branchCov" title="Branch 7 was taken 94 times"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 8 was taken 490 times"> + </span><span class="branchCov" title="Branch 9 was taken 98 times"> + </span>]
+<span class="lineNum">     330 </span>[<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 470 times"> + </span>][<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 490 times"> + </span>]:<span class="lineCov">       2406 :                 if(owi.IsEnd()) { // out of space in the fragment</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 7 was taken 4 times"> + </span><span class="branchCov" title="Branch 8 was taken 482 times"> + </span>][<span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchCov" title="Branch 11 was taken 470 times"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchNoCov" title="Branch 13 was not taken"> - </span><span class="branchCov" title="Branch 14 was taken 490 times"> + </span>]
+<span class="lineNum">     331 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">          4 :                         this-&gt;mStaticWriteMap[arKey] = boost::bind(&amp;ResponseContext::WriteStaticObjects&lt;T&gt;, this, apObject, arStart, arStop, arKey, _1);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 20 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 21 was not taken"> - </span>][<span class="branchCov" title="Branch 23 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 24 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 26 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 27 was not taken"> - </span>][<span class="branchNoExec" title="Branch 30 was not executed"> # </span><span class="branchNoExec" title="Branch 31 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 33 was not executed"> # </span><span class="branchNoExec" title="Branch 34 was not executed"> # </span>][<span class="branchNoExec" title="Branch 36 was not executed"> # </span><span class="branchNoExec" title="Branch 37 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 40 was not executed"> # </span><span class="branchNoExec" title="Branch 41 was not executed"> # </span>][<span class="branchNoExec" title="Branch 43 was not executed"> # </span><span class="branchNoExec" title="Branch 44 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 46 was not executed"> # </span><span class="branchNoExec" title="Branch 47 was not executed"> # </span>]
+<span class="lineNum">     332 </span>                :<span class="lineCov">          4 :                         return false;</span>
+<span class="lineNum">     333 </span>                :            :                 }
+<span class="lineNum">     334 </span>[<span class="branchCov" title="Branch 1 was taken 470 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 470 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       2402 :                 apObject-&gt;Write(*owi, arStart-&gt;mValue);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 8 was taken 490 times"> + </span><span class="branchNoCov" title="Branch 9 was not taken"> - </span>][<span class="branchCov" title="Branch 11 was taken 490 times"> + </span><span class="branchNoCov" title="Branch 12 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 15 was taken 482 times"> + </span><span class="branchNoCov" title="Branch 16 was not taken"> - </span>][<span class="branchCov" title="Branch 18 was taken 482 times"> + </span><span class="branchNoCov" title="Branch 19 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 22 was taken 470 times"> + </span><span class="branchNoCov" title="Branch 23 was not taken"> - </span>][<span class="branchCov" title="Branch 25 was taken 470 times"> + </span><span class="branchNoCov" title="Branch 26 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 29 was taken 490 times"> + </span><span class="branchNoCov" title="Branch 30 was not taken"> - </span>][<span class="branchCov" title="Branch 32 was taken 490 times"> + </span><span class="branchNoCov" title="Branch 33 was not taken"> - </span>]
+<span class="lineNum">     335 </span>                :<span class="lineCov">       2402 :                 ++arStart; //increment the iterators</span>
+<span class="lineNum">     336 </span>  [<span class="branchCov" title="Branch 0 was taken 470 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 490 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span> :<span class="lineCov">       2402 :                 ++owi;</span>
+<span class="lineNum">         </span><span class="branchCov" title="Branch 6 was taken 482 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span><span class="branchCov" title="Branch 9 was taken 470 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchCov" title="Branch 12 was taken 490 times"> + </span> 
+<span class="lineNum">         </span>            <span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">     337 </span>                :            :         }
+<span class="lineNum">     338 </span>                :            : 
+<span class="lineNum">     339 </span>                :<span class="lineCov">        482 :         return true;</span>
+<span class="lineNum">     340 </span>                :            : }
+<a name="341"><span class="lineNum">     341 </span>                :            : </a>
+<span class="lineNum">     342 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     343 </span>                :<span class="lineCov">        915 : bool ResponseContext::LoadEvents(APDU&amp; arAPDU, std::deque&lt; EventRequest&lt;T&gt; &gt;&amp; arQueue)</span>
+<span class="lineNum">     344 </span>                :            : {
+<span class="lineNum">     345 </span>                :<span class="lineCov">        915 :         typename EvtItr&lt; EventInfo&lt;T&gt; &gt;::Type itr;</span>
+<span class="lineNum">     346 </span>[<span class="branchCov" title="Branch 0 was taken 305 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 305 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        915 :         mBuffer.Begin(itr);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 305 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     347 </span>[<span class="branchCov" title="Branch 0 was taken 305 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 305 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        915 :         size_t remain = mBuffer.NumSelected(Convert(T::MeasEnum));</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 305 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 305 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 12 was taken 305 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>][<span class="branchCov" title="Branch 15 was taken 305 times"> + </span><span class="branchNoCov" title="Branch 16 was not taken"> - </span>]
+<span class="lineNum">     348 </span>                :            : 
+<span class="lineNum">     349 </span>[<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 305 times"> + </span>][<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 305 times"> + </span>]:<span class="lineCov">        915 :         while (arQueue.size() &gt; 0) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoCov" title="Branch 7 was not taken"> - </span><span class="branchCov" title="Branch 8 was taken 305 times"> + </span>]
+<span class="lineNum">     350 </span>                :            :                 /* Get the number of events requested */
+<span class="lineNum">     351 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 EventRequest&lt;T&gt;&amp; r = arQueue.front();</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     352 </span>                :            : 
+<span class="lineNum">     353 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if (r.count &gt; remain) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     354 </span>                :<span class="lineNoCov">          0 :                         r.count = remain;</span>
+<span class="lineNum">     355 </span>                :            :                 }
+<span class="lineNum">     356 </span>                :            : 
+<span class="lineNum">     357 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 size_t written = r.pObj-&gt;UseCTO() ? this-&gt;IterateCTO&lt;T&gt;(r.pObj, r.count, itr, arAPDU) : this-&gt;IterateIndexed&lt;T&gt;(r, itr, arAPDU);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>][<span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 15 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>][<span class="branchNoExec" title="Branch 19 was not executed"> # </span><span class="branchNoExec" title="Branch 20 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 22 was not executed"> # </span><span class="branchNoExec" title="Branch 23 was not executed"> # </span>][<span class="branchNoExec" title="Branch 25 was not executed"> # </span><span class="branchNoExec" title="Branch 26 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 27 was not executed"> # </span><span class="branchNoExec" title="Branch 28 was not executed"> # </span>][<span class="branchNoExec" title="Branch 30 was not executed"> # </span><span class="branchNoExec" title="Branch 31 was not executed"> # </span>]
+<span class="lineNum">     358 </span>                :<span class="lineNoCov">          0 :                 remain -= written;</span>
+<span class="lineNum">     359 </span>                :            : 
+<span class="lineNum">     360 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if (written &gt; 0) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     361 </span>                :            :                         /* At least one event was loaded */
+<span class="lineNum">     362 </span>                :<span class="lineNoCov">          0 :                         this-&gt;mLoadedEventData = true;</span>
+<span class="lineNum">     363 </span>                :            :                 }
+<span class="lineNum">     364 </span>                :            : 
+<span class="lineNum">     365 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if (written == r.count) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     366 </span>                :            :                         /* all events were written, finished with request */
+<span class="lineNum">     367 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         arQueue.pop_front();</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     368 </span>                :            :                 }
+<span class="lineNum">     369 </span>                :            :                 else {
+<span class="lineNum">     370 </span>                :            :                         /* more event data remains in the queue */
+<span class="lineNum">     371 </span>                :<span class="lineNoCov">          0 :                         r.count -= written;</span>
+<span class="lineNum">     372 </span>                :<span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">     373 </span>                :            :                 }
+<span class="lineNum">     374 </span>                :            :         }
+<span class="lineNum">     375 </span>                :            : 
+<span class="lineNum">     376 </span>                :<span class="lineCov">        915 :         return true;    // the queue has been exhausted on this iteration</span>
+<span class="lineNum">     377 </span>                :            : }
+<span class="lineNum">     378 </span>                :            : 
+<span class="lineNum">     379 </span>                :            : 
+<a name="380"><span class="lineNum">     380 </span>                :            : // T is the point info type</a>
+<span class="lineNum">     381 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     382 </span>                :<span class="lineNoCov">          0 : size_t ResponseContext::IterateIndexed(EventRequest&lt;T&gt;&amp; arRequest, typename EvtItr&lt; EventInfo&lt;T&gt; &gt;::Type&amp; arIter, APDU&amp; arAPDU)</span>
+<span class="lineNum">     383 </span>                :            : {
+<span class="lineNum">     384 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         size_t max_index = mpDB-&gt;MaxIndex(T::MeasEnum);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     385 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         IndexedWriteIterator write = arAPDU.WriteIndexed(arRequest.pObj, arRequest.count, max_index);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     386 </span>                :            : 
+<span class="lineNum">     387 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         for(size_t i = 0; i &lt; arRequest.count; ++i) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     388 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if(write.IsEnd()) return i;                                                                             //that's all we can get into this fragment</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     389 </span>                :            : 
+<span class="lineNum">     390 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 write.SetIndex(arIter-&gt;mIndex);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">     391 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 arRequest.pObj-&gt;Write(*write, arIter-&gt;mValue);                                    // do the write</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span>][<span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span>]
+<span class="lineNum">     392 </span>                :<span class="lineNoCov">          0 :                 arIter-&gt;mWritten = true;                                                                             // flag it as written</span>
+<span class="lineNum">     393 </span>                :<span class="lineNoCov">          0 :                 ++arIter;                                                                                                               // advance the read iterator</span>
+<span class="lineNum">     394 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span> :<span class="lineNoCov">          0 :                 ++write;                                                                                                                // advance the write iterator</span>
+<span class="lineNum">         </span>         <span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     395 </span>                :            :         }
+<span class="lineNum">     396 </span>                :            : 
+<span class="lineNum">     397 </span>                :<span class="lineNoCov">          0 :         return arRequest.count; // all requested events were written</span>
+<span class="lineNum">     398 </span>                :            : }
+<a name="399"><span class="lineNum">     399 </span>                :            : </a>
+<span class="lineNum">     400 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     401 </span>                :<span class="lineNoCov">          0 : size_t ResponseContext::CalcPossibleCTO(typename EvtItr&lt; EventInfo&lt;T&gt; &gt;::Type aIter, size_t aMax)</span>
+<span class="lineNum">     402 </span>                :            : {
+<span class="lineNum">     403 </span>                :<span class="lineNoCov">          0 :         millis_t start = aIter-&gt;mValue.GetTime();</span>
+<span class="lineNum">     404 </span>                :            : 
+<span class="lineNum">     405 </span>                :<span class="lineNoCov">          0 :         size_t num = 0;</span>
+<span class="lineNum">     406 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         while(num &lt; aMax) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     407 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if((aIter-&gt;mValue.GetTime() - start) &gt; UInt16LE::Max) break;</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">     408 </span>                :<span class="lineNoCov">          0 :                 ++num;</span>
+<span class="lineNum">     409 </span>                :<span class="lineNoCov">          0 :                 ++aIter;</span>
+<span class="lineNum">     410 </span>                :            :         }
+<span class="lineNum">     411 </span>                :            : 
+<span class="lineNum">     412 </span>                :<span class="lineNoCov">          0 :         return num;</span>
+<span class="lineNum">     413 </span>                :            : }
+<span class="lineNum">     414 </span>                :            : 
+<a name="415"><span class="lineNum">     415 </span>                :            : // T is the point info type</a>
+<span class="lineNum">     416 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     417 </span>                :<span class="lineNoCov">          0 : size_t ResponseContext::IterateCTO(const StreamObject&lt;T&gt;* apObj, size_t aCount, typename EvtItr&lt; EventInfo&lt;T&gt; &gt;::Type&amp; arIter, APDU&amp; arAPDU)</span>
+<span class="lineNum">     418 </span>                :            : {
+<span class="lineNum">     419 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         size_t max_index = mpDB-&gt;MaxIndex(T::MeasEnum);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     420 </span>                :            : 
+<span class="lineNum">     421 </span>                :<span class="lineNoCov">          0 :         millis_t start = arIter-&gt;mValue.GetTime();</span>
+<span class="lineNum">     422 </span>                :            : 
+<span class="lineNum">     423 </span>                :            :         // first try to write a CTO object for the first value that we're pushing
+<span class="lineNum">     424 </span>  [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span> :<span class="lineNoCov">          0 :         ObjectWriteIterator itr = arAPDU.WriteContiguous(Group51Var1::Inst(), 0, 0, QC_1B_CNT);</span>
+<span class="lineNum">         </span>         <span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">     425 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(itr.IsEnd()) return 0;</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     426 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :         else Group51Var1::Inst()-&gt;mTime.Set(*itr, start);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">     427 </span>                :            : 
+<span class="lineNum">     428 </span>                :            :         // predetermine how many results you're going to be able to fit given the time differences
+<span class="lineNum">     429 </span>                :<span class="lineNoCov">          0 :         size_t num = this-&gt;CalcPossibleCTO&lt;T&gt;(arIter, aCount);</span>
+<span class="lineNum">     430 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span> :<span class="lineNoCov">          0 :         IndexedWriteIterator write = arAPDU.WriteIndexed(apObj, num, max_index); //start the object write</span>
+<span class="lineNum">         </span>         <span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     431 </span>                :            : 
+<span class="lineNum">     432 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         for(size_t i = 0; i &lt; num; ++i) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     433 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if(write.IsEnd()) return i;                                                                             // that's all we can get into this fragment</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     434 </span>                :            : 
+<span class="lineNum">     435 </span>                :<span class="lineNoCov">          0 :                 T tmp = arIter-&gt;mValue;                                                                                      // make a copy and adjust the time</span>
+<span class="lineNum">     436 </span>                :<span class="lineNoCov">          0 :                 tmp.SetTime(tmp.GetTime() - start);</span>
+<span class="lineNum">     437 </span>                :            : 
+<span class="lineNum">     438 </span>  [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span> :<span class="lineNoCov">          0 :                 write.SetIndex(arIter-&gt;mIndex);</span>
+<span class="lineNum">         </span>         <span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">     439 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 apObj-&gt;Write(*write, tmp);                                                                           // do the write, with the tmp</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>][<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span>]
+<span class="lineNum">     440 </span>                :<span class="lineNoCov">          0 :                 arIter-&gt;mWritten = true;                                                                             // flag it as written</span>
+<span class="lineNum">     441 </span>                :<span class="lineNoCov">          0 :                 ++arIter;                                                                                                               // advance the read iterator</span>
+<span class="lineNum">     442 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 ++write;                                                                                                                // advance the write iterator</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>]
+<span class="lineNum">     443 </span>                :            :         }
+<span class="lineNum">     444 </span>                :            : 
+<span class="lineNum">     445 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(num == aCount) return num;</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     446 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         else return num + this-&gt;IterateCTO(apObj, aCount - num, arIter, arAPDU); //recurse, and do another CTO header</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     447 </span>                :            : }
+<span class="lineNum">     448 </span>                :            : 
+<span class="lineNum">     449 </span>                :            : }
+<span class="lineNum">     450 </span>                :            : 
+<span class="lineNum">     451 </span>                :            : /* vim: set ts=4 sw=4: */
+<span class="lineNum">     452 </span>                :            : 
+<span class="lineNum">     453 </span>                :            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

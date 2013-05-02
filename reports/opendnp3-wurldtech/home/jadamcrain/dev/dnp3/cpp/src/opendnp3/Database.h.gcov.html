@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/src/opendnp3/Database.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/src/opendnp3</a> - Database.h<span style="font-size: 80%;"> (source / <a href="Database.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntry">33</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntryLo">68.2 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntry">60</td>
+            <td class="headerCovTableEntryLo">41.7 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #ifndef __DATABASE_H_
+<span class="lineNum">      30 </span>                :            : #define __DATABASE_H_
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :            : #include &quot;DatabaseInterfaces.h&quot;
+<span class="lineNum">      33 </span>                :            : #include &quot;Loggable.h&quot;
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            : #include &lt;opendnp3/DNPConstants.h&gt;
+<span class="lineNum">      36 </span>                :            : #include &lt;opendnp3/IDataObserver.h&gt;
+<span class="lineNum">      37 </span>                :            : #include &lt;opendnp3/Exception.h&gt;
+<span class="lineNum">      38 </span>                :            : #include &lt;opendnp3/Location.h&gt;
+<span class="lineNum">      39 </span>                :            : #include &lt;opendnp3/Visibility.h&gt;
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :            : #include &lt;set&gt;
+<span class="lineNum">      42 </span>                :            : #include &lt;vector&gt;
+<span class="lineNum">      43 </span>                :            : #include &lt;limits&gt;
+<span class="lineNum">      44 </span>                :            : 
+<span class="lineNum">      45 </span>                :            : #ifdef max
+<span class="lineNum">      46 </span>                :            : #undef max
+<span class="lineNum">      47 </span>                :            : #endif
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : namespace opendnp3
+<span class="lineNum">      50 </span>                :            : {
+<span class="lineNum">      51 </span>                :            : 
+<span class="lineNum">      52 </span>                :            : class INotifier;
+<span class="lineNum">      53 </span>                :            : class EventLog;
+<span class="lineNum">      54 </span>                :            : struct DeviceTemplate;
+<span class="lineNum">      55 </span>                :            : 
+<span class="lineNum">      56 </span>                :            : /**
+<span class="lineNum">      57 </span>                :            : Manages the static data model of a DNP3 slave. Dual-interface to update data points and read current values.
+<span class="lineNum">      58 </span>                :            : 
+<span class="lineNum">      59 </span>                :            : Passes data updates to an associated event buffer for event generation/management.
+<span class="lineNum">      60 </span>                :            : */
+<span class="lineNum">      61 </span>                :            : class DLL_LOCAL Database : public IDataObserver, public Loggable
+<span class="lineNum">      62 </span>                :            : {
+<span class="lineNum">      63 </span>                :            : public:
+<span class="lineNum">      64 </span>                :            : 
+<span class="lineNum">      65 </span>                :            :         Database(Logger* apLogger);
+<span class="lineNum">      66 </span>                :            : 
+<span class="lineNum">      67 </span>                :            :         virtual ~Database();
+<span class="lineNum">      68 </span>                :            : 
+<span class="lineNum">      69 </span>                :            :         /* Configuration functions */
+<span class="lineNum">      70 </span>                :            : 
+<span class="lineNum">      71 </span>                :            :         void Configure(const DeviceTemplate&amp; arTmp);
+<span class="lineNum">      72 </span>                :            :         void Configure(DataTypes aType, size_t aNumPoints, bool aStartOnline = false);
+<span class="lineNum">      73 </span>                :            : 
+<span class="lineNum">      74 </span>                :            :         size_t NumType(DataTypes aType);
+<span class="lineNum">      75 </span>                :            :         size_t MaxIndex(DataTypes aType);
+<span class="lineNum">      76 </span>                :            :         void SetDeadband(DataTypes, size_t aIndex, double aDeadband);
+<span class="lineNum">      77 </span>                :            :         void SetClass(DataTypes aType, size_t aIndex, PointClass aClass);
+<span class="lineNum">      78 </span>                :            :         void SetClass(DataTypes aType, PointClass aClass); //set classes for all indices
+<span class="lineNum">      79 </span>                :            : 
+<span class="lineNum">      80 </span>                :            :         void SetEventBuffer(IEventBuffer*);
+<span class="lineNum">      81 </span>                :            : 
+<a name="82"><span class="lineNum">      82 </span>                :            :         /* Functions for obtaining iterators */</a>
+<span class="lineNum">      83 </span>                :            : 
+<span class="lineNum">      84 </span>                :<span class="lineCov">        257 :         void Begin(BinaryIterator&amp; arIter)          {</span>
+<a name="85"><span class="lineNum">      85 </span>        [<span class="branchCov" title="Branch 1 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        257 :                 arIter = mBinaryVec.begin();</span></a>
+<span class="lineNum">      86 </span>                :<span class="lineCov">        257 :         }</span>
+<span class="lineNum">      87 </span>                :<span class="lineCov">        257 :         void Begin(AnalogIterator&amp; arIter)          {</span>
+<a name="88"><span class="lineNum">      88 </span>        [<span class="branchCov" title="Branch 1 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        257 :                 arIter = mAnalogVec.begin();</span></a>
+<span class="lineNum">      89 </span>                :<span class="lineCov">        257 :         }</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">        257 :         void Begin(CounterIterator&amp; arIter)         {</span>
+<a name="91"><span class="lineNum">      91 </span>        [<span class="branchCov" title="Branch 1 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        257 :                 arIter = mCounterVec.begin();</span></a>
+<span class="lineNum">      92 </span>                :<span class="lineCov">        257 :         }</span>
+<span class="lineNum">      93 </span>                :<span class="lineCov">        257 :         void Begin(ControlIterator&amp; arIter)         {</span>
+<a name="94"><span class="lineNum">      94 </span>        [<span class="branchCov" title="Branch 1 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        257 :                 arIter = mControlStatusVec.begin();</span></a>
+<span class="lineNum">      95 </span>                :<span class="lineCov">        257 :         }</span>
+<span class="lineNum">      96 </span>                :<span class="lineCov">        257 :         void Begin(SetpointIterator&amp; arIter)        {</span>
+<span class="lineNum">      97 </span>        [<span class="branchCov" title="Branch 1 was taken 257 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        257 :                 arIter = mSetpointStatusVec.begin();</span>
+<span class="lineNum">      98 </span>                :<span class="lineCov">        257 :         }</span>
+<span class="lineNum">      99 </span>                :            : 
+<span class="lineNum">     100 </span>                :            : 
+<span class="lineNum">     101 </span>                :            : private:
+<a name="102"><span class="lineNum">     102 </span>                :            : </a>
+<a name="103"><span class="lineNum">     103 </span>                :            :         // ITransactable  functions, no lock on this structure.</a>
+<span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 :         void _Start() {}</span>
+<span class="lineNum">     105 </span>                :<span class="lineNoCov">          0 :         void _End() {}</span>
+<span class="lineNum">     106 </span>                :            : 
+<span class="lineNum">     107 </span>                :            :         // IDataObserver functions
+<span class="lineNum">     108 </span>                :            :         void _Update(const Binary&amp; arPoint, size_t);
+<span class="lineNum">     109 </span>                :            :         void _Update(const Analog&amp; arPoint, size_t);
+<span class="lineNum">     110 </span>                :            :         void _Update(const Counter&amp; arPoint, size_t);
+<span class="lineNum">     111 </span>                :            :         void _Update(const ControlStatus&amp; arPoint, size_t);
+<span class="lineNum">     112 </span>                :            :         void _Update(const SetpointStatus&amp; arPoint, size_t);
+<span class="lineNum">     113 </span>                :            : 
+<span class="lineNum">     114 </span>                :            :         template&lt;typename T&gt;
+<span class="lineNum">     115 </span>                :            :         void AssignIndices( std::vector&lt; PointInfo&lt;T&gt; &gt;&amp; arVector );
+<span class="lineNum">     116 </span>                :            : 
+<span class="lineNum">     117 </span>                :            :         template&lt;typename T&gt;
+<span class="lineNum">     118 </span>                :            :         void SetAllOnline( std::vector&lt; PointInfo&lt;T&gt; &gt;&amp; arVector );
+<span class="lineNum">     119 </span>                :            : 
+<span class="lineNum">     120 </span>                :            :         template&lt;typename T&gt;
+<span class="lineNum">     121 </span>                :            :         bool UpdateValue(std::vector&lt; PointInfo&lt;T&gt; &gt;&amp; arVec, const T&amp; arValue, size_t aIndex);
+<span class="lineNum">     122 </span>                :            : 
+<span class="lineNum">     123 </span>                :            :         template&lt;typename T&gt;
+<span class="lineNum">     124 </span>                :            :         void PerformRead(std::vector&lt; PointInfo&lt;T&gt; &gt;&amp; arVec, T&amp; arValue, size_t aIndex);
+<span class="lineNum">     125 </span>                :            : 
+<span class="lineNum">     126 </span>                :            :         /////////////////////////////////////////
+<span class="lineNum">     127 </span>                :            :         //      Static data
+<span class="lineNum">     128 </span>                :            :         /////////////////////////////////////////
+<span class="lineNum">     129 </span>                :            : 
+<span class="lineNum">     130 </span>                :            :         std::vector&lt; PointInfo&lt;Binary&gt; &gt; mBinaryVec;
+<span class="lineNum">     131 </span>                :            :         std::vector&lt; PointInfo&lt;Analog&gt; &gt; mAnalogVec;
+<span class="lineNum">     132 </span>                :            :         std::vector&lt; PointInfo&lt;Counter&gt; &gt; mCounterVec;
+<span class="lineNum">     133 </span>                :            :         std::vector&lt; PointInfo&lt;ControlStatus&gt; &gt; mControlStatusVec;
+<span class="lineNum">     134 </span>                :            :         std::vector&lt; PointInfo&lt;SetpointStatus&gt; &gt; mSetpointStatusVec;
+<span class="lineNum">     135 </span>                :            : 
+<span class="lineNum">     136 </span>                :            :         IEventBuffer* mpEventBuffer;
+<span class="lineNum">     137 </span>                :            : 
+<span class="lineNum">     138 </span>                :            :         template &lt;typename T&gt;
+<span class="lineNum">     139 </span>                :            :         size_t CalcNumType(const std::vector&lt;T*&gt;&amp; arIdxVec);
+<span class="lineNum">     140 </span>                :            : };
+<span class="lineNum">     141 </span>                :            : 
+<span class="lineNum">     142 </span>                :            : template &lt;typename T&gt;
+<span class="lineNum">     143 </span>                :            : size_t Database::CalcNumType(const std::vector&lt;T*&gt;&amp; arIdxVec)
+<span class="lineNum">     144 </span>                :            : {
+<span class="lineNum">     145 </span>                :            :         std::set&lt;size_t&gt; indexSet;
+<span class="lineNum">     146 </span>                :            : 
+<span class="lineNum">     147 </span>                :            : for(auto i: arIdxVec) indexSet.insert(i-&gt;Index);
+<span class="lineNum">     148 </span>                :            : 
+<span class="lineNum">     149 </span>                :            :         if(indexSet.size() &gt; 0) return *indexSet.rbegin() + 1;
+<span class="lineNum">     150 </span>                :            :         else return 0;
+<span class="lineNum">     151 </span>                :            : }
+<a name="152"><span class="lineNum">     152 </span>                :            : </a>
+<span class="lineNum">     153 </span>                :            : template&lt;typename T&gt;
+<span class="lineNum">     154 </span>                :<span class="lineCov">          5 : inline void Database::SetAllOnline( std::vector&lt; PointInfo&lt;T&gt; &gt;&amp; arVector )</span>
+<span class="lineNum">     155 </span>                :            : {
+<span class="lineNum">     156 </span>[<span class="branchCov" title="Branch 3 was taken 5 times"> + </span><span class="branchCov" title="Branch 4 was taken 1 time"> + </span>][<span class="branchCov" title="Branch 8 was taken 5 times"> + </span><span class="branchCov" title="Branch 9 was taken 1 time"> + </span>]:<span class="lineCov">         30 :         for(size_t i=0; i&lt;arVector.size(); ++i) arVector[i].mValue.SetQuality(T::ONLINE);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 13 was taken 5 times"> + </span><span class="branchCov" title="Branch 14 was taken 1 time"> + </span>][<span class="branchCov" title="Branch 18 was taken 5 times"> + </span><span class="branchCov" title="Branch 19 was taken 1 time"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 23 was taken 5 times"> + </span><span class="branchCov" title="Branch 24 was taken 1 time"> + </span>]
+<span class="lineNum">     157 </span>                :<span class="lineCov">          5 : }</span>
+<a name="158"><span class="lineNum">     158 </span>                :            : </a>
+<span class="lineNum">     159 </span>                :            : template&lt;typename T&gt;
+<span class="lineNum">     160 </span>                :<span class="lineCov">          5 : inline void Database::AssignIndices( std::vector&lt; PointInfo&lt;T&gt; &gt;&amp; arVector )</span>
+<span class="lineNum">     161 </span>                :            : {
+<span class="lineNum">     162 </span>[<span class="branchCov" title="Branch 1 was taken 5 times"> + </span><span class="branchCov" title="Branch 2 was taken 1 time"> + </span>][<span class="branchCov" title="Branch 4 was taken 5 times"> + </span><span class="branchCov" title="Branch 5 was taken 1 time"> + </span>]:<span class="lineCov">         30 :         for(size_t i = 0; i &lt; arVector.size(); i++) {</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 7 was taken 5 times"> + </span><span class="branchCov" title="Branch 8 was taken 1 time"> + </span>][<span class="branchCov" title="Branch 10 was taken 5 times"> + </span><span class="branchCov" title="Branch 11 was taken 1 time"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 13 was taken 5 times"> + </span><span class="branchCov" title="Branch 14 was taken 1 time"> + </span>]
+<span class="lineNum">     163 </span>                :<span class="lineCov">         25 :                 arVector[i].mIndex = i;</span>
+<span class="lineNum">     164 </span>                :            :         }
+<span class="lineNum">     165 </span>                :<span class="lineCov">          5 : }</span>
+<a name="166"><span class="lineNum">     166 </span>                :            : </a>
+<span class="lineNum">     167 </span>                :            : template&lt;typename T&gt;
+<span class="lineNum">     168 </span>                :<span class="lineNoCov">          0 : bool Database::UpdateValue(std::vector&lt; PointInfo&lt;T&gt; &gt;&amp; arVec, const T&amp; arValue, size_t aIndex)</span>
+<span class="lineNum">     169 </span>                :            : {
+<span class="lineNum">     170 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(aIndex &gt;= arVec.size()) {</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>]
+<span class="lineNum">     171 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 15 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_INDEX_OUT_OF_BOUNDS(aIndex);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 26 was not executed"> # </span><span class="branchNoExec" title="Branch 27 was not executed"> # </span>][<span class="branchNoExec" title="Branch 38 was not executed"> # </span><span class="branchNoExec" title="Branch 39 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 50 was not executed"> # </span><span class="branchNoExec" title="Branch 51 was not executed"> # </span>]
+<span class="lineNum">     172 </span>                :            :         }
+<span class="lineNum">     173 </span>                :            : 
+<span class="lineNum">     174 </span>                :<span class="lineNoCov">          0 :         T&amp; value = arVec[aIndex].mValue;</span>
+<span class="lineNum">     175 </span>                :            : 
+<span class="lineNum">     176 </span>  [<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span> :<span class="lineNoCov">          0 :         if(value.ShouldGenerateEvent(arValue, arVec[aIndex].mDeadband, arVec[aIndex].mLastEventValue)) {</span>
+<span class="lineNum">         </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span><span class="branchNoExec" title="Branch 23 was not executed"> # </span> 
+<span class="lineNum">         </span>            <span class="branchNoExec" title="Branch 24 was not executed"> # </span>]
+<span class="lineNum">     177 </span>                :<span class="lineNoCov">          0 :                 value = arValue;</span>
+<span class="lineNum">     178 </span>                :<span class="lineNoCov">          0 :                 return ((arVec[aIndex].mClass &amp; PC_ALL_EVENTS) != 0);</span>
+<span class="lineNum">     179 </span>                :            :         }
+<span class="lineNum">     180 </span>                :            :         else {
+<span class="lineNum">     181 </span>                :<span class="lineNoCov">          0 :                 value = arValue;</span>
+<span class="lineNum">     182 </span>                :<span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     183 </span>                :            :         }
+<span class="lineNum">     184 </span>                :            : }
+<span class="lineNum">     185 </span>                :            : 
+<span class="lineNum">     186 </span>                :            : }
+<span class="lineNum">     187 </span>                :            : 
+<span class="lineNum">     188 </span>                :            : #endif
+<span class="lineNum">     189 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,757 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/src/opendnp3/APDU.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/src/opendnp3</a> - APDU.cpp<span style="font-size: 80%;"> (source / <a href="APDU.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">175</td>
+            <td class="headerCovTableEntry">282</td>
+            <td class="headerCovTableEntryLo">62.1 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntry">35</td>
+            <td class="headerCovTableEntryLo">74.3 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">103</td>
+            <td class="headerCovTableEntry">395</td>
+            <td class="headerCovTableEntryLo">26.1 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #include &quot;APDU.h&quot;
+<span class="lineNum">      30 </span>                :            : 
+<span class="lineNum">      31 </span>                :            : #include &lt;opendnp3/Exception.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;opendnp3/Util.h&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;opendnp3/DNPConstants.h&gt;
+<span class="lineNum">      34 </span>                :            : #include &lt;opendnp3/APDUConstants.h&gt;
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :            : #include &quot;ObjectWriteIterator.h&quot;
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      40 </span>                :            : #include &lt;sstream&gt;
+<span class="lineNum">      41 </span>                :            : #include &lt;limits&gt;
+<span class="lineNum">      42 </span>                :            : #include &lt;boost/numeric/conversion/converter.hpp&gt;
+<span class="lineNum">      43 </span>                :            : 
+<span class="lineNum">      44 </span>                :            : 
+<span class="lineNum">      45 </span>                :            : 
+<span class="lineNum">      46 </span>                :            : using namespace std;
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :            : namespace opendnp3
+<a name="49"><span class="lineNum">      49 </span>                :            : {</a>
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :<span class="lineCov">          6 : APDU::APDU(size_t aFragSize) :</span>
+<span class="lineNum">      52 </span>                :            :         mIsInterpreted(false),
+<span class="lineNum">      53 </span>                :            :         mpAppHeader(NULL),
+<span class="lineNum">      54 </span>                :            :         mObjectHeaders(0),
+<span class="lineNum">      55 </span>                :            :         mBuffer(aFragSize),
+<span class="lineNum">      56 </span>        [<span class="branchCov" title="Branch 1 was taken 6 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          6 :         mFragmentSize(0)</span>
+<span class="lineNum">      57 </span>                :            : {
+<span class="lineNum">      58 </span>                :            : 
+<span class="lineNum">      59 </span>                :<span class="lineCov">          6 : }</span>
+<a name="60"><span class="lineNum">      60 </span>                :            : </a>
+<span class="lineNum">      61 </span>                :            : 
+<span class="lineNum">      62 </span>                :<span class="lineNoCov">          0 : bool APDU::operator==(const APDU&amp; rhs)</span>
+<span class="lineNum">      63 </span>                :            : {
+<span class="lineNum">      64 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if ( this-&gt;Size() != rhs.Size() )</span>
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">      66 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         for ( size_t i = 0; i &lt; this-&gt;Size(); i++ )</span>
+<span class="lineNum">      67 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if ( this-&gt;GetBuffer()[i] != rhs.GetBuffer()[i] ) return false;</span>
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :         return true;</span>
+<span class="lineNum">      69 </span>                :            : }
+<a name="70"><span class="lineNum">      70 </span>                :            : </a>
+<span class="lineNum">      71 </span>                :            : 
+<span class="lineNum">      72 </span>                :<span class="lineCov">      53132 : AppControlField APDU::GetControl() const</span>
+<span class="lineNum">      73 </span>                :            : {
+<span class="lineNum">      74 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 53132 times"> + </span>]:<span class="lineCov">      53132 :         assert(mpAppHeader != NULL);    </span>
+<span class="lineNum">      75 </span>                :            : 
+<span class="lineNum">      76 </span>                :<span class="lineCov">      53132 :         return mpAppHeader-&gt;GetControl(mBuffer);</span>
+<a name="77"><span class="lineNum">      77 </span>                :            : }</a>
+<span class="lineNum">      78 </span>                :            : 
+<span class="lineNum">      79 </span>                :<span class="lineNoCov">          0 : IINField APDU::GetIIN() const</span>
+<span class="lineNum">      80 </span>                :            : {
+<span class="lineNum">      81 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         assert(mpAppHeader != NULL);    </span>
+<span class="lineNum">      82 </span>                :            : 
+<span class="lineNum">      83 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(mpAppHeader-&gt;GetType() != AHT_RESPONSE) {</span>
+<span class="lineNum">      84 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_EXCEPTION(Exception, &quot;Only response packets have IIN fields&quot;);</span>
+<span class="lineNum">      85 </span>                :            :         }
+<span class="lineNum">      86 </span>                :            : 
+<span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 :         return static_cast&lt;ResponseHeader*&gt;(mpAppHeader)-&gt;GetIIN(mBuffer);</span>
+<a name="88"><span class="lineNum">      88 </span>                :            : }</a>
+<span class="lineNum">      89 </span>                :            : 
+<span class="lineNum">      90 </span>                :<span class="lineCov">     101023 : FunctionCodes APDU::GetFunction() const</span>
+<span class="lineNum">      91 </span>                :            : {
+<span class="lineNum">      92 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 101023 times"> + </span>]:<span class="lineCov">     101023 :         assert(mpAppHeader != NULL);    </span>
+<span class="lineNum">      93 </span>                :            : 
+<span class="lineNum">      94 </span>                :<span class="lineCov">     101023 :         return mpAppHeader-&gt;GetFunction(mBuffer);</span>
+<a name="95"><span class="lineNum">      95 </span>                :            : }</a>
+<span class="lineNum">      96 </span>                :            : 
+<span class="lineNum">      97 </span>                :<span class="lineCov">      16266 : void APDU::SetFunction(FunctionCodes aCode)</span>
+<span class="lineNum">      98 </span>                :            : {
+<span class="lineNum">      99 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 16266 times"> + </span>]:<span class="lineCov">      16266 :         assert(mpAppHeader == NULL);    </span>
+<span class="lineNum">     100 </span>                :            : 
+<span class="lineNum">     101 </span>[<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 16265 times"> + </span>][<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 1 time"> + </span>]:<span class="lineCov">      16266 :         if(aCode == FC_RESPONSE || aCode == FC_UNSOLICITED_RESPONSE) {</span>
+<span class="lineNum">     102 </span>                :<span class="lineCov">      16265 :                 mpAppHeader = ResponseHeader::Inst();</span>
+<span class="lineNum">     103 </span>                :            :         }
+<span class="lineNum">     104 </span>                :            :         else {
+<span class="lineNum">     105 </span>                :<span class="lineCov">          1 :                 mpAppHeader = RequestHeader::Inst();</span>
+<span class="lineNum">     106 </span>                :            :         }
+<span class="lineNum">     107 </span>                :            : 
+<span class="lineNum">     108 </span>                :<span class="lineCov">      16266 :         mFragmentSize = mpAppHeader-&gt;GetSize();</span>
+<span class="lineNum">     109 </span>                :            : 
+<span class="lineNum">     110 </span>                :<span class="lineCov">      16266 :         mpAppHeader-&gt;SetFunction(mBuffer, aCode);</span>
+<a name="111"><span class="lineNum">     111 </span>                :<span class="lineCov">      16266 : }</span></a>
+<span class="lineNum">     112 </span>                :            : 
+<span class="lineNum">     113 </span>                :<span class="lineCov">      32819 : void APDU::SetControl(const AppControlField&amp; arControl)</span>
+<span class="lineNum">     114 </span>                :            : {
+<span class="lineNum">     115 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 32819 times"> + </span>]:<span class="lineCov">      32819 :         assert(mpAppHeader != NULL);    </span>
+<span class="lineNum">     116 </span>                :            : 
+<span class="lineNum">     117 </span>                :<span class="lineCov">      32819 :         mpAppHeader-&gt;SetControl(mBuffer, arControl);</span>
+<a name="118"><span class="lineNum">     118 </span>                :<span class="lineCov">      32819 : }</span></a>
+<span class="lineNum">     119 </span>                :            : 
+<span class="lineNum">     120 </span>                :<span class="lineCov">      16249 : void APDU::SetIIN(const IINField&amp; arIIN)</span>
+<span class="lineNum">     121 </span>                :            : {
+<span class="lineNum">     122 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 16249 times"> + </span>]:<span class="lineCov">      16249 :         assert(mpAppHeader != NULL);</span>
+<span class="lineNum">     123 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 16249 times"> + </span>]:<span class="lineCov">      16249 :         assert(mpAppHeader-&gt;GetType() == AHT_RESPONSE);      </span>
+<span class="lineNum">     124 </span>                :            : 
+<span class="lineNum">     125 </span>                :<span class="lineCov">      16249 :         static_cast&lt;ResponseHeader*&gt;(mpAppHeader)-&gt;SetIIN(mBuffer, arIIN);</span>
+<a name="126"><span class="lineNum">     126 </span>                :<span class="lineCov">      16249 : }</span></a>
+<span class="lineNum">     127 </span>                :            : 
+<span class="lineNum">     128 </span>                :<span class="lineCov">      47162 : void APDU::Reset()</span>
+<span class="lineNum">     129 </span>                :            : {
+<span class="lineNum">     130 </span>                :<span class="lineCov">      47162 :         mFragmentSize = 0;</span>
+<span class="lineNum">     131 </span>                :<span class="lineCov">      47162 :         mIsInterpreted = false;</span>
+<span class="lineNum">     132 </span>                :<span class="lineCov">      47162 :         mpAppHeader = NULL;</span>
+<span class="lineNum">     133 </span>                :<span class="lineCov">      47162 :         mObjectHeaders.clear();</span>
+<a name="134"><span class="lineNum">     134 </span>                :<span class="lineCov">      47162 : }</span></a>
+<span class="lineNum">     135 </span>                :            : 
+<span class="lineNum">     136 </span>                :<span class="lineCov">      30897 : void APDU::Write(const uint8_t* apData, size_t aLength)</span>
+<span class="lineNum">     137 </span>                :            : {
+<span class="lineNum">     138 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 30897 times"> + </span>]:<span class="lineCov">      30897 :         if(aLength &gt; mBuffer.Size()) {</span>
+<span class="lineNum">     139 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_EXCEPTION_COMPLEX(ArgumentException, &quot;Size &quot; &lt;&lt; aLength &lt;&lt; &quot; exceeds max fragment size of &quot; &lt;&lt; mBuffer.Size());</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>][<span class="branchNoExec" title="Branch 17 was not executed"> # </span><span class="branchNoExec" title="Branch 18 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span>]
+<span class="lineNum">     140 </span>                :            :         }
+<span class="lineNum">     141 </span>                :            : 
+<span class="lineNum">     142 </span>                :<span class="lineCov">      30897 :         this-&gt;Reset();</span>
+<span class="lineNum">     143 </span>                :<span class="lineCov">      30897 :         memcpy(mBuffer, apData, aLength);</span>
+<span class="lineNum">     144 </span>                :<span class="lineCov">      30897 :         mFragmentSize = aLength;</span>
+<a name="145"><span class="lineNum">     145 </span>                :<span class="lineCov">      30897 : }</span></a>
+<span class="lineNum">     146 </span>                :            : 
+<span class="lineNum">     147 </span>                :<span class="lineCov">      30898 : void APDU::Interpret()</span>
+<span class="lineNum">     148 </span>                :            : {
+<span class="lineNum">     149 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 30897 times"> + </span>]:<span class="lineCov">      35078 :         if(mIsInterpreted) return;</span>
+<span class="lineNum">     150 </span>                :            : 
+<span class="lineNum">     151 </span>                :<span class="lineCov">      30897 :         this-&gt;InterpretHeader();</span>
+<span class="lineNum">     152 </span>                :            : 
+<span class="lineNum">     153 </span>                :<span class="lineCov">      27667 :         size_t consumed = mpAppHeader-&gt;GetSize();</span>
+<span class="lineNum">     154 </span>                :<span class="lineCov">      27667 :         size_t remainder = mFragmentSize - consumed;</span>
+<span class="lineNum">     155 </span>                :            : 
+<span class="lineNum">     156 </span>        [<span class="branchCov" title="Branch 0 was taken 37795 times"> + </span><span class="branchCov" title="Branch 1 was taken 4180 times"> + </span>]:<span class="lineCov">      41975 :         while(remainder &gt; 0) {</span>
+<span class="lineNum">     157 </span>                :<span class="lineCov">      37795 :                 size_t header_size = this-&gt;ReadObjectHeader(consumed, remainder);</span>
+<span class="lineNum">     158 </span>                :<span class="lineCov">      14308 :                 remainder -= header_size;</span>
+<span class="lineNum">     159 </span>                :<span class="lineCov">      14308 :                 consumed += header_size;</span>
+<span class="lineNum">     160 </span>                :            :         }
+<span class="lineNum">     161 </span>                :            : 
+<span class="lineNum">     162 </span>                :<span class="lineCov">       4180 :         mIsInterpreted = true;</span>
+<span class="lineNum">     163 </span>                :            : }
+<a name="164"><span class="lineNum">     164 </span>                :            : </a>
+<span class="lineNum">     165 </span>                :            : // Parse the header only. Throws exception if header is malformed
+<span class="lineNum">     166 </span>                :<span class="lineCov">      30897 : void APDU::InterpretHeader()</span>
+<span class="lineNum">     167 </span>                :            : {
+<span class="lineNum">     168 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 30897 times"> + </span>]:<span class="lineCov">      58564 :         if(mpAppHeader != NULL) return;</span>
+<span class="lineNum">     169 </span>                :<span class="lineCov">      30897 :         mpAppHeader = this-&gt;ParseHeader();</span>
+<a name="170"><span class="lineNum">     170 </span>                :            : }</a>
+<span class="lineNum">     171 </span>                :            : 
+<span class="lineNum">     172 </span>                :<span class="lineCov">      30897 : IAppHeader* APDU::ParseHeader() const</span>
+<span class="lineNum">     173 </span>                :            : {
+<span class="lineNum">     174 </span>        [<span class="branchCov" title="Branch 0 was taken 3230 times"> + </span><span class="branchCov" title="Branch 1 was taken 27667 times"> + </span>]:<span class="lineCov">      30897 :         if(mFragmentSize &lt; 2) {</span>
+<span class="lineNum">     175 </span>[<span class="branchCov" title="Branch 2 was taken 3230 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>][<span class="branchCov" title="Branch 6 was taken 3230 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]:<span class="lineCov">       3230 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;Insufficent size&quot;, ALERR_INSUFFICIENT_DATA_FOR_FRAG);</span>
+<span class="lineNum">     176 </span>                :            :         }
+<span class="lineNum">     177 </span>                :            : 
+<span class="lineNum">     178 </span>                :            :         // start by assuming that it's a request header since they have same starting structure
+<span class="lineNum">     179 </span>                :<span class="lineCov">      27667 :         IAppHeader* pHeader = RequestHeader::Inst();</span>
+<span class="lineNum">     180 </span>        [<span class="branchCov" title="Branch 1 was taken 27667 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">      27667 :         FunctionCodes function = pHeader-&gt;GetFunction(mBuffer);</span>
+<span class="lineNum">     181 </span>        [<span class="branchCov" title="Branch 1 was taken 27667 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">      27667 :         AppControlField control = pHeader-&gt;GetControl(mBuffer);</span>
+<span class="lineNum">     182 </span>                :            : 
+<span class="lineNum">     183 </span>[<span class="branchCov" title="Branch 0 was taken 27667 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 216 times"> + </span><span class="branchCov" title="Branch 4 was taken 27451 times"> + </span>]:<span class="lineCov">      27667 :         if( IsResponse(function) ) {</span>
+<span class="lineNum">     184 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 216 times"> + </span>]:<span class="lineCov">        216 :                 if(mFragmentSize &lt; 4) {</span>
+<span class="lineNum">     185 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineCov">       3230 :                         MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;Insufficent size&quot;, ALERR_INSUFFICIENT_DATA_FOR_RESPONSE);</span>
+<span class="lineNum">     186 </span>                :            :                 }
+<span class="lineNum">     187 </span>                :            : 
+<span class="lineNum">     188 </span>                :<span class="lineCov">        216 :                 pHeader = ResponseHeader::Inst();</span>
+<span class="lineNum">     189 </span>                :            :         }
+<span class="lineNum">     190 </span>                :            : 
+<span class="lineNum">     191 </span>                :<span class="lineCov">      27667 :         return pHeader;</span>
+<a name="192"><span class="lineNum">     192 </span>                :            : }</a>
+<span class="lineNum">     193 </span>                :            : 
+<span class="lineNum">     194 </span>                :<span class="lineCov">      37795 : size_t APDU::ReadObjectHeader(size_t aOffset, size_t aRemainder)</span>
+<span class="lineNum">     195 </span>                :            : {
+<span class="lineNum">     196 </span>                :            : 
+<span class="lineNum">     197 </span>                :<span class="lineCov">      37795 :         const uint8_t* pStart = mBuffer.Buffer() + aOffset;</span>
+<span class="lineNum">     198 </span>                :<span class="lineCov">      37795 :         IObjectHeader* pHdr = AllObjectsHeader::Inst(); //Start by interpreting using the smallest possible header</span>
+<span class="lineNum">     199 </span>                :<span class="lineCov">      37795 :         ObjectHeaderField hdrData;</span>
+<span class="lineNum">     200 </span>                :            : 
+<span class="lineNum">     201 </span>[<span class="branchCov" title="Branch 0 was taken 37795 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 334 times"> + </span><span class="branchCov" title="Branch 4 was taken 37461 times"> + </span>]:<span class="lineCov">      37795 :         if(aRemainder &lt; pHdr-&gt;GetSize()) {</span>
+<span class="lineNum">     202 </span>[<span class="branchCov" title="Branch 2 was taken 334 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>][<span class="branchCov" title="Branch 6 was taken 334 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]:<span class="lineCov">        334 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;Insufficent size&quot;, ALERR_INSUFFICIENT_DATA_FOR_HEADER);</span>
+<span class="lineNum">     203 </span>                :            :         }
+<span class="lineNum">     204 </span>                :            : 
+<span class="lineNum">     205 </span>                :            :         //Read the header data and select the correct object header based on this information
+<span class="lineNum">     206 </span>        [<span class="branchCov" title="Branch 0 was taken 37461 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      37461 :         pHdr-&gt;Get(pStart, hdrData);</span>
+<span class="lineNum">     207 </span>                :            : 
+<span class="lineNum">     208 </span>        [<span class="branchCov" title="Branch 0 was taken 7310 times"> + </span><span class="branchCov" title="Branch 1 was taken 30151 times"> + </span>]:<span class="lineCov">      37461 :         if(hdrData.Qualifier == QC_UNDEFINED) {</span>
+<span class="lineNum">     209 </span>[<span class="branchCov" title="Branch 2 was taken 7310 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>][<span class="branchCov" title="Branch 6 was taken 7310 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]:<span class="lineCov">       7310 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;Unknown qualifier&quot;, ALERR_UNKNOWN_QUALIFIER);</span>
+<span class="lineNum">     210 </span>                :            :         }
+<span class="lineNum">     211 </span>                :            : 
+<span class="lineNum">     212 </span>        [<span class="branchCov" title="Branch 0 was taken 30151 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      30151 :         pHdr = this-&gt;GetObjectHeader(hdrData.Qualifier);</span>
+<span class="lineNum">     213 </span>                :            : 
+<span class="lineNum">     214 </span>                :            :         //lookup the object type
+<span class="lineNum">     215 </span>        [<span class="branchCov" title="Branch 0 was taken 30151 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      30151 :         ObjectBase* pObj = ObjectBase::Get(hdrData.Group, hdrData.Variation);</span>
+<span class="lineNum">     216 </span>                :            : 
+<span class="lineNum">     217 </span>        [<span class="branchCov" title="Branch 0 was taken 15809 times"> + </span><span class="branchCov" title="Branch 1 was taken 14342 times"> + </span>]:<span class="lineCov">      30151 :         if(pObj == NULL) {</span>
+<span class="lineNum">     218 </span>[<span class="branchCov" title="Branch 0 was taken 15809 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 15809 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      15809 :                 MACRO_THROW_EXCEPTION_COMPLEX(ObjectException, &quot;Undefined object, &quot; &lt;&lt; &quot;Group: &quot; &lt;&lt; static_cast&lt;int&gt;(hdrData.Group) &lt;&lt; &quot; Var: &quot; &lt;&lt; static_cast&lt;int&gt;(hdrData.Variation));</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 15809 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 15809 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 12 was taken 15809 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>][<span class="branchCov" title="Branch 15 was taken 15809 times"> + </span><span class="branchNoCov" title="Branch 16 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 19 was taken 15809 times"> + </span><span class="branchNoCov" title="Branch 20 was not taken"> - </span>][<span class="branchCov" title="Branch 23 was taken 15809 times"> + </span><span class="branchNoCov" title="Branch 24 was not taken"> - </span>]
+<span class="lineNum">     219 </span>                :            :         }
+<span class="lineNum">     220 </span>                :            : 
+<span class="lineNum">     221 </span>[<span class="branchCov" title="Branch 0 was taken 14342 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 34 times"> + </span><span class="branchCov" title="Branch 4 was taken 14308 times"> + </span>]:<span class="lineCov">      14342 :         if(aRemainder &lt; pHdr-&gt;GetSize()) {</span>
+<span class="lineNum">     222 </span>[<span class="branchCov" title="Branch 2 was taken 34 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>][<span class="branchCov" title="Branch 6 was taken 34 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]:<span class="lineCov">         34 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;Insufficent size&quot;, ALERR_INSUFFICIENT_DATA_FOR_HEADER);</span>
+<span class="lineNum">     223 </span>                :            :         }
+<span class="lineNum">     224 </span>                :            : 
+<span class="lineNum">     225 </span>        [<span class="branchCov" title="Branch 0 was taken 14308 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      14308 :         aRemainder -= pHdr-&gt;GetSize();</span>
+<span class="lineNum">     226 </span>                :            : 
+<span class="lineNum">     227 </span>                :            :         //figure out what the size of the prefixes are in bytes and how many objects there are.
+<span class="lineNum">     228 </span>[<span class="branchCov" title="Branch 0 was taken 14308 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 14308 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      14308 :         size_t prefixSize = this-&gt;GetPrefixSizeAndValidate(hdrData.Qualifier, pObj-&gt;GetType());</span>
+<span class="lineNum">     229 </span>        [<span class="branchCov" title="Branch 0 was taken 14308 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      14308 :         size_t objCount = this-&gt;GetNumObjects(pHdr, pStart);</span>
+<span class="lineNum">     230 </span>                :            : 
+<span class="lineNum">     231 </span>                :            :         //pStart += pHdr-&gt;GetSize(); //move the reading position to the first object
+<span class="lineNum">     232 </span>                :            : 
+<span class="lineNum">     233 </span>                :<span class="lineCov">      14308 :         size_t data_size = 0;</span>
+<span class="lineNum">     234 </span>                :            : 
+<span class="lineNum">     235 </span>                :            :         //Some function codes, aka read implicitly do not carry data, only indices
+<span class="lineNum">     236 </span>        [<span class="branchCov" title="Branch 0 was taken 14308 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      14308 :         bool has_data = APDU::HasData(this-&gt;GetFunction());</span>
+<span class="lineNum">     237 </span>                :            : 
+<span class="lineNum">     238 </span>[<span class="branchCov" title="Branch 0 was taken 14308 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 2706 times"> + </span><span class="branchCov" title="Branch 4 was taken 11206 times"> + </span> :<span class="lineCov">      14308 :         switch(pObj-&gt;GetType()) {</span>
+<span class="lineNum">         </span>      <span class="branchCov" title="Branch 5 was taken 396 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     239 </span>                :            :         case(OT_PLACEHOLDER):
+<span class="lineNum">     240 </span>                :<span class="lineCov">       2706 :                 break;</span>
+<span class="lineNum">     241 </span>                :            :         case(OT_FIXED):
+<span class="lineNum">     242 </span>                :<span class="lineCov">      11206 :                 data_size = prefixSize;</span>
+<span class="lineNum">     243 </span>[<span class="branchCov" title="Branch 0 was taken 1116 times"> + </span><span class="branchCov" title="Branch 1 was taken 10090 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 1116 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">      11206 :                 if(has_data) data_size += static_cast&lt;FixedObject*&gt;(pObj)-&gt;GetSize();</span>
+<span class="lineNum">     244 </span>                :<span class="lineCov">      11206 :                 data_size *= objCount;</span>
+<span class="lineNum">     245 </span>                :<span class="lineCov">      11206 :                 break;</span>
+<span class="lineNum">     246 </span>                :            :         case(OT_BITFIELD):
+<span class="lineNum">     247 </span>        [<span class="branchCov" title="Branch 0 was taken 372 times"> + </span><span class="branchCov" title="Branch 1 was taken 24 times"> + </span>]:<span class="lineCov">        396 :                 data_size = has_data ? static_cast&lt;BitfieldObject*&gt;(pObj)-&gt;GetSize(objCount) : 0;</span>
+<span class="lineNum">     248 </span>                :<span class="lineCov">        396 :                 break;</span>
+<span class="lineNum">     249 </span>                :            :         case(OT_SIZE_BY_VARIATION):
+<span class="lineNum">     250 </span>                :<span class="lineNoCov">          0 :                 data_size = prefixSize;</span>
+<span class="lineNum">     251 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 data_size += has_data ? hdrData.Variation : 0;</span>
+<span class="lineNum">     252 </span>                :<span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     253 </span>                :            :         default:
+<span class="lineNum">     254 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_EXCEPTION(Exception, &quot;Unknown object type&quot;);</span>
+<span class="lineNum">     255 </span>                :            :         }
+<span class="lineNum">     256 </span>                :            : 
+<span class="lineNum">     257 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 14308 times"> + </span>]:<span class="lineCov">      14308 :         if(data_size &gt; aRemainder) {</span>
+<span class="lineNum">     258 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;&quot;, ALERR_INSUFFICIENT_DATA_FOR_OBJECTS);</span>
+<span class="lineNum">     259 </span>                :            :         }
+<span class="lineNum">     260 </span>                :            : 
+<span class="lineNum">     261 </span>        [<span class="branchCov" title="Branch 1 was taken 14308 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">      37795 :         mObjectHeaders.push_back(HeaderInfo(hdrData, objCount, prefixSize, pHdr, pObj, aOffset));</span>
+<span class="lineNum">     262 </span>                :            : 
+<span class="lineNum">     263 </span>        [<span class="branchCov" title="Branch 0 was taken 14308 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      14308 :         return pHdr-&gt;GetSize() + data_size;</span>
+<a name="264"><span class="lineNum">     264 </span>                :            : }</a>
+<span class="lineNum">     265 </span>                :            : 
+<span class="lineNum">     266 </span>                :<span class="lineCov">      30633 : IObjectHeader* APDU::GetObjectHeader(QualifierCode aCode)</span>
+<span class="lineNum">     267 </span>                :            : {
+<span class="lineNum">     268 </span>  [<span class="branchCov" title="Branch 0 was taken 495 times"> + </span><span class="branchCov" title="Branch 1 was taken 12 times"> + </span><span class="branchCov" title="Branch 2 was taken 24 times"> + </span><span class="branchCov" title="Branch 3 was taken 24082 times"> + </span> :<span class="lineCov">      30633 :         switch(aCode) {</span>
+<span class="lineNum">         </span>   <span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 6020 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     269 </span>                :            :         case(QC_1B_START_STOP):
+<span class="lineNum">     270 </span>                :<span class="lineCov">        495 :                 return Ranged2OctetHeader::Inst();</span>
+<span class="lineNum">     271 </span>                :            :         case(QC_2B_START_STOP):
+<span class="lineNum">     272 </span>                :<span class="lineCov">         12 :                 return Ranged4OctetHeader::Inst();</span>
+<span class="lineNum">     273 </span>                :            :         case(QC_4B_START_STOP):
+<span class="lineNum">     274 </span>                :<span class="lineCov">         24 :                 return Ranged8OctetHeader::Inst();</span>
+<span class="lineNum">     275 </span>                :            :         case(QC_ALL_OBJ):
+<span class="lineNum">     276 </span>                :<span class="lineCov">      24082 :                 return AllObjectsHeader::Inst();</span>
+<span class="lineNum">     277 </span>                :            :         case(QC_1B_CNT):
+<span class="lineNum">     278 </span>                :            :         case(QC_1B_CNT_1B_INDEX):
+<span class="lineNum">     279 </span>                :            :         case(QC_1B_VCNT_1B_SIZE):
+<span class="lineNum">     280 </span>                :            :         case(QC_1B_VCNT_2B_SIZE):
+<span class="lineNum">     281 </span>                :            :         case(QC_1B_VCNT_4B_SIZE):
+<span class="lineNum">     282 </span>                :<span class="lineNoCov">          0 :                 return Count1OctetHeader::Inst();</span>
+<span class="lineNum">     283 </span>                :            :         case(QC_2B_CNT):
+<span class="lineNum">     284 </span>                :            :         case(QC_2B_CNT_2B_INDEX):
+<span class="lineNum">     285 </span>                :<span class="lineCov">       6020 :                 return Count2OctetHeader::Inst();</span>
+<span class="lineNum">     286 </span>                :            :         case(QC_4B_CNT):
+<span class="lineNum">     287 </span>                :            :         case(QC_4B_CNT_4B_INDEX):
+<span class="lineNum">     288 </span>                :<span class="lineNoCov">          0 :                 return Count4OctetHeader::Inst();</span>
+<span class="lineNum">     289 </span>                :            :         default:
+<span class="lineNum">     290 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineCov">      30633 :                 MACRO_THROW_EXCEPTION(Exception, &quot;Unknown range specifier&quot;);</span>
+<span class="lineNum">     291 </span>                :            :         }
+<a name="292"><span class="lineNum">     292 </span>                :            : }</a>
+<span class="lineNum">     293 </span>                :            : 
+<span class="lineNum">     294 </span>                :<span class="lineCov">      14308 : size_t APDU::GetNumObjects(const IObjectHeader* apHeader, const uint8_t* apStart)</span>
+<span class="lineNum">     295 </span>                :            : {
+<span class="lineNum">     296 </span>  [<span class="branchCov" title="Branch 1 was taken 13138 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 1170 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      14308 :         switch(apHeader-&gt;GetType()) {</span>
+<span class="lineNum">     297 </span>                :            :         case(OHT_ALL_OBJECTS):
+<span class="lineNum">     298 </span>                :<span class="lineCov">      13138 :                 return 0;</span>
+<span class="lineNum">     299 </span>                :            :         case(OHT_RANGED_2_OCTET):
+<span class="lineNum">     300 </span>                :            :         case(OHT_RANGED_4_OCTET):
+<span class="lineNum">     301 </span>                :            :         case(OHT_RANGED_8_OCTET):
+<span class="lineNum">     302 </span>                :            :                 RangeInfo info;
+<span class="lineNum">     303 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 static_cast&lt;const IRangeHeader*&gt;(apHeader)-&gt;GetRange(apStart, info);</span>
+<span class="lineNum">     304 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if(info.Start &gt; info.Stop) {</span>
+<span class="lineNum">     305 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;&quot;, ALERR_START_STOP_MISMATCH);</span>
+<span class="lineNum">     306 </span>                :            :                 }
+<span class="lineNum">     307 </span>                :<span class="lineNoCov">          0 :                 return (info.Stop - info.Start + 1); //indices are inclusive</span>
+<span class="lineNum">     308 </span>                :            :         case(OHT_COUNT_1_OCTET):
+<span class="lineNum">     309 </span>                :            :         case(OHT_COUNT_2_OCTET):
+<span class="lineNum">     310 </span>                :            :         case(OHT_COUNT_4_OCTET):
+<span class="lineNum">     311 </span>        [<span class="branchCov" title="Branch 0 was taken 1170 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1170 :                 return static_cast&lt;const ICountHeader*&gt;(apHeader)-&gt;GetCount(apStart);</span>
+<span class="lineNum">     312 </span>                :            :         default:
+<span class="lineNum">     313 </span>                :<span class="lineCov">      14308 :                 assert(false);</span>
+<span class="lineNum">     314 </span>                :            :                 return 0;
+<span class="lineNum">     315 </span>                :            :         }
+<span class="lineNum">     316 </span>                :            : }
+<span class="lineNum">     317 </span>                :            : 
+<a name="318"><span class="lineNum">     318 </span>                :            : #define MACRO_QUAL_OBJ_RADIX(qual, type) (qual &lt;&lt; 8) | type</a>
+<span class="lineNum">     319 </span>                :            : 
+<span class="lineNum">     320 </span>                :<span class="lineCov">      14326 : size_t APDU::GetPrefixSizeAndValidate(QualifierCode aCode, ObjectTypes aType)</span>
+<span class="lineNum">     321 </span>                :            : {
+<span class="lineNum">     322 </span>                :            : 
+<span class="lineNum">     323 </span>  [<span class="branchCov" title="Branch 0 was taken 14326 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">      14326 :         switch(MACRO_QUAL_OBJ_RADIX(aCode, aType)) {</span>
+<span class="lineNum">         </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span> 
+<span class="lineNum">         </span>         <span class="branchNoCov" title="Branch 9 was not taken"> - </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     324 </span>                :            :                 //allowed cases with no prefix
+<span class="lineNum">     325 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_ALL_OBJ, OT_PLACEHOLDER)):
+<span class="lineNum">     326 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_ALL_OBJ, OT_FIXED)):
+<span class="lineNum">     327 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_ALL_OBJ, OT_BITFIELD)):
+<span class="lineNum">     328 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_START_STOP, OT_FIXED)):
+<span class="lineNum">     329 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_2B_START_STOP, OT_FIXED)):
+<span class="lineNum">     330 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_4B_START_STOP, OT_FIXED)):
+<span class="lineNum">     331 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_START_STOP, OT_PLACEHOLDER)):
+<span class="lineNum">     332 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_2B_START_STOP, OT_PLACEHOLDER)):
+<span class="lineNum">     333 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_4B_START_STOP, OT_PLACEHOLDER)):
+<span class="lineNum">     334 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_START_STOP, OT_BITFIELD)):
+<span class="lineNum">     335 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_2B_START_STOP, OT_BITFIELD)):
+<span class="lineNum">     336 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_4B_START_STOP, OT_BITFIELD)):
+<span class="lineNum">     337 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_CNT, OT_FIXED)):
+<span class="lineNum">     338 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_2B_CNT, OT_FIXED)):
+<span class="lineNum">     339 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_4B_CNT, OT_FIXED)):
+<span class="lineNum">     340 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_CNT, OT_BITFIELD)):
+<span class="lineNum">     341 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_2B_CNT, OT_BITFIELD)):
+<span class="lineNum">     342 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_4B_CNT, OT_BITFIELD)):
+<span class="lineNum">     343 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_CNT, OT_PLACEHOLDER)):
+<span class="lineNum">     344 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_2B_CNT, OT_PLACEHOLDER)):
+<span class="lineNum">     345 </span>                :            :         case(MACRO_QUAL_OBJ_RADIX(QC_4B_CNT, OT_PLACEHOLDER)):
+<span class="lineNum">     346 </span>                :<span class="lineCov">      14326 :                 return 0;</span>
+<span class="lineNum">     347 </span>                :            : 
+<span class="lineNum">     348 </span>                :            :                 //Objects prefixed with an index can only be OT_STATIC or OT_VARIABLE
+<span class="lineNum">     349 </span>                :<span class="lineNoCov">          0 :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_CNT_1B_INDEX, OT_FIXED)):       return 1;</span>
+<span class="lineNum">     350 </span>                :<span class="lineNoCov">          0 :         case(MACRO_QUAL_OBJ_RADIX(QC_2B_CNT_2B_INDEX, OT_FIXED)):       return 2;</span>
+<span class="lineNum">     351 </span>                :<span class="lineNoCov">          0 :         case(MACRO_QUAL_OBJ_RADIX(QC_4B_CNT_4B_INDEX, OT_FIXED)):       return 4;</span>
+<span class="lineNum">     352 </span>                :<span class="lineNoCov">          0 :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_CNT_1B_INDEX, OT_SIZE_BY_VARIATION)):   return 1;</span>
+<span class="lineNum">     353 </span>                :<span class="lineNoCov">          0 :         case(MACRO_QUAL_OBJ_RADIX(QC_2B_CNT_2B_INDEX, OT_SIZE_BY_VARIATION)):   return 2;</span>
+<span class="lineNum">     354 </span>                :<span class="lineNoCov">          0 :         case(MACRO_QUAL_OBJ_RADIX(QC_4B_CNT_4B_INDEX, OT_SIZE_BY_VARIATION)):   return 4;</span>
+<span class="lineNum">     355 </span>                :            : 
+<span class="lineNum">     356 </span>                :            :                 // Objects prefixed with a size must be of variable length type
+<span class="lineNum">     357 </span>                :<span class="lineNoCov">          0 :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_VCNT_1B_SIZE, OT_VARIABLE)): return 1;</span>
+<span class="lineNum">     358 </span>                :<span class="lineNoCov">          0 :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_VCNT_2B_SIZE, OT_VARIABLE)): return 2;</span>
+<span class="lineNum">     359 </span>                :<span class="lineNoCov">          0 :         case(MACRO_QUAL_OBJ_RADIX(QC_1B_VCNT_4B_SIZE, OT_VARIABLE)): return 4;</span>
+<span class="lineNum">     360 </span>                :            : 
+<span class="lineNum">     361 </span>                :            :         default:
+<span class="lineNum">     362 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineCov">      14326 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;Unknown Prefix Size&quot;, ALERR_ILLEGAL_QUALIFIER_AND_OBJECT);</span>
+<span class="lineNum">     363 </span>                :            :         }
+<a name="364"><span class="lineNum">     364 </span>                :            : }</a>
+<span class="lineNum">     365 </span>                :            : 
+<span class="lineNum">     366 </span>                :<span class="lineCov">        365 : HeaderReadIterator APDU::BeginRead() const</span>
+<span class="lineNum">     367 </span>                :            : {
+<span class="lineNum">     368 </span>                :<span class="lineCov">        365 :         return HeaderReadIterator(&amp;mObjectHeaders, mBuffer, HasData(this-&gt;GetFunction()));</span>
+<a name="369"><span class="lineNum">     369 </span>                :            : }</a>
+<span class="lineNum">     370 </span>                :            : 
+<span class="lineNum">     371 </span>                :<span class="lineCov">      15173 : bool APDU::HasData(FunctionCodes aCode)</span>
+<span class="lineNum">     372 </span>                :            : {
+<span class="lineNum">     373 </span>        [<span class="branchCov" title="Branch 0 was taken 12525 times"> + </span><span class="branchCov" title="Branch 1 was taken 2648 times"> + </span>]:<span class="lineCov">      15173 :         switch(aCode) {</span>
+<span class="lineNum">     374 </span>                :            :         case(FC_READ):
+<span class="lineNum">     375 </span>                :            :         case(FC_ASSIGN_CLASS):
+<span class="lineNum">     376 </span>                :<span class="lineCov">      12525 :                 return false;</span>
+<span class="lineNum">     377 </span>                :            :         default:
+<span class="lineNum">     378 </span>                :<span class="lineCov">      15173 :                 return true;</span>
+<span class="lineNum">     379 </span>                :            :         }
+<a name="380"><span class="lineNum">     380 </span>                :            : }</a>
+<span class="lineNum">     381 </span>                :            : 
+<span class="lineNum">     382 </span>                :<span class="lineCov">        482 : ObjectWriteIterator APDU::WriteContiguous(const FixedObject* apObj, size_t aStart, size_t aStop, QualifierCode aCode)</span>
+<span class="lineNum">     383 </span>                :            : {
+<span class="lineNum">     384 </span>                :<span class="lineCov">        482 :         this-&gt;CheckWriteState(apObj);</span>
+<span class="lineNum">     385 </span>        [<span class="branchCov" title="Branch 0 was taken 482 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        482 :         if(aCode == QC_UNDEFINED)  aCode = this-&gt;GetContiguousQualifier(aStart, aStop);</span>
+<span class="lineNum">     386 </span>                :            : 
+<span class="lineNum">     387 </span>                :<span class="lineCov">        482 :         IObjectHeader* pHdr = this-&gt;GetObjectHeader(aCode);</span>
+<span class="lineNum">     388 </span>        [<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 482 times"> + </span>]:<span class="lineCov">        482 :         if(pHdr-&gt;GetSize() &gt; this-&gt;Remainder()) return ObjectWriteIterator();</span>
+<span class="lineNum">     389 </span>                :            : 
+<span class="lineNum">     390 </span>                :<span class="lineCov">        482 :         size_t maxObjects = (this-&gt;Remainder() - pHdr-&gt;GetSize()) / apObj-&gt;GetSize();</span>
+<span class="lineNum">     391 </span>                :            : 
+<span class="lineNum">     392 </span>                :            :         //No point in writing a header if it can't hold an object
+<span class="lineNum">     393 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 482 times"> + </span>]:<span class="lineCov">        482 :         if(maxObjects == 0) return ObjectWriteIterator();</span>
+<span class="lineNum">     394 </span>                :            : 
+<span class="lineNum">     395 </span>                :            :         //do we write all the objects or the max in the space
+<span class="lineNum">     396 </span>                :<span class="lineCov">        482 :         size_t requested = aStop - aStart + 1;</span>
+<span class="lineNum">     397 </span>        [<span class="branchCov" title="Branch 0 was taken 478 times"> + </span><span class="branchCov" title="Branch 1 was taken 4 times"> + </span>]:<span class="lineCov">        482 :         size_t count = (requested &lt; maxObjects) ? requested : maxObjects;</span>
+<span class="lineNum">     398 </span>                :<span class="lineCov">        482 :         size_t stop = aStart + count - 1;</span>
+<span class="lineNum">     399 </span>                :            : 
+<span class="lineNum">     400 </span>                :            :         //we're commited to writing some data, so proceed
+<span class="lineNum">     401 </span>                :<span class="lineCov">        482 :         uint8_t* pHeaderPos = mBuffer + mFragmentSize;</span>
+<span class="lineNum">     402 </span>                :<span class="lineCov">        482 :         pHdr-&gt;Set(pHeaderPos, apObj-&gt;GetGroup(), apObj-&gt;GetVariation(), aCode);</span>
+<span class="lineNum">     403 </span>                :<span class="lineCov">        482 :         uint8_t* pPos = pHeaderPos + pHdr-&gt;GetSize();</span>
+<span class="lineNum">     404 </span>                :<span class="lineCov">        482 :         this-&gt;WriteContiguousHeader(pHdr, pHeaderPos, aStart, stop);</span>
+<span class="lineNum">     405 </span>                :            : 
+<span class="lineNum">     406 </span>                :<span class="lineCov">        482 :         mFragmentSize += pHdr-&gt;GetSize();</span>
+<span class="lineNum">     407 </span>                :<span class="lineCov">        482 :         bool has_data = APDU::HasData(this-&gt;GetFunction());</span>
+<span class="lineNum">     408 </span>        [<span class="branchCov" title="Branch 0 was taken 482 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        482 :         size_t obj_size = has_data ? apObj-&gt;GetSize() : 0;</span>
+<span class="lineNum">     409 </span>                :<span class="lineCov">        482 :         mFragmentSize += count * obj_size;</span>
+<span class="lineNum">     410 </span>                :            : 
+<span class="lineNum">     411 </span>                :<span class="lineCov">        482 :         return ObjectWriteIterator(pPos, aStart, stop, obj_size);</span>
+<a name="412"><span class="lineNum">     412 </span>                :            : }</a>
+<span class="lineNum">     413 </span>                :            : 
+<span class="lineNum">     414 </span>                :<span class="lineNoCov">          0 : ObjectWriteIterator APDU::WriteContiguous(const BitfieldObject* apObj, size_t aStart, size_t aStop, QualifierCode aCode)</span>
+<span class="lineNum">     415 </span>                :            : {
+<span class="lineNum">     416 </span>                :<span class="lineNoCov">          0 :         this-&gt;CheckWriteState(apObj);</span>
+<span class="lineNum">     417 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(aCode == QC_UNDEFINED)  aCode = this-&gt;GetContiguousQualifier(aStart, aStop);</span>
+<span class="lineNum">     418 </span>                :            : 
+<span class="lineNum">     419 </span>                :<span class="lineNoCov">          0 :         IObjectHeader* pHdr = this-&gt;GetObjectHeader(aCode);</span>
+<span class="lineNum">     420 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(pHdr-&gt;GetSize() &gt; this-&gt;Remainder()) return ObjectWriteIterator();</span>
+<span class="lineNum">     421 </span>                :            : 
+<span class="lineNum">     422 </span>                :<span class="lineNoCov">          0 :         size_t maxObjects = (this-&gt;Remainder() - pHdr-&gt;GetSize()) * 8; //bitfield, 8 objects per byte</span>
+<span class="lineNum">     423 </span>                :            : 
+<span class="lineNum">     424 </span>                :            :         //No point in writing a header if it can't hold an object
+<span class="lineNum">     425 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(maxObjects == 0) return ObjectWriteIterator();</span>
+<span class="lineNum">     426 </span>                :            : 
+<span class="lineNum">     427 </span>                :            :         //do we write all the objects or the max in the space
+<span class="lineNum">     428 </span>                :<span class="lineNoCov">          0 :         size_t requested = aStop - aStart + 1;</span>
+<span class="lineNum">     429 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         size_t count = (requested &lt; maxObjects) ? requested : maxObjects;</span>
+<span class="lineNum">     430 </span>                :<span class="lineNoCov">          0 :         size_t stop = aStart + count - 1;</span>
+<span class="lineNum">     431 </span>                :            : 
+<span class="lineNum">     432 </span>                :            :         //we're commited to writing some data, so proceed
+<span class="lineNum">     433 </span>                :<span class="lineNoCov">          0 :         uint8_t* pHeaderPos = mBuffer + mFragmentSize;</span>
+<span class="lineNum">     434 </span>                :<span class="lineNoCov">          0 :         pHdr-&gt;Set(pHeaderPos, apObj-&gt;GetGroup(), apObj-&gt;GetVariation(), aCode);</span>
+<span class="lineNum">     435 </span>                :<span class="lineNoCov">          0 :         uint8_t* pPos = pHeaderPos + pHdr-&gt;GetSize();</span>
+<span class="lineNum">     436 </span>                :<span class="lineNoCov">          0 :         apObj-&gt;Zero(pPos, count);</span>
+<span class="lineNum">     437 </span>                :            : 
+<span class="lineNum">     438 </span>                :<span class="lineNoCov">          0 :         this-&gt;WriteContiguousHeader(pHdr, pHeaderPos, aStart, stop);</span>
+<span class="lineNum">     439 </span>                :            : 
+<span class="lineNum">     440 </span>                :<span class="lineNoCov">          0 :         mFragmentSize += pHdr-&gt;GetSize();</span>
+<span class="lineNum">     441 </span>                :<span class="lineNoCov">          0 :         bool has_data = APDU::HasData(this-&gt;GetFunction());</span>
+<span class="lineNum">     442 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         size_t data_size = has_data ? apObj-&gt;GetSize(count) : 0;</span>
+<span class="lineNum">     443 </span>                :<span class="lineNoCov">          0 :         mFragmentSize += data_size;</span>
+<span class="lineNum">     444 </span>                :            : 
+<span class="lineNum">     445 </span>                :<span class="lineNoCov">          0 :         return ObjectWriteIterator(pPos, aStart, stop, 0);</span>
+<a name="446"><span class="lineNum">     446 </span>                :            : }</a>
+<span class="lineNum">     447 </span>                :            : 
+<span class="lineNum">     448 </span>                :<span class="lineCov">        482 : void APDU::WriteContiguousHeader(IObjectHeader* apHdr, uint8_t* apPos, size_t aStart, size_t aStop)</span>
+<span class="lineNum">     449 </span>                :            : {
+<span class="lineNum">     450 </span>     [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 482 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        482 :         switch(apHdr-&gt;GetType()) {</span>
+<span class="lineNum">     451 </span>                :            :         case(OHT_COUNT_1_OCTET):
+<span class="lineNum">     452 </span>                :            :         case(OHT_COUNT_2_OCTET):
+<span class="lineNum">     453 </span>                :            :         case(OHT_COUNT_4_OCTET):
+<span class="lineNum">     454 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 static_cast&lt;ICountHeader*&gt;(apHdr)-&gt;SetCount(apPos, aStop - aStart + 1);</span>
+<span class="lineNum">     455 </span>                :            :                 break;
+<span class="lineNum">     456 </span>                :            :         case(OHT_RANGED_2_OCTET):
+<span class="lineNum">     457 </span>                :            :         case(OHT_RANGED_4_OCTET):
+<span class="lineNum">     458 </span>                :            :         case(OHT_RANGED_8_OCTET):
+<span class="lineNum">     459 </span>                :            :                 RangeInfo r;
+<span class="lineNum">     460 </span>                :<span class="lineCov">        482 :                 r.Start = aStart;</span>
+<span class="lineNum">     461 </span>                :<span class="lineCov">        482 :                 r.Stop = aStop;</span>
+<span class="lineNum">     462 </span>        [<span class="branchCov" title="Branch 0 was taken 482 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        482 :                 static_cast&lt;IRangeHeader*&gt;(apHdr)-&gt;SetRange(apPos, r);</span>
+<span class="lineNum">     463 </span>                :            :                 break;
+<span class="lineNum">     464 </span>                :            :         default:
+<span class="lineNum">     465 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_EXCEPTION(Exception, &quot;Invalid header type&quot;);</span>
+<span class="lineNum">     466 </span>                :            :         }
+<a name="467"><span class="lineNum">     467 </span>                :<span class="lineCov">        482 : }</span></a>
+<span class="lineNum">     468 </span>                :            : 
+<span class="lineNum">     469 </span>                :<span class="lineNoCov">          0 : IndexedWriteIterator APDU::WriteIndexed(const SizeByVariationObject* apObj, size_t aSize, size_t aIndex)</span>
+<span class="lineNum">     470 </span>                :            : {
+<span class="lineNum">     471 </span>                :<span class="lineNoCov">          0 :         return WriteIndexed(apObj, aSize, GetIndexedQualifier(aIndex, 1));</span>
+<a name="472"><span class="lineNum">     472 </span>                :            : }</a>
+<span class="lineNum">     473 </span>                :            : 
+<span class="lineNum">     474 </span>                :<span class="lineNoCov">          0 : IndexedWriteIterator APDU::WriteIndexed(const FixedObject* apObj, size_t aCount, size_t aMaxIndex)</span>
+<span class="lineNum">     475 </span>                :            : {
+<span class="lineNum">     476 </span>                :<span class="lineNoCov">          0 :         return WriteIndexed(apObj, aCount, GetIndexedQualifier(aMaxIndex, aCount));</span>
+<a name="477"><span class="lineNum">     477 </span>                :            : }</a>
+<span class="lineNum">     478 </span>                :            : 
+<span class="lineNum">     479 </span>                :<span class="lineNoCov">          0 : IndexedWriteIterator APDU::WriteIndexed(const SizeByVariationObject* apObj, size_t aSize, QualifierCode aCode)</span>
+<span class="lineNum">     480 </span>                :            : {
+<span class="lineNum">     481 </span>                :<span class="lineNoCov">          0 :         this-&gt;CheckWriteState(apObj);</span>
+<span class="lineNum">     482 </span>                :            : 
+<span class="lineNum">     483 </span>                :            :         // This object type encodes the size in the variation field, the prefix is used to encode something else
+<span class="lineNum">     484 </span>                :<span class="lineNoCov">          0 :         uint8_t variation = boost::numeric::converter&lt;uint8_t, size_t&gt;::convert(aSize);</span>
+<span class="lineNum">     485 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         size_t obj_size = APDU::HasData(this-&gt;GetFunction()) ? aSize : 0;</span>
+<span class="lineNum">     486 </span>                :<span class="lineNoCov">          0 :         size_t prefix_size = this-&gt;GetPrefixSizeAndValidate(aCode, apObj-&gt;GetType());</span>
+<span class="lineNum">     487 </span>                :            : 
+<span class="lineNum">     488 </span>                :<span class="lineNoCov">          0 :         return WriteCountHeader(obj_size, prefix_size, apObj-&gt;GetGroup(), variation, 1, aCode);</span>
+<a name="489"><span class="lineNum">     489 </span>                :            : }</a>
+<span class="lineNum">     490 </span>                :            : 
+<span class="lineNum">     491 </span>                :<span class="lineCov">         18 : IndexedWriteIterator APDU::WriteIndexed(const FixedObject* apObj, size_t aCount, QualifierCode aCode)</span>
+<span class="lineNum">     492 </span>                :            : {
+<span class="lineNum">     493 </span>                :<span class="lineCov">         18 :         this-&gt;CheckWriteState(apObj);</span>
+<span class="lineNum">     494 </span>                :            : 
+<span class="lineNum">     495 </span>        [<span class="branchCov" title="Branch 2 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         18 :         size_t obj_size = APDU::HasData(this-&gt;GetFunction()) ? apObj-&gt;GetSize() : 0;</span>
+<span class="lineNum">     496 </span>                :<span class="lineCov">         18 :         size_t prefix_size = this-&gt;GetPrefixSizeAndValidate(aCode, apObj-&gt;GetType());</span>
+<span class="lineNum">     497 </span>                :            : 
+<span class="lineNum">     498 </span>                :<span class="lineCov">         18 :         return WriteCountHeader(obj_size, prefix_size, apObj-&gt;GetGroup(), apObj-&gt;GetVariation(), aCount, aCode);</span>
+<a name="499"><span class="lineNum">     499 </span>                :            : }</a>
+<span class="lineNum">     500 </span>                :            : 
+<span class="lineNum">     501 </span>                :<span class="lineCov">         18 : IndexedWriteIterator APDU::WriteCountHeader(size_t aObjectSize, size_t aPrefixSize, uint8_t aGrp, uint8_t aVar, size_t aCount, QualifierCode aQual)</span>
+<span class="lineNum">     502 </span>                :            : {
+<span class="lineNum">     503 </span>                :<span class="lineCov">         18 :         ICountHeader* pHdr = this-&gt;GetCountHeader(aQual); //Get the count header</span>
+<span class="lineNum">     504 </span>        [<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 10 times"> + </span>]:<span class="lineCov">         10 :         if(pHdr-&gt;GetSize() &gt; this-&gt;Remainder()) return IndexedWriteIterator();</span>
+<span class="lineNum">     505 </span>                :            : 
+<span class="lineNum">     506 </span>                :<span class="lineCov">         10 :         size_t obj_plus_prefix_size = aObjectSize + aPrefixSize;</span>
+<span class="lineNum">     507 </span>                :            : 
+<span class="lineNum">     508 </span>                :            :         //how many objects can we write?
+<span class="lineNum">     509 </span>                :<span class="lineCov">         10 :         size_t max_num = (this-&gt;Remainder() - pHdr-&gt;GetSize()) / obj_plus_prefix_size;</span>
+<span class="lineNum">     510 </span>                :            : 
+<span class="lineNum">     511 </span>                :            :         // No point in writing a header if it can't hold an object/index
+<span class="lineNum">     512 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 10 times"> + </span>]:<span class="lineCov">         10 :         if(max_num == 0) return IndexedWriteIterator();</span>
+<span class="lineNum">     513 </span>                :            : 
+<span class="lineNum">     514 </span>                :            :         //how many will we write?
+<span class="lineNum">     515 </span>        [<span class="branchCov" title="Branch 0 was taken 10 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         10 :         size_t count = (aCount &lt; max_num) ? aCount : max_num;</span>
+<span class="lineNum">     516 </span>                :<span class="lineCov">         10 :         size_t data_size = count * obj_plus_prefix_size;</span>
+<span class="lineNum">     517 </span>                :<span class="lineCov">         10 :         uint8_t* pHeaderPos = mBuffer + mFragmentSize;</span>
+<span class="lineNum">     518 </span>                :            : 
+<span class="lineNum">     519 </span>                :            :         //commited to writing at this point, so set the header
+<span class="lineNum">     520 </span>                :<span class="lineCov">         10 :         pHdr-&gt;Set(pHeaderPos, aGrp, aVar, aQual);</span>
+<span class="lineNum">     521 </span>                :<span class="lineCov">         10 :         pHdr-&gt;SetCount(pHeaderPos, count);</span>
+<span class="lineNum">     522 </span>                :<span class="lineCov">         10 :         mFragmentSize += pHdr-&gt;GetSize();</span>
+<span class="lineNum">     523 </span>                :<span class="lineCov">         10 :         uint8_t* pObjectPos = mBuffer + mFragmentSize;</span>
+<span class="lineNum">     524 </span>                :<span class="lineCov">         10 :         mFragmentSize += data_size;</span>
+<span class="lineNum">     525 </span>                :            : 
+<span class="lineNum">     526 </span>                :<span class="lineCov">         10 :         return IndexedWriteIterator(pObjectPos, count, aQual, aObjectSize);</span>
+<span class="lineNum">     527 </span>                :            : }
+<span class="lineNum">     528 </span>                :            : 
+<a name="529"><span class="lineNum">     529 </span>                :            : </a>
+<span class="lineNum">     530 </span>                :            : 
+<span class="lineNum">     531 </span>                :<span class="lineNoCov">          0 : bool APDU::DoPlaceholderWrite(ObjectBase* apObj)</span>
+<span class="lineNum">     532 </span>                :            : {
+<span class="lineNum">     533 </span>                :<span class="lineNoCov">          0 :         this-&gt;CheckWriteState(apObj);</span>
+<span class="lineNum">     534 </span>                :            : 
+<span class="lineNum">     535 </span>                :            :         //determine what the prefix and range specifier should be
+<span class="lineNum">     536 </span>                :<span class="lineNoCov">          0 :         IObjectHeader* pHdr = AllObjectsHeader::Inst();</span>
+<span class="lineNum">     537 </span>                :            : 
+<span class="lineNum">     538 </span>                :<span class="lineNoCov">          0 :         size_t remainder = mBuffer.Size() - mFragmentSize;</span>
+<span class="lineNum">     539 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(pHdr-&gt;GetSize() &gt; remainder) return false;</span>
+<span class="lineNum">     540 </span>                :            : 
+<span class="lineNum">     541 </span>                :<span class="lineNoCov">          0 :         pHdr-&gt;Set(mBuffer + mFragmentSize, apObj-&gt;GetGroup(), apObj-&gt;GetVariation(), QC_ALL_OBJ);</span>
+<span class="lineNum">     542 </span>                :<span class="lineNoCov">          0 :         mFragmentSize += pHdr-&gt;GetSize();</span>
+<span class="lineNum">     543 </span>                :            : 
+<span class="lineNum">     544 </span>                :<span class="lineNoCov">          0 :         return true;</span>
+<span class="lineNum">     545 </span>                :            : }
+<span class="lineNum">     546 </span>                :            : 
+<a name="547"><span class="lineNum">     547 </span>                :            : </a>
+<span class="lineNum">     548 </span>                :            : 
+<span class="lineNum">     549 </span>                :<span class="lineCov">        500 : void APDU::CheckWriteState(const ObjectBase* apObj)</span>
+<span class="lineNum">     550 </span>                :            : {
+<span class="lineNum">     551 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 500 times"> + </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineCov">        500 :         if(mpAppHeader == NULL) MACRO_THROW_EXCEPTION(InvalidStateException, &quot;Header has not be configured&quot;);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     552 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 500 times"> + </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineCov">        500 :         if(mIsInterpreted) MACRO_THROW_EXCEPTION(InvalidStateException, &quot;APDU is interpreted&quot;);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     553 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 500 times"> + </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineCov">        500 :         if(apObj == NULL) MACRO_THROW_EXCEPTION(ArgumentException, &quot;Object cannot be NULL&quot;);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<a name="554"><span class="lineNum">     554 </span>                :<span class="lineCov">        500 : }</span></a>
+<span class="lineNum">     555 </span>                :            : 
+<span class="lineNum">     556 </span>                :<span class="lineCov">         18 : ICountHeader* APDU::GetCountHeader(QualifierCode aCode)</span>
+<span class="lineNum">     557 </span>                :            : {
+<span class="lineNum">     558 </span>  [<span class="branchCov" title="Branch 0 was taken 10 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 8 times"> + </span>]:<span class="lineCov">         18 :         switch(aCode) {</span>
+<span class="lineNum">     559 </span>                :            :         case(QC_1B_CNT):
+<span class="lineNum">     560 </span>                :            :         case(QC_1B_CNT_1B_INDEX):
+<span class="lineNum">     561 </span>                :            :         case(QC_1B_VCNT_1B_SIZE):
+<span class="lineNum">     562 </span>                :            :         case(QC_1B_VCNT_2B_SIZE):
+<span class="lineNum">     563 </span>                :            :         case(QC_1B_VCNT_4B_SIZE):
+<span class="lineNum">     564 </span>                :<span class="lineCov">         10 :                 return Count1OctetHeader::Inst();</span>
+<span class="lineNum">     565 </span>                :            :         case(QC_2B_CNT):
+<span class="lineNum">     566 </span>                :            :         case(QC_2B_CNT_2B_INDEX):
+<span class="lineNum">     567 </span>                :<span class="lineNoCov">          0 :                 return Count2OctetHeader::Inst();</span>
+<span class="lineNum">     568 </span>                :            :         case(QC_4B_CNT):
+<span class="lineNum">     569 </span>                :            :         case(QC_4B_CNT_4B_INDEX):
+<span class="lineNum">     570 </span>                :<span class="lineNoCov">          0 :                 return Count4OctetHeader::Inst();</span>
+<span class="lineNum">     571 </span>                :            :         default:
+<span class="lineNum">     572 </span>[<span class="branchCov" title="Branch 2 was taken 8 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>][<span class="branchCov" title="Branch 6 was taken 8 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]:<span class="lineCov">         18 :                 MACRO_THROW_EXCEPTION(ArgumentException, &quot;Invalid qualifier for count header&quot;);</span>
+<span class="lineNum">     573 </span>                :            :         }
+<span class="lineNum">     574 </span>                :            : }
+<span class="lineNum">     575 </span>                :            : 
+<span class="lineNum">     576 </span>                :            : 
+<a name="577"><span class="lineNum">     577 </span>                :            : // Found a bug here... The Max index is not enough information because the count can exceed</a>
+<span class="lineNum">     578 </span>                :            : // the max index when binary events are reported because of SOE
+<span class="lineNum">     579 </span>                :<span class="lineNoCov">          0 : QualifierCode APDU::GetIndexedQualifier(size_t aMaxIndex, size_t aCount)</span>
+<span class="lineNum">     580 </span>                :            : {
+<span class="lineNum">     581 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(aMaxIndex &lt;= Count1OctetHeader::MaxCount() &amp;&amp; aCount &lt;= Count1OctetHeader::MaxCount()) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     582 </span>                :<span class="lineNoCov">          0 :                 return QC_1B_CNT_1B_INDEX;</span>
+<span class="lineNum">     583 </span>                :            :         }
+<span class="lineNum">     584 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :         else if(aMaxIndex &lt;= Count2OctetHeader::MaxCount() &amp;&amp; aCount &lt;= Count2OctetHeader::MaxCount()) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     585 </span>                :<span class="lineNoCov">          0 :                 return QC_2B_CNT_2B_INDEX;</span>
+<span class="lineNum">     586 </span>                :            :         }
+<span class="lineNum">     587 </span>                :            :         else {
+<span class="lineNum">     588 </span>                :<span class="lineNoCov">          0 :                 return QC_4B_CNT_4B_INDEX;</span>
+<span class="lineNum">     589 </span>                :            :         }
+<span class="lineNum">     590 </span>                :            : 
+<a name="591"><span class="lineNum">     591 </span>                :            : }</a>
+<span class="lineNum">     592 </span>                :            : 
+<span class="lineNum">     593 </span>                :<span class="lineCov">        482 : QualifierCode APDU::GetContiguousQualifier(size_t aStart, size_t aStop)</span>
+<span class="lineNum">     594 </span>                :            : {
+<span class="lineNum">     595 </span>        [<span class="branchCov" title="Branch 1 was taken 482 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        482 :         if(aStop &lt;= Ranged2OctetHeader::MaxRange()) {</span>
+<span class="lineNum">     596 </span>                :<span class="lineCov">        482 :                 return QC_1B_START_STOP;</span>
+<span class="lineNum">     597 </span>                :            :         }
+<span class="lineNum">     598 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         else if(aStop &lt;= Ranged4OctetHeader::MaxRange()) {</span>
+<span class="lineNum">     599 </span>                :<span class="lineNoCov">          0 :                 return QC_2B_START_STOP;</span>
+<span class="lineNum">     600 </span>                :            :         }
+<span class="lineNum">     601 </span>                :            :         else {
+<span class="lineNum">     602 </span>                :<span class="lineCov">        482 :                 return QC_4B_START_STOP;</span>
+<span class="lineNum">     603 </span>                :            :         }
+<span class="lineNum">     604 </span>                :            : }
+<a name="605"><span class="lineNum">     605 </span>                :            : </a>
+<span class="lineNum">     606 </span>                :            : #ifndef OPENDNP3_STRIP_LOG_MESSAGES
+<span class="lineNum">     607 </span>                :<span class="lineNoCov">          0 : std::string APDU::ToString() const</span>
+<span class="lineNum">     608 </span>                :            : {
+<span class="lineNum">     609 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         ostringstream oss;</span>
+<span class="lineNum">     610 </span>                :            : 
+<span class="lineNum">     611 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         APDU copy(*this);</span>
+<span class="lineNum">     612 </span>                :            : 
+<span class="lineNum">     613 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         FunctionCodes func = copy.GetFunction();</span>
+<span class="lineNum">     614 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         AppControlField acf = copy.GetControl();</span>
+<span class="lineNum">     615 </span>                :            : 
+<span class="lineNum">     616 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         oss &lt;&lt; &quot;FIR: &quot; &lt;&lt; acf.FIR;</span>
+<span class="lineNum">     617 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         oss &lt;&lt; &quot;, FIN: &quot; &lt;&lt; acf.FIN;</span>
+<span class="lineNum">     618 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         oss &lt;&lt; &quot;, CON: &quot; &lt;&lt; acf.CON;</span>
+<span class="lineNum">     619 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         oss &lt;&lt; &quot;, UNS: &quot; &lt;&lt; acf.UNS;</span>
+<span class="lineNum">     620 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         oss &lt;&lt; &quot;, SEQ: &quot; &lt;&lt; static_cast&lt;int&gt;(acf.SEQ);</span>
+<span class="lineNum">     621 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         oss &lt;&lt; &quot;, Func: &quot; &lt;&lt; FunctionCodeToString(func);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     622 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if ( IsResponse(func) ) oss &lt;&lt; copy.GetIIN().ToString();</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
+<span class="lineNum">     623 </span>                :            : 
+<span class="lineNum">     624 </span>                :            :         try {
+<span class="lineNum">     625 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 copy.Interpret();</span>
+<span class="lineNum">     626 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 HeaderReadIterator itr = copy.BeginRead();</span>
+<span class="lineNum">     627 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 oss &lt;&lt; &quot; HdrCount: &quot; &lt;&lt; itr.Count();</span>
+<span class="lineNum">     628 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if ( itr.Count() != 0 )</span>
+<span class="lineNum">     629 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         oss &lt;&lt; &quot;,&quot;;</span>
+<span class="lineNum">     630 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 for ( ; !itr.IsEnd(); ++itr) {</span>
+<span class="lineNum">     631 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         oss &lt;&lt; &quot; Header: (Grp: &quot; &lt;&lt; itr-&gt;GetGroup();</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     632 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         oss &lt;&lt; &quot;, Var: &quot; &lt;&lt; itr-&gt;GetVariation();</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     633 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         oss &lt;&lt; &quot;, Qual: &quot; &lt;&lt; itr-&gt;GetQualifier() &lt;&lt; &quot;, &quot;;</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">     634 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         oss &lt;&lt; itr-&gt;GetHeader()-&gt;ToString(*itr);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">     635 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         oss &lt;&lt; &quot;)&quot;;</span>
+<span class="lineNum">     636 </span>                :            :                 }
+<span class="lineNum">     637 </span>                :            :         }
+<span class="lineNum">     638 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:            :         catch(Exception) {
+<span class="lineNum">     639 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:            :                 oss &lt;&lt; &quot; Malformed header data preceeds&quot;;
+<span class="lineNum">     640 </span>                :            :         }
+<span class="lineNum">     641 </span>                :            : 
+<span class="lineNum">     642 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :         oss &lt;&lt; &quot;, Size: &quot; &lt;&lt; this-&gt;Size();</span>
+<span class="lineNum">     643 </span>                :            : 
+<span class="lineNum">     644 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         return oss.str();</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     645 </span>                :            : }
+<a name="646"><span class="lineNum">     646 </span>                :            : #endif</a>
+<span class="lineNum">     647 </span>                :            : 
+<span class="lineNum">     648 </span>[<span class="branchCov" title="Branch 1 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">          3 : }</span>
+<span class="lineNum">     649 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

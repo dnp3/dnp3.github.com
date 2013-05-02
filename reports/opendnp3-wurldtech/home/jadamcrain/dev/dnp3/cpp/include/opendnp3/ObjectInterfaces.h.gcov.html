@@ -1,0 +1,464 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/include/opendnp3/ObjectInterfaces.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/include/opendnp3</a> - ObjectInterfaces.h<span style="font-size: 80%;"> (source / <a href="ObjectInterfaces.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntry">63</td>
+            <td class="headerCovTableEntryLo">30.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">46</td>
+            <td class="headerCovTableEntry">88</td>
+            <td class="headerCovTableEntryLo">52.3 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntry">86</td>
+            <td class="headerCovTableEntryLo">25.6 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #ifndef __OBJECT_INTERFACES_H_
+<span class="lineNum">      30 </span>                :            : #define __OBJECT_INTERFACES_H_
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :            : #include &quot;Types.h&quot;
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      35 </span>                :            : #include &lt;stddef.h&gt;
+<span class="lineNum">      36 </span>                :            : #include &lt;cstring&gt;
+<span class="lineNum">      37 </span>                :            : #include &lt;string&gt;
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :            : /*
+<span class="lineNum">      40 </span>                :            :  * Object hierarchy
+<span class="lineNum">      41 </span>                :            :  *
+<span class="lineNum">      42 </span>                :            :  *               +--- PlaceHolderObject
+<span class="lineNum">      43 </span>                :            :  *               |
+<span class="lineNum">      44 </span>                :            :  *               |                     +--- FixedObject --- StreamObject&lt;T&gt;
+<span class="lineNum">      45 </span>                :            :  *               |                     |
+<span class="lineNum">      46 </span>                :            :  * ObjectBase ---+--- IndexedObject ---+--- BitFieldObject
+<span class="lineNum">      47 </span>                :            :  *               |                     |
+<span class="lineNum">      48 </span>                :            :  *               |                     +--- SizeByVariationObject
+<span class="lineNum">      49 </span>                :            :  *               |
+<span class="lineNum">      50 </span>                :            :  *               +--- VariableObject
+<span class="lineNum">      51 </span>                :            :  *
+<span class="lineNum">      52 </span>                :            :  */
+<span class="lineNum">      53 </span>                :            : namespace opendnp3
+<span class="lineNum">      54 </span>                :            : {
+<span class="lineNum">      55 </span>                :            : 
+<span class="lineNum">      56 </span>                :            : class VTOData;
+<span class="lineNum">      57 </span>                :            : class CopyableBuffer;
+<span class="lineNum">      58 </span>                :            : 
+<span class="lineNum">      59 </span>                :            : /**
+<span class="lineNum">      60 </span>                :            :  * An enumeration for all of the concrete class types in the ObjectBase
+<span class="lineNum">      61 </span>                :            :  * hierarchy.
+<span class="lineNum">      62 </span>                :            :  */
+<span class="lineNum">      63 </span>                :            : enum ObjectTypes {
+<span class="lineNum">      64 </span>                :            :         OT_PLACEHOLDER,
+<span class="lineNum">      65 </span>                :            :         OT_FIXED,
+<span class="lineNum">      66 </span>                :            :         OT_BITFIELD,
+<span class="lineNum">      67 </span>                :            :         OT_VARIABLE,
+<span class="lineNum">      68 </span>                :            :         OT_SIZE_BY_VARIATION
+<span class="lineNum">      69 </span>                :            : };
+<span class="lineNum">      70 </span>                :            : 
+<span class="lineNum">      71 </span>                :            : /**
+<span class="lineNum">      72 </span>                :            :  * A class that represents a very generic DNP3 object.  All DNP3 objects
+<span class="lineNum">      73 </span>                :            :  * must implement some common functionality, such as the group and
+<a name="74"><span class="lineNum">      74 </span>                :            :  * variation identifiers.  This class provides those common functions.</a>
+<span class="lineNum">      75 </span>                :            :  */
+<span class="lineNum">      76 </span>                :<span class="lineCov">        109 : class ObjectBase</span>
+<span class="lineNum">      77 </span>                :            : {
+<span class="lineNum">      78 </span>                :            : public:
+<span class="lineNum">      79 </span>                :            : 
+<span class="lineNum">      80 </span>                :            :         /**
+<a name="81"><span class="lineNum">      81 </span>                :            :          * A default destructor for the ObjectBase subclasses.</a>
+<span class="lineNum">      82 </span>                :            :          */
+<span class="lineNum">      83 </span>        [<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 109 times"> + </span>]:<span class="lineCov">        109 :         virtual ~ObjectBase() {}</span>
+<span class="lineNum">      84 </span>                :            : 
+<span class="lineNum">      85 </span>                :            :         /**
+<span class="lineNum">      86 </span>                :            :          * Returns ObjectTypes code that corresponds with the ObjectBase
+<span class="lineNum">      87 </span>                :            :          * subclass.
+<span class="lineNum">      88 </span>                :            :          *
+<span class="lineNum">      89 </span>                :            :          * @return                      the appropriate code from the ObjectTypes
+<span class="lineNum">      90 </span>                :            :          *                  enumeration that correspond with the
+<span class="lineNum">      91 </span>                :            :          *                  ObjectBase subclass
+<span class="lineNum">      92 </span>                :            :          */
+<span class="lineNum">      93 </span>                :            :         virtual ObjectTypes GetType() const = 0;
+<span class="lineNum">      94 </span>                :            : 
+<span class="lineNum">      95 </span>                :            :         /**
+<span class="lineNum">      96 </span>                :            :          * Returns the DNP3 group identifier for the object.
+<span class="lineNum">      97 </span>                :            :          *
+<span class="lineNum">      98 </span>                :            :          * @return                      the DNP3 group identifier for the object
+<span class="lineNum">      99 </span>                :            :          */
+<span class="lineNum">     100 </span>                :            :         virtual int GetGroup() const = 0;
+<span class="lineNum">     101 </span>                :            : 
+<span class="lineNum">     102 </span>                :            :         /**
+<span class="lineNum">     103 </span>                :            :          * Returns the DNP3 variation identifier for the object.
+<span class="lineNum">     104 </span>                :            :          *
+<span class="lineNum">     105 </span>                :            :          * @return                      the DNP3 variation identifier for the object.
+<span class="lineNum">     106 </span>                :            :          */
+<a name="107"><span class="lineNum">     107 </span>                :            :         virtual int GetVariation() const = 0;</a>
+<span class="lineNum">     108 </span>                :            : 
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :         virtual bool UseCTO() const {</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :                 return false;</span>
+<a name="111"><span class="lineNum">     111 </span>                :            :         }</a>
+<span class="lineNum">     112 </span>                :            : 
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :         virtual bool IsEvent() const {</span>
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     115 </span>                :            :         }
+<span class="lineNum">     116 </span>                :            : 
+<span class="lineNum">     117 </span>                :            :         /**
+<span class="lineNum">     118 </span>                :            :          * Returns an instance of the appropriate ObjectBase subclass that
+<span class="lineNum">     119 </span>                :            :          * corresponds with the given DNP3 group and variation
+<span class="lineNum">     120 </span>                :            :          * identifiers.
+<span class="lineNum">     121 </span>                :            :          *
+<span class="lineNum">     122 </span>                :            :          * @param aGroup                the DNP3 group identifier
+<span class="lineNum">     123 </span>                :            :          * @param aVariation    the DNP3 variation identifier
+<span class="lineNum">     124 </span>                :            :          *
+<span class="lineNum">     125 </span>                :            :          * @return                              an instance of the ObjectBase subclass
+<span class="lineNum">     126 </span>                :            :          *                      that represents the group and variation
+<span class="lineNum">     127 </span>                :            :          */
+<span class="lineNum">     128 </span>                :            :         static ObjectBase* Get(int aGroup, int aVariation);
+<span class="lineNum">     129 </span>                :            : 
+<span class="lineNum">     130 </span>                :            :         /**
+<span class="lineNum">     131 </span>                :            :          * Determines object equality based on the DNP3 group and
+<span class="lineNum">     132 </span>                :            :          * variation identifiers.
+<span class="lineNum">     133 </span>                :            :          *
+<span class="lineNum">     134 </span>                :            :          * @param pObj          the ObjectBase instance with which to compare
+<span class="lineNum">     135 </span>                :            :          *                                      the current object
+<span class="lineNum">     136 </span>                :            :          *
+<span class="lineNum">     137 </span>                :            :          * @return                      true if the group and variation identifiers
+<a name="138"><span class="lineNum">     138 </span>                :            :          *                                      are equal, false if not</a>
+<span class="lineNum">     139 </span>                :            :          */
+<span class="lineNum">     140 </span>                :<span class="lineNoCov">          0 :         bool Equals(ObjectBase* pObj) const {</span>
+<span class="lineNum">     141 </span>                :<span class="lineNoCov">          0 :                 return (pObj-&gt;GetGroup() == this-&gt;GetGroup() &amp;&amp;</span>
+<span class="lineNum">     142 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :                         pObj-&gt;GetVariation() == this-&gt;GetVariation());</span>
+<span class="lineNum">     143 </span>                :            :         }
+<span class="lineNum">     144 </span>                :            : 
+<span class="lineNum">     145 </span>                :            : #ifndef OPENDNP3_STRIP_LOG_MESSAGES
+<span class="lineNum">     146 </span>                :            :         /**
+<span class="lineNum">     147 </span>                :            :          * Returns the name of the ObjectBase subclass as a string.
+<span class="lineNum">     148 </span>                :            :          *
+<span class="lineNum">     149 </span>                :            :          * @return                      the name of the ObjectBase subclass
+<span class="lineNum">     150 </span>                :            :          */
+<span class="lineNum">     151 </span>                :            :         virtual std::string Name() const = 0;
+<span class="lineNum">     152 </span>                :            : #endif
+<span class="lineNum">     153 </span>                :            : 
+<span class="lineNum">     154 </span>                :            : };
+<span class="lineNum">     155 </span>                :            : 
+<span class="lineNum">     156 </span>                :            : /**
+<span class="lineNum">     157 </span>                :            :  * A common base class for all objects that must have an index associated
+<a name="158"><span class="lineNum">     158 </span>                :            :  * with them.</a>
+<span class="lineNum">     159 </span>                :            :  */
+<span class="lineNum">     160 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 93 times"> + </span>]:<span class="lineCov">        186 : class IndexedObject : public ObjectBase</span>
+<span class="lineNum">     161 </span>                :            : {
+<span class="lineNum">     162 </span>                :            :         /* Nothing specific to define with this object */
+<span class="lineNum">     163 </span>                :            : };
+<span class="lineNum">     164 </span>                :            : 
+<span class="lineNum">     165 </span>                :            : /**
+<span class="lineNum">     166 </span>                :            :  * A dummy object that acts like a placeholder for a group/variation
+<span class="lineNum">     167 </span>                :            :  * identifier.  This is useful to parse messages that have headers defined
+<a name="168"><span class="lineNum">     168 </span>                :            :  * which are not necessarily supported at this time.</a>
+<span class="lineNum">     169 </span>                :            :  */
+<span class="lineNum">     170 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 16 times"> + </span>]:<span class="lineCov">         32 : class PlaceHolderObject : public ObjectBase</span>
+<span class="lineNum">     171 </span>                :            : {
+<span class="lineNum">     172 </span>                :            : public:
+<span class="lineNum">     173 </span>                :            : 
+<span class="lineNum">     174 </span>                :            :         /**
+<span class="lineNum">     175 </span>                :            :          * Implements ObjectBase::GetType() to return OT_PLACEHOLDER.
+<span class="lineNum">     176 </span>                :            :          *
+<a name="177"><span class="lineNum">     177 </span>                :            :          * @return                      OT_PLACEHOLDER</a>
+<span class="lineNum">     178 </span>                :            :          */
+<span class="lineNum">     179 </span>                :<span class="lineCov">       5420 :         virtual ObjectTypes GetType() const {</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">       5420 :                 return OT_PLACEHOLDER;</span>
+<span class="lineNum">     181 </span>                :            :         }
+<span class="lineNum">     182 </span>                :            : 
+<span class="lineNum">     183 </span>                :            :         /**
+<span class="lineNum">     184 </span>                :            :          * Implements ObjectBase::GetSize() to return 0.
+<span class="lineNum">     185 </span>                :            :          *
+<span class="lineNum">     186 </span>                :            :          * @return                      zero (0)
+<span class="lineNum">     187 </span>                :            :          */
+<span class="lineNum">     188 </span>                :            :         size_t GetSize() {
+<span class="lineNum">     189 </span>                :            :                 return 0;
+<span class="lineNum">     190 </span>                :            :         }
+<span class="lineNum">     191 </span>                :            : 
+<a name="192"><span class="lineNum">     192 </span>                :            : };</a>
+<span class="lineNum">     193 </span>                :            : 
+<span class="lineNum">     194 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 85 times"> + </span>]:<span class="lineCov">        170 : class FixedObject : public IndexedObject</span>
+<span class="lineNum">     195 </span>                :            : {
+<span class="lineNum">     196 </span>                :            : public:
+<span class="lineNum">     197 </span>                :            : 
+<span class="lineNum">     198 </span>                :            :         /**
+<span class="lineNum">     199 </span>                :            :          * Implements ObjectBase::GetType() to return OT_FIXED.
+<span class="lineNum">     200 </span>                :            :          *
+<a name="201"><span class="lineNum">     201 </span>                :            :          * @return                      OT_FIXED</a>
+<span class="lineNum">     202 </span>                :            :          */
+<span class="lineNum">     203 </span>                :<span class="lineCov">      22454 :         virtual ObjectTypes GetType() const {</span>
+<span class="lineNum">     204 </span>                :<span class="lineCov">      22454 :                 return OT_FIXED;</span>
+<span class="lineNum">     205 </span>                :            :         }
+<span class="lineNum">     206 </span>                :            : 
+<span class="lineNum">     207 </span>                :            :         virtual size_t GetSize() const = 0;
+<span class="lineNum">     208 </span>                :            : 
+<span class="lineNum">     209 </span>                :            : };
+<a name="210"><span class="lineNum">     210 </span>                :            : </a>
+<span class="lineNum">     211 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     212 </span>[<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 1 time"> + </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]:<span class="lineCov">         88 : class StreamObject : public FixedObject</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span>][<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 27 was not executed"> # </span><span class="branchNoExec" title="Branch 28 was not executed"> # </span>][<span class="branchNoExec" title="Branch 33 was not executed"> # </span><span class="branchNoExec" title="Branch 34 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 39 was not executed"> # </span><span class="branchNoExec" title="Branch 40 was not executed"> # </span>][<span class="branchNoExec" title="Branch 45 was not executed"> # </span><span class="branchNoExec" title="Branch 46 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 51 was not executed"> # </span><span class="branchNoExec" title="Branch 52 was not executed"> # </span>][<span class="branchNoExec" title="Branch 57 was not executed"> # </span><span class="branchNoExec" title="Branch 58 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchCov" title="Branch 11 was taken 1 time"> + </span>][<span class="branchNoCov" title="Branch 17 was not taken"> - </span><span class="branchCov" title="Branch 18 was taken 1 time"> + </span>]
+<span class="lineNum">         </span>[<span class="branchNoCov" title="Branch 24 was not taken"> - </span><span class="branchCov" title="Branch 25 was taken 1 time"> + </span>][<span class="branchNoCov" title="Branch 31 was not taken"> - </span><span class="branchCov" title="Branch 32 was taken 4 times"> + </span>]
+<span class="lineNum">         </span>[<span class="branchNoCov" title="Branch 38 was not taken"> - </span><span class="branchCov" title="Branch 39 was taken 14 times"> + </span>][<span class="branchNoCov" title="Branch 45 was not taken"> - </span><span class="branchCov" title="Branch 46 was taken 16 times"> + </span>]
+<span class="lineNum">         </span>[<span class="branchNoCov" title="Branch 52 was not taken"> - </span><span class="branchCov" title="Branch 53 was taken 1 time"> + </span>][<span class="branchNoCov" title="Branch 59 was not taken"> - </span><span class="branchCov" title="Branch 60 was taken 1 time"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchNoCov" title="Branch 66 was not taken"> - </span><span class="branchCov" title="Branch 67 was taken 4 times"> + </span>]
+<span class="lineNum">     213 </span>                :            : {
+<span class="lineNum">     214 </span>                :            : public:
+<span class="lineNum">     215 </span>                :            : 
+<span class="lineNum">     216 </span>                :            :         virtual void Write(uint8_t* apPos, const T&amp;) const = 0;
+<span class="lineNum">     217 </span>                :            : 
+<a name="218"><span class="lineNum">     218 </span>                :            :         virtual T Read(const uint8_t*) const = 0;</a>
+<span class="lineNum">     219 </span>                :            : 
+<span class="lineNum">     220 </span>                :<span class="lineNoCov">          0 :         virtual bool HasQuality() const {</span>
+<span class="lineNum">     221 </span>                :<span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     222 </span>                :            :         }
+<span class="lineNum">     223 </span>                :            : 
+<span class="lineNum">     224 </span>                :            :         typedef T DataType;
+<span class="lineNum">     225 </span>                :            : };
+<a name="226"><span class="lineNum">     226 </span>                :            : </a>
+<span class="lineNum">     227 </span>                :            : template &lt;class T&gt;
+<span class="lineNum">     228 </span>[<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 1 time"> + </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]:<span class="lineCov">         10 : class CommandObject : public StreamObject&lt;T&gt;</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span>][<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 27 was not executed"> # </span><span class="branchNoExec" title="Branch 28 was not executed"> # </span>][<span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchCov" title="Branch 11 was taken 1 time"> + </span>]
+<span class="lineNum">         </span>[<span class="branchNoCov" title="Branch 17 was not taken"> - </span><span class="branchCov" title="Branch 18 was taken 1 time"> + </span>][<span class="branchNoCov" title="Branch 24 was not taken"> - </span><span class="branchCov" title="Branch 25 was taken 1 time"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchNoCov" title="Branch 31 was not taken"> - </span><span class="branchCov" title="Branch 32 was taken 1 time"> + </span>]
+<span class="lineNum">     229 </span>                :            : {
+<span class="lineNum">     230 </span>                :            : public:
+<span class="lineNum">     231 </span>                :            : 
+<span class="lineNum">     232 </span>                :            :         virtual CopyableBuffer GetValueBytes(const uint8_t*) const = 0;
+<span class="lineNum">     233 </span>                :            : 
+<a name="234"><span class="lineNum">     234 </span>                :            : };</a>
+<span class="lineNum">     235 </span>                :            : 
+<span class="lineNum">     236 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 4 times"> + </span>]:<span class="lineCov">          8 : class BitfieldObject : public IndexedObject</span>
+<span class="lineNum">     237 </span>                :            : {
+<a name="238"><span class="lineNum">     238 </span>                :            : public:</a>
+<span class="lineNum">     239 </span>                :            : 
+<span class="lineNum">     240 </span>                :<span class="lineCov">        800 :         virtual ObjectTypes GetType() const {</span>
+<span class="lineNum">     241 </span>                :<span class="lineCov">        800 :                 return OT_BITFIELD;</span>
+<a name="242"><span class="lineNum">     242 </span>                :            :         }</a>
+<span class="lineNum">     243 </span>                :            : 
+<span class="lineNum">     244 </span>                :<span class="lineCov">        372 :         size_t GetSize(size_t aNumValues) const {</span>
+<span class="lineNum">     245 </span>                :            :                 /* Integer division by 8 */
+<span class="lineNum">     246 </span>                :<span class="lineCov">        372 :                 size_t ret = (aNumValues &gt;&gt; 3);</span>
+<span class="lineNum">     247 </span>                :            : 
+<span class="lineNum">     248 </span>                :            :                 /*
+<span class="lineNum">     249 </span>                :            :                  * If it's not an even multiple of 8, add an extra byte
+<span class="lineNum">     250 </span>                :            :                  */
+<span class="lineNum">     251 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 372 times"> + </span>]:<span class="lineCov">        372 :                 if ((aNumValues &amp; 0x07) != 0) {</span>
+<span class="lineNum">     252 </span>                :<span class="lineNoCov">          0 :                         ++ret;</span>
+<span class="lineNum">     253 </span>                :            :                 }
+<span class="lineNum">     254 </span>                :            : 
+<span class="lineNum">     255 </span>                :<span class="lineCov">        372 :                 return ret;</span>
+<a name="256"><span class="lineNum">     256 </span>                :            :         }</a>
+<span class="lineNum">     257 </span>                :            : 
+<span class="lineNum">     258 </span>                :<span class="lineNoCov">          0 :         void Zero(uint8_t* apPos, size_t aNumValues) const {</span>
+<span class="lineNum">     259 </span>                :<span class="lineNoCov">          0 :                 size_t num_bytes = GetSize(aNumValues);</span>
+<span class="lineNum">     260 </span>                :            : 
+<span class="lineNum">     261 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 for (size_t i = 0; i &lt; num_bytes; i++) {</span>
+<span class="lineNum">     262 </span>                :<span class="lineNoCov">          0 :                         *(apPos++) = 0;</span>
+<span class="lineNum">     263 </span>                :            :                 }
+<a name="264"><span class="lineNum">     264 </span>                :<span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     265 </span>                :            : 
+<span class="lineNum">     266 </span>                :<span class="lineNoCov">          0 :         bool Read(const uint8_t* apPos, size_t aStartIndex, size_t aIndex) const {</span>
+<span class="lineNum">     267 </span>                :<span class="lineNoCov">          0 :                 return StaticRead(apPos, aStartIndex, aIndex);</span>
+<a name="268"><span class="lineNum">     268 </span>                :            :         }</a>
+<span class="lineNum">     269 </span>                :            : 
+<span class="lineNum">     270 </span>                :<span class="lineNoCov">          0 :         void Write(uint8_t* apPos, size_t aStartIndex, size_t aIndex, bool aValue) const {</span>
+<span class="lineNum">     271 </span>                :<span class="lineNoCov">          0 :                 StaticWrite(apPos, aStartIndex, aIndex, aValue);</span>
+<a name="272"><span class="lineNum">     272 </span>                :<span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     273 </span>                :            : 
+<span class="lineNum">     274 </span>                :<span class="lineNoCov">          0 :         static bool StaticRead(const uint8_t* apPos, size_t aStartIndex, size_t aIndex) {</span>
+<span class="lineNum">     275 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 assert(aIndex &gt;= aStartIndex);</span>
+<span class="lineNum">     276 </span>                :            : 
+<span class="lineNum">     277 </span>                :<span class="lineNoCov">          0 :                 size_t pos =  aIndex - aStartIndex;</span>
+<span class="lineNum">     278 </span>                :            : 
+<span class="lineNum">     279 </span>                :<span class="lineNoCov">          0 :                 apPos += (pos &gt;&gt; 3);      /* figure out which byte you are */</span>
+<span class="lineNum">     280 </span>                :            :                 /* on and advance the pointer    */
+<span class="lineNum">     281 </span>                :            : 
+<span class="lineNum">     282 </span>                :<span class="lineNoCov">          0 :                 return ((*apPos) &amp; (1 &lt;&lt; (pos &amp; 0x07))) != 0;</span>
+<a name="283"><span class="lineNum">     283 </span>                :            :         }</a>
+<span class="lineNum">     284 </span>                :            : 
+<span class="lineNum">     285 </span>                :<span class="lineNoCov">          0 :         static void StaticWrite(uint8_t* apPos, size_t aStartIndex, size_t aIndex, bool aValue) {</span>
+<span class="lineNum">     286 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 assert(aIndex &gt;= aStartIndex);</span>
+<span class="lineNum">     287 </span>                :            : 
+<span class="lineNum">     288 </span>                :<span class="lineNoCov">          0 :                 size_t pos =  aIndex - aStartIndex;</span>
+<span class="lineNum">     289 </span>                :            : 
+<span class="lineNum">     290 </span>                :<span class="lineNoCov">          0 :                 apPos += (pos &gt;&gt; 3);      /* figure out which byte you are */</span>
+<span class="lineNum">     291 </span>                :            :                 /* on and advance the pointer    */
+<span class="lineNum">     292 </span>                :            : 
+<span class="lineNum">     293 </span>                :<span class="lineNoCov">          0 :                 size_t bit_mask = 1 &lt;&lt; (pos &amp; 0x07);</span>
+<span class="lineNum">     294 </span>                :            : 
+<span class="lineNum">     295 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if (aValue) {</span>
+<span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 :                         *apPos |= bit_mask;</span>
+<span class="lineNum">     297 </span>                :            :                 }
+<span class="lineNum">     298 </span>                :            :                 else {
+<span class="lineNum">     299 </span>                :<span class="lineNoCov">          0 :                         *apPos &amp;= ~bit_mask;</span>
+<span class="lineNum">     300 </span>                :            :                 }
+<span class="lineNum">     301 </span>                :<span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     302 </span>                :            : };
+<span class="lineNum">     303 </span>                :            : 
+<span class="lineNum">     304 </span>                :            : /**
+<span class="lineNum">     305 </span>                :            :  * Represents a byte stream object whose size is encoded by its
+<span class="lineNum">     306 </span>                :            :  * variation.  As per IEEE 1815 &quot;Standard for Electric Power Systems
+<span class="lineNum">     307 </span>                :            :  * Communications - Distributed Network Protocol (DNP3)&quot;, Annex A &quot;DNP3
+<span class="lineNum">     308 </span>                :            :  * Object Library&quot;, page 429, the only DNP3 object types that support the
+<span class="lineNum">     309 </span>                :            :  * &quot;size-by-variation&quot; feature are 100 (floating-point), 110 (octet
+<span class="lineNum">     310 </span>                :            :  * string), 111 (octet string event), 112 (virtual terminal output block),
+<span class="lineNum">     311 </span>                :            :  * and 113 (virtual terminal event data).
+<a name="312"><span class="lineNum">     312 </span>                :            :  *</a>
+<span class="lineNum">     313 </span>                :            :  */
+<span class="lineNum">     314 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 4 times"> + </span>]:<span class="lineCov">          8 : class SizeByVariationObject : public IndexedObject</span>
+<span class="lineNum">     315 </span>                :            : {
+<span class="lineNum">     316 </span>                :            : public:
+<span class="lineNum">     317 </span>                :            : 
+<span class="lineNum">     318 </span>                :            :         /**
+<span class="lineNum">     319 </span>                :            :          * Implements ObjectBase::GetType() to return
+<span class="lineNum">     320 </span>                :            :          * OT_SIZE_BY_VARIATION.
+<span class="lineNum">     321 </span>                :            :          *
+<a name="322"><span class="lineNum">     322 </span>                :            :          * @return                      OT_SIZE_BY_VARIATION</a>
+<span class="lineNum">     323 </span>                :            :          */
+<span class="lineNum">     324 </span>                :<span class="lineNoCov">          0 :         virtual ObjectTypes GetType() const {</span>
+<span class="lineNum">     325 </span>                :<span class="lineNoCov">          0 :                 return OT_SIZE_BY_VARIATION;</span>
+<span class="lineNum">     326 </span>                :            :         }
+<span class="lineNum">     327 </span>                :            : 
+<span class="lineNum">     328 </span>                :            :         /**
+<span class="lineNum">     329 </span>                :            :          * Copies the specified number of bytes (defined by aVariation)
+<span class="lineNum">     330 </span>                :            :          * from apPos to apOut.
+<span class="lineNum">     331 </span>                :            :          *
+<span class="lineNum">     332 </span>                :            :          * @param apPos                 the source byte stream
+<span class="lineNum">     333 </span>                :            :          * @param aVariation    the number of bytes to copy
+<span class="lineNum">     334 </span>                :            :          * @param apOut                 the destination byte stream
+<span class="lineNum">     335 </span>                :            :          *
+<a name="336"><span class="lineNum">     336 </span>                :            :          * @return                              true if the copy succeeds, false if not</a>
+<span class="lineNum">     337 </span>                :            :          */
+<span class="lineNum">     338 </span>                :<span class="lineNoCov">          0 :         bool Read(const uint8_t* apPos, size_t aVariation, uint8_t* apOut) const {</span>
+<span class="lineNum">     339 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 assert(aVariation &lt;= 255);</span>
+<span class="lineNum">     340 </span>                :<span class="lineNoCov">          0 :                 memcpy(apOut, apPos, aVariation);</span>
+<span class="lineNum">     341 </span>                :<span class="lineNoCov">          0 :                 return true;</span>
+<span class="lineNum">     342 </span>                :            :         }
+<span class="lineNum">     343 </span>                :            : 
+<span class="lineNum">     344 </span>                :            :         /**
+<span class="lineNum">     345 </span>                :            :          * Copies the specified number of bytes (defined by aVariation)
+<span class="lineNum">     346 </span>                :            :          * from apIn to apPos.
+<span class="lineNum">     347 </span>                :            :          *
+<span class="lineNum">     348 </span>                :            :          * @param apPos                 the destination byte stream
+<span class="lineNum">     349 </span>                :            :          * @param aVariation    the number of bytes to copy
+<span class="lineNum">     350 </span>                :            :          * @param apIn                  the source byte stream
+<span class="lineNum">     351 </span>                :            :          *
+<a name="352"><span class="lineNum">     352 </span>                :            :          * @return                              true if the copy succeeds, false if not</a>
+<span class="lineNum">     353 </span>                :            :          */
+<span class="lineNum">     354 </span>                :<span class="lineNoCov">          0 :         void Write(uint8_t* apPos, size_t aVariation, const uint8_t* apIn) const {</span>
+<span class="lineNum">     355 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 assert(aVariation &lt;= 255);</span>
+<span class="lineNum">     356 </span>                :<span class="lineNoCov">          0 :                 memcpy(apPos, apIn, aVariation);</span>
+<span class="lineNum">     357 </span>                :<span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     358 </span>                :            : 
+<span class="lineNum">     359 </span>                :            : };
+<span class="lineNum">     360 </span>                :            : 
+<span class="lineNum">     361 </span>                :            : }
+<span class="lineNum">     362 </span>                :            : 
+<span class="lineNum">     363 </span>                :            : /* vim: set ts=4 sw=4: */
+<span class="lineNum">     364 </span>                :            : 
+<span class="lineNum">     365 </span>                :            : #endif
+<span class="lineNum">     366 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

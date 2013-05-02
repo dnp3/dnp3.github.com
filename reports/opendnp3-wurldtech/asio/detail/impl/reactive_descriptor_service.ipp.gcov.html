@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - asio/detail/impl/reactive_descriptor_service.ipp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">asio/detail/impl</a> - reactive_descriptor_service.ipp<span style="font-size: 80%;"> (source / <a href="reactive_descriptor_service.ipp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">41</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : //</a>
+<span class="lineNum">       2 </span>                :            : // detail/impl/reactive_descriptor_service.ipp
+<span class="lineNum">       3 </span>                :            : // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<span class="lineNum">       4 </span>                :            : //
+<span class="lineNum">       5 </span>                :            : // Copyright (c) 2003-2012 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+<span class="lineNum">       6 </span>                :            : //
+<span class="lineNum">       7 </span>                :            : // Distributed under the Boost Software License, Version 1.0. (See accompanying
+<span class="lineNum">       8 </span>                :            : // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : 
+<span class="lineNum">      11 </span>                :            : #ifndef BOOST_ASIO_DETAIL_IMPL_REACTIVE_DESCRIPTOR_SERVICE_IPP
+<span class="lineNum">      12 </span>                :            : #define BOOST_ASIO_DETAIL_IMPL_REACTIVE_DESCRIPTOR_SERVICE_IPP
+<span class="lineNum">      13 </span>                :            : 
+<span class="lineNum">      14 </span>                :            : #if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+<span class="lineNum">      15 </span>                :            : # pragma once
+<span class="lineNum">      16 </span>                :            : #endif // defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+<span class="lineNum">      17 </span>                :            : 
+<span class="lineNum">      18 </span>                :            : #include &lt;boost/asio/detail/config.hpp&gt;
+<span class="lineNum">      19 </span>                :            : 
+<span class="lineNum">      20 </span>                :            : #if !defined(BOOST_WINDOWS) &amp;&amp; !defined(__CYGWIN__)
+<span class="lineNum">      21 </span>                :            : 
+<span class="lineNum">      22 </span>                :            : #include &lt;boost/asio/error.hpp&gt;
+<span class="lineNum">      23 </span>                :            : #include &lt;boost/asio/detail/reactive_descriptor_service.hpp&gt;
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #include &lt;boost/asio/detail/push_options.hpp&gt;
+<span class="lineNum">      26 </span>                :            : 
+<span class="lineNum">      27 </span>                :            : namespace boost {
+<span class="lineNum">      28 </span>                :            : namespace asio {
+<a name="29"><span class="lineNum">      29 </span>                :            : namespace detail {</a>
+<span class="lineNum">      30 </span>                :            : 
+<span class="lineNum">      31 </span>                :<span class="lineNoCov">          0 : reactive_descriptor_service::reactive_descriptor_service(</span>
+<span class="lineNum">      32 </span>                :            :     boost::asio::io_service&amp; io_service)
+<span class="lineNum">      33 </span>                :<span class="lineNoCov">          0 :   : reactor_(boost::asio::use_service&lt;reactor&gt;(io_service))</span>
+<span class="lineNum">      34 </span>                :            : {
+<span class="lineNum">      35 </span>                :<span class="lineNoCov">          0 :   reactor_.init_task();</span>
+<a name="36"><span class="lineNum">      36 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :<span class="lineNoCov">          0 : void reactive_descriptor_service::shutdown_service()</span>
+<span class="lineNum">      39 </span>                :            : {
+<a name="40"><span class="lineNum">      40 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      41 </span>                :            : 
+<span class="lineNum">      42 </span>                :<span class="lineNoCov">          0 : void reactive_descriptor_service::construct(</span>
+<span class="lineNum">      43 </span>                :            :     reactive_descriptor_service::implementation_type&amp; impl)
+<span class="lineNum">      44 </span>                :            : {
+<span class="lineNum">      45 </span>                :<span class="lineNoCov">          0 :   impl.descriptor_ = -1;</span>
+<span class="lineNum">      46 </span>                :<span class="lineNoCov">          0 :   impl.state_ = 0;</span>
+<span class="lineNum">      47 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : void reactive_descriptor_service::move_construct(
+<span class="lineNum">      50 </span>                :            :     reactive_descriptor_service::implementation_type&amp; impl,
+<span class="lineNum">      51 </span>                :            :     reactive_descriptor_service::implementation_type&amp; other_impl)
+<span class="lineNum">      52 </span>                :            : {
+<span class="lineNum">      53 </span>                :            :   impl.descriptor_ = other_impl.descriptor_;
+<span class="lineNum">      54 </span>                :            :   other_impl.descriptor_ = -1;
+<span class="lineNum">      55 </span>                :            : 
+<span class="lineNum">      56 </span>                :            :   impl.state_ = other_impl.state_;
+<span class="lineNum">      57 </span>                :            :   other_impl.state_ = 0;
+<span class="lineNum">      58 </span>                :            : 
+<span class="lineNum">      59 </span>                :            :   reactor_.move_descriptor(impl.descriptor_,
+<span class="lineNum">      60 </span>                :            :       impl.reactor_data_, other_impl.reactor_data_);
+<span class="lineNum">      61 </span>                :            : }
+<span class="lineNum">      62 </span>                :            : 
+<span class="lineNum">      63 </span>                :            : void reactive_descriptor_service::move_assign(
+<span class="lineNum">      64 </span>                :            :     reactive_descriptor_service::implementation_type&amp; impl,
+<span class="lineNum">      65 </span>                :            :     reactive_descriptor_service&amp; other_service,
+<span class="lineNum">      66 </span>                :            :     reactive_descriptor_service::implementation_type&amp; other_impl)
+<span class="lineNum">      67 </span>                :            : {
+<span class="lineNum">      68 </span>                :            :   destroy(impl);
+<span class="lineNum">      69 </span>                :            : 
+<span class="lineNum">      70 </span>                :            :   impl.descriptor_ = other_impl.descriptor_;
+<span class="lineNum">      71 </span>                :            :   other_impl.descriptor_ = -1;
+<span class="lineNum">      72 </span>                :            : 
+<span class="lineNum">      73 </span>                :            :   impl.state_ = other_impl.state_;
+<span class="lineNum">      74 </span>                :            :   other_impl.state_ = 0;
+<span class="lineNum">      75 </span>                :            : 
+<span class="lineNum">      76 </span>                :            :   other_service.reactor_.move_descriptor(impl.descriptor_,
+<span class="lineNum">      77 </span>                :            :       impl.reactor_data_, other_impl.reactor_data_);
+<a name="78"><span class="lineNum">      78 </span>                :            : }</a>
+<span class="lineNum">      79 </span>                :            : 
+<span class="lineNum">      80 </span>                :<span class="lineNoCov">          0 : void reactive_descriptor_service::destroy(</span>
+<span class="lineNum">      81 </span>                :            :     reactive_descriptor_service::implementation_type&amp; impl)
+<span class="lineNum">      82 </span>                :            : {
+<span class="lineNum">      83 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (is_open(impl))</span>
+<span class="lineNum">      84 </span>                :            :   {
+<span class="lineNum">      85 </span>                :            :     BOOST_ASIO_HANDLER_OPERATION((&quot;descriptor&quot;, &amp;impl, &quot;close&quot;));
+<span class="lineNum">      86 </span>                :            : 
+<span class="lineNum">      87 </span>                :            :     reactor_.deregister_descriptor(impl.descriptor_, impl.reactor_data_,
+<span class="lineNum">      88 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         (impl.state_ &amp; descriptor_ops::possible_dup) == 0);</span>
+<span class="lineNum">      89 </span>                :            :   }
+<span class="lineNum">      90 </span>                :            : 
+<span class="lineNum">      91 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   boost::system::error_code ignored_ec;</span>
+<span class="lineNum">      92 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   descriptor_ops::close(impl.descriptor_, impl.state_, ignored_ec);</span>
+<a name="93"><span class="lineNum">      93 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      94 </span>                :            : 
+<span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 : boost::system::error_code reactive_descriptor_service::assign(</span>
+<span class="lineNum">      96 </span>                :            :     reactive_descriptor_service::implementation_type&amp; impl,
+<span class="lineNum">      97 </span>                :            :     const native_handle_type&amp; native_descriptor, boost::system::error_code&amp; ec)
+<span class="lineNum">      98 </span>                :            : {
+<span class="lineNum">      99 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (is_open(impl))</span>
+<span class="lineNum">     100 </span>                :            :   {
+<span class="lineNum">     101 </span>                :<span class="lineNoCov">          0 :     ec = boost::asio::error::already_open;</span>
+<span class="lineNum">     102 </span>                :<span class="lineNoCov">          0 :     return ec;</span>
+<span class="lineNum">     103 </span>                :            :   }
+<span class="lineNum">     104 </span>                :            : 
+<span class="lineNum">     105 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (int err = reactor_.register_descriptor(</span>
+<span class="lineNum">     106 </span>                :<span class="lineNoCov">          0 :         native_descriptor, impl.reactor_data_))</span>
+<span class="lineNum">     107 </span>                :            :   {
+<span class="lineNum">     108 </span>                :            :     ec = boost::system::error_code(err,
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :         boost::asio::error::get_system_category());</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :     return ec;</span>
+<span class="lineNum">     111 </span>                :            :   }
+<span class="lineNum">     112 </span>                :            : 
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :   impl.descriptor_ = native_descriptor;</span>
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 :   impl.state_ = descriptor_ops::possible_dup;</span>
+<span class="lineNum">     115 </span>                :<span class="lineNoCov">          0 :   ec = boost::system::error_code();</span>
+<span class="lineNum">     116 </span>                :<span class="lineNoCov">          0 :   return ec;</span>
+<a name="117"><span class="lineNum">     117 </span>                :            : }</a>
+<span class="lineNum">     118 </span>                :            : 
+<span class="lineNum">     119 </span>                :<span class="lineNoCov">          0 : boost::system::error_code reactive_descriptor_service::close(</span>
+<span class="lineNum">     120 </span>                :            :     reactive_descriptor_service::implementation_type&amp; impl,
+<span class="lineNum">     121 </span>                :            :     boost::system::error_code&amp; ec)
+<span class="lineNum">     122 </span>                :            : {
+<span class="lineNum">     123 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (is_open(impl))</span>
+<span class="lineNum">     124 </span>                :            :   {
+<span class="lineNum">     125 </span>                :            :     BOOST_ASIO_HANDLER_OPERATION((&quot;descriptor&quot;, &amp;impl, &quot;close&quot;));
+<span class="lineNum">     126 </span>                :            : 
+<span class="lineNum">     127 </span>                :            :     reactor_.deregister_descriptor(impl.descriptor_, impl.reactor_data_,
+<span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 :         (impl.state_ &amp; descriptor_ops::possible_dup) == 0);</span>
+<span class="lineNum">     129 </span>                :            :   }
+<span class="lineNum">     130 </span>                :            : 
+<span class="lineNum">     131 </span>                :<span class="lineNoCov">          0 :   descriptor_ops::close(impl.descriptor_, impl.state_, ec);</span>
+<span class="lineNum">     132 </span>                :            : 
+<span class="lineNum">     133 </span>                :            :   // The descriptor is closed by the OS even if close() returns an error.
+<span class="lineNum">     134 </span>                :            :   //
+<span class="lineNum">     135 </span>                :            :   // (Actually, POSIX says the state of the descriptor is unspecified. On
+<span class="lineNum">     136 </span>                :            :   // Linux the descriptor is apparently closed anyway; e.g. see
+<span class="lineNum">     137 </span>                :            :   //   http://lkml.org/lkml/2005/9/10/129
+<span class="lineNum">     138 </span>                :            :   // We'll just have to assume that other OSes follow the same behaviour.)
+<span class="lineNum">     139 </span>                :<span class="lineNoCov">          0 :   construct(impl);</span>
+<span class="lineNum">     140 </span>                :            : 
+<span class="lineNum">     141 </span>                :<span class="lineNoCov">          0 :   return ec;</span>
+<span class="lineNum">     142 </span>                :            : }
+<span class="lineNum">     143 </span>                :            : 
+<span class="lineNum">     144 </span>                :            : reactive_descriptor_service::native_handle_type
+<span class="lineNum">     145 </span>                :            : reactive_descriptor_service::release(
+<span class="lineNum">     146 </span>                :            :     reactive_descriptor_service::implementation_type&amp; impl)
+<span class="lineNum">     147 </span>                :            : {
+<span class="lineNum">     148 </span>                :            :   native_handle_type descriptor = impl.descriptor_;
+<span class="lineNum">     149 </span>                :            : 
+<span class="lineNum">     150 </span>                :            :   if (is_open(impl))
+<span class="lineNum">     151 </span>                :            :   {
+<span class="lineNum">     152 </span>                :            :     BOOST_ASIO_HANDLER_OPERATION((&quot;descriptor&quot;, &amp;impl, &quot;release&quot;));
+<span class="lineNum">     153 </span>                :            : 
+<span class="lineNum">     154 </span>                :            :     reactor_.deregister_descriptor(impl.descriptor_, impl.reactor_data_, false);
+<span class="lineNum">     155 </span>                :            :     construct(impl);
+<span class="lineNum">     156 </span>                :            :   }
+<span class="lineNum">     157 </span>                :            : 
+<span class="lineNum">     158 </span>                :            :   return descriptor;
+<span class="lineNum">     159 </span>                :            : }
+<span class="lineNum">     160 </span>                :            : 
+<span class="lineNum">     161 </span>                :            : boost::system::error_code reactive_descriptor_service::cancel(
+<span class="lineNum">     162 </span>                :            :     reactive_descriptor_service::implementation_type&amp; impl,
+<span class="lineNum">     163 </span>                :            :     boost::system::error_code&amp; ec)
+<span class="lineNum">     164 </span>                :            : {
+<span class="lineNum">     165 </span>                :            :   if (!is_open(impl))
+<span class="lineNum">     166 </span>                :            :   {
+<span class="lineNum">     167 </span>                :            :     ec = boost::asio::error::bad_descriptor;
+<span class="lineNum">     168 </span>                :            :     return ec;
+<span class="lineNum">     169 </span>                :            :   }
+<span class="lineNum">     170 </span>                :            : 
+<span class="lineNum">     171 </span>                :            :   BOOST_ASIO_HANDLER_OPERATION((&quot;descriptor&quot;, &amp;impl, &quot;cancel&quot;));
+<span class="lineNum">     172 </span>                :            : 
+<span class="lineNum">     173 </span>                :            :   reactor_.cancel_ops(impl.descriptor_, impl.reactor_data_);
+<span class="lineNum">     174 </span>                :            :   ec = boost::system::error_code();
+<span class="lineNum">     175 </span>                :            :   return ec;
+<a name="176"><span class="lineNum">     176 </span>                :            : }</a>
+<span class="lineNum">     177 </span>                :            : 
+<span class="lineNum">     178 </span>                :<span class="lineNoCov">          0 : void reactive_descriptor_service::start_op(</span>
+<span class="lineNum">     179 </span>                :            :     reactive_descriptor_service::implementation_type&amp; impl,
+<span class="lineNum">     180 </span>                :            :     int op_type, reactor_op* op, bool is_non_blocking, bool noop)
+<span class="lineNum">     181 </span>                :            : {
+<span class="lineNum">     182 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (!noop)</span>
+<span class="lineNum">     183 </span>                :            :   {
+<span class="lineNum">     184 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if ((impl.state_ &amp; descriptor_ops::non_blocking) ||</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     185 </span>                :            :         descriptor_ops::set_internal_non_blocking(
+<span class="lineNum">     186 </span>                :<span class="lineNoCov">          0 :           impl.descriptor_, impl.state_, true, op-&gt;ec_))</span>
+<span class="lineNum">     187 </span>                :            :     {
+<span class="lineNum">     188 </span>                :            :       reactor_.start_op(op_type, impl.descriptor_,
+<span class="lineNum">     189 </span>                :<span class="lineNoCov">          0 :           impl.reactor_data_, op, is_non_blocking);</span>
+<span class="lineNum">     190 </span>                :<span class="lineNoCov">          0 :       return;</span>
+<span class="lineNum">     191 </span>                :            :     }
+<span class="lineNum">     192 </span>                :            :   }
+<span class="lineNum">     193 </span>                :            : 
+<span class="lineNum">     194 </span>                :<span class="lineNoCov">          0 :   reactor_.post_immediate_completion(op);</span>
+<span class="lineNum">     195 </span>                :            : }
+<span class="lineNum">     196 </span>                :            : 
+<span class="lineNum">     197 </span>                :            : } // namespace detail
+<span class="lineNum">     198 </span>                :            : } // namespace asio
+<span class="lineNum">     199 </span>                :            : } // namespace boost
+<span class="lineNum">     200 </span>                :            : 
+<span class="lineNum">     201 </span>                :            : #include &lt;boost/asio/detail/pop_options.hpp&gt;
+<span class="lineNum">     202 </span>                :            : 
+<span class="lineNum">     203 </span>                :            : #endif // !defined(BOOST_WINDOWS) &amp;&amp; !defined(__CYGWIN__)
+<span class="lineNum">     204 </span>                :            : 
+<span class="lineNum">     205 </span>                :            : #endif // BOOST_ASIO_DETAIL_IMPL_REACTIVE_DESCRIPTOR_SERVICE_IPP
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

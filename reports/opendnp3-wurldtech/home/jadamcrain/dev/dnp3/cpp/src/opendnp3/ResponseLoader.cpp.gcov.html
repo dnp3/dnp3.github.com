@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/src/opendnp3/ResponseLoader.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/src/opendnp3</a> - ResponseLoader.cpp<span style="font-size: 80%;"> (source / <a href="ResponseLoader.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">70</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">100</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #include &quot;ResponseLoader.h&quot;
+<span class="lineNum">      30 </span>                :            : 
+<span class="lineNum">      31 </span>                :            : #include &lt;opendnp3/Util.h&gt;
+<span class="lineNum">      32 </span>                :            : 
+<span class="lineNum">      33 </span>                :            : #include &quot;LoggableMacros.h&quot;
+<span class="lineNum">      34 </span>                :            : #include &quot;HeaderReadIterator.h&quot;
+<span class="lineNum">      35 </span>                :            : #include &quot;Objects.h&quot;
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :            : namespace opendnp3
+<a name="38"><span class="lineNum">      38 </span>                :            : {</a>
+<span class="lineNum">      39 </span>                :            : 
+<span class="lineNum">      40 </span>                :<span class="lineNoCov">          0 : ResponseLoader::ResponseLoader(Logger* apLogger, IDataObserver* apPublisher, VtoReader* apVtoReader) :</span>
+<span class="lineNum">      41 </span>                :            :         Loggable(apLogger),
+<span class="lineNum">      42 </span>                :            :         mpPublisher(apPublisher),
+<span class="lineNum">      43 </span>                :            :         mpVtoReader(apVtoReader),
+<span class="lineNum">      44 </span>                :<span class="lineNoCov">          0 :         mTransaction(apPublisher)</span>
+<a name="45"><span class="lineNum">      45 </span>                :<span class="lineNoCov">          0 : {}</span></a>
+<span class="lineNum">      46 </span>                :            : 
+<span class="lineNum">      47 </span>                :<span class="lineNoCov">          0 : void ResponseLoader::Process(HeaderReadIterator&amp; arIter)</span>
+<span class="lineNum">      48 </span>                :            : {
+<span class="lineNum">      49 </span>                :<span class="lineNoCov">          0 :         int grp = arIter-&gt;GetGroup();</span>
+<span class="lineNum">      50 </span>                :<span class="lineNoCov">          0 :         int var = arIter-&gt;GetVariation();</span>
+<span class="lineNum">      51 </span>                :            : 
+<span class="lineNum">      52 </span>                :<span class="lineNoCov">          0 :         this-&gt;ProcessData(arIter, grp, var);</span>
+<span class="lineNum">      53 </span>                :            : 
+<span class="lineNum">      54 </span>                :<span class="lineNoCov">          0 :         mCTO.NextHeader();</span>
+<a name="55"><span class="lineNum">      55 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      56 </span>                :            : 
+<span class="lineNum">      57 </span>                :<span class="lineNoCov">          0 : void ResponseLoader::ProcessData(HeaderReadIterator&amp; arIter, int aGrp, int aVar)</span>
+<span class="lineNum">      58 </span>                :            : {
+<span class="lineNum">      59 </span>                :            :         /*
+<span class="lineNum">      60 </span>                :            :          * These objects require matching on both the aGrp and aVar fields.
+<span class="lineNum">      61 </span>                :            :          */
+<span class="lineNum">      62 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span> :<span class="lineNoCov">          0 :         switch (MACRO_DNP_RADIX(aGrp, aVar)) {</span>
+<span class="lineNum">         </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span> 
+<span class="lineNum">         </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span> 
+<span class="lineNum">         </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span><span class="branchNoExec" title="Branch 18 was not executed"> # </span> 
+<span class="lineNum">         </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span><span class="branchNoExec" title="Branch 20 was not executed"> # </span><span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span><span class="branchNoExec" title="Branch 23 was not executed"> # </span> 
+<span class="lineNum">         </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span><span class="branchNoExec" title="Branch 25 was not executed"> # </span><span class="branchNoExec" title="Branch 26 was not executed"> # </span><span class="branchNoExec" title="Branch 27 was not executed"> # </span><span class="branchNoExec" title="Branch 28 was not executed"> # </span> 
+<span class="lineNum">         </span><span class="branchNoExec" title="Branch 29 was not executed"> # </span><span class="branchNoExec" title="Branch 30 was not executed"> # </span><span class="branchNoExec" title="Branch 31 was not executed"> # </span><span class="branchNoExec" title="Branch 32 was not executed"> # </span><span class="branchNoExec" title="Branch 33 was not executed"> # </span> 
+<span class="lineNum">         </span>   <span class="branchNoExec" title="Branch 34 was not executed"> # </span><span class="branchNoExec" title="Branch 35 was not executed"> # </span><span class="branchNoExec" title="Branch 36 was not executed"> # </span><span class="branchNoExec" title="Branch 37 was not executed"> # </span> 
+<span class="lineNum">         </span>            <span class="branchNoExec" title="Branch 38 was not executed"> # </span>]
+<span class="lineNum">      63 </span>                :            :                 // Control Status
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(10, 2)): this-&gt;Read(arIter, Group10Var2::Inst()); break;</span>
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>                :            :                 // Binary
+<span class="lineNum">      67 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(1, 1)): this-&gt;ReadBitfield&lt;Group1Var1&gt;(arIter); break;</span>
+<span class="lineNum">      68 </span>                :            : 
+<span class="lineNum">      69 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(1, 2)): this-&gt;Read(arIter, Group1Var2::Inst()); break;</span>
+<span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(2, 1)): this-&gt;Read(arIter, Group2Var1::Inst()); break;</span>
+<span class="lineNum">      71 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(2, 2)): this-&gt;Read(arIter, Group2Var2::Inst()); break;</span>
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(2, 3)): this-&gt;Read(arIter, Group2Var3::Inst()); break;</span>
+<span class="lineNum">      73 </span>                :            : 
+<span class="lineNum">      74 </span>                :            :                 // Counters
+<span class="lineNum">      75 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(20, 1)): this-&gt;Read(arIter, Group20Var1::Inst()); break;</span>
+<span class="lineNum">      76 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(20, 2)): this-&gt;Read(arIter, Group20Var2::Inst()); break;</span>
+<span class="lineNum">      77 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(20, 3)): this-&gt;Read(arIter, Group20Var3::Inst()); break;</span>
+<span class="lineNum">      78 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(20, 4)): this-&gt;Read(arIter, Group20Var4::Inst()); break;</span>
+<span class="lineNum">      79 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(20, 5)): this-&gt;Read(arIter, Group20Var5::Inst()); break;</span>
+<span class="lineNum">      80 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(20, 6)): this-&gt;Read(arIter, Group20Var6::Inst()); break;</span>
+<span class="lineNum">      81 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(20, 7)): this-&gt;Read(arIter, Group20Var7::Inst()); break;</span>
+<span class="lineNum">      82 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(20, 8)): this-&gt;Read(arIter, Group20Var8::Inst()); break;</span>
+<span class="lineNum">      83 </span>                :            : 
+<span class="lineNum">      84 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(22, 1)): this-&gt;Read(arIter, Group22Var1::Inst()); break;</span>
+<span class="lineNum">      85 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(22, 2)): this-&gt;Read(arIter, Group22Var2::Inst()); break;</span>
+<span class="lineNum">      86 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(22, 3)): this-&gt;Read(arIter, Group22Var3::Inst()); break;</span>
+<span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(22, 4)): this-&gt;Read(arIter, Group22Var4::Inst()); break;</span>
+<span class="lineNum">      88 </span>                :            : 
+<span class="lineNum">      89 </span>                :            :                 // Analogs
+<span class="lineNum">      90 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(30, 1)): this-&gt;Read(arIter, Group30Var1::Inst()); break;</span>
+<span class="lineNum">      91 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(30, 2)): this-&gt;Read(arIter, Group30Var2::Inst()); break;</span>
+<span class="lineNum">      92 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(30, 3)): this-&gt;Read(arIter, Group30Var3::Inst()); break;</span>
+<span class="lineNum">      93 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(30, 4)): this-&gt;Read(arIter, Group30Var4::Inst()); break;</span>
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(30, 5)): this-&gt;Read(arIter, Group30Var5::Inst()); break;</span>
+<span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(30, 6)): this-&gt;Read(arIter, Group30Var6::Inst()); break;</span>
+<span class="lineNum">      96 </span>                :            : 
+<span class="lineNum">      97 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(32, 1)): this-&gt;Read(arIter, Group32Var1::Inst()); break;</span>
+<span class="lineNum">      98 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(32, 2)): this-&gt;Read(arIter, Group32Var2::Inst()); break;</span>
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(32, 3)): this-&gt;Read(arIter, Group32Var3::Inst()); break;</span>
+<span class="lineNum">     100 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(32, 4)): this-&gt;Read(arIter, Group32Var4::Inst()); break;</span>
+<span class="lineNum">     101 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(32, 5)): this-&gt;Read(arIter, Group32Var5::Inst()); break;</span>
+<span class="lineNum">     102 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(32, 6)): this-&gt;Read(arIter, Group32Var6::Inst()); break;</span>
+<span class="lineNum">     103 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(32, 7)): this-&gt;Read(arIter, Group32Var7::Inst()); break;</span>
+<span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(32, 8)): this-&gt;Read(arIter, Group32Var8::Inst()); break;</span>
+<span class="lineNum">     105 </span>                :            : 
+<span class="lineNum">     106 </span>                :            :                 // Setpoint Status
+<span class="lineNum">     107 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(40, 1)): this-&gt;Read(arIter, Group40Var1::Inst()); break;</span>
+<span class="lineNum">     108 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(40, 2)): this-&gt;Read(arIter, Group40Var2::Inst()); break;</span>
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(40, 3)): this-&gt;Read(arIter, Group40Var3::Inst()); break;</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(40, 4)): this-&gt;Read(arIter, Group40Var4::Inst()); break;</span>
+<span class="lineNum">     111 </span>                :            : 
+<span class="lineNum">     112 </span>                :            :                 // CTO
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(51, 1)): this-&gt;ReadCTO&lt;Group51Var1&gt;(arIter); break;</span>
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 :         case (MACRO_DNP_RADIX(51, 2)): this-&gt;ReadCTO&lt;Group51Var2&gt;(arIter); break;</span>
+<span class="lineNum">     115 </span>                :            : 
+<span class="lineNum">     116 </span>                :            :         default:
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 :                 this-&gt;ProcessSizeByVariation(arIter, aGrp, aVar);</span>
+<span class="lineNum">     118 </span>                :<span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     119 </span>                :            :         }
+<a name="120"><span class="lineNum">     120 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     121 </span>                :            : 
+<span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 : void ResponseLoader::ProcessSizeByVariation(HeaderReadIterator&amp; arIter, int aGrp, int aVar)</span>
+<span class="lineNum">     123 </span>                :            : {
+<span class="lineNum">     124 </span>                :            :         /*
+<span class="lineNum">     125 </span>                :            :          * These objects only require matching on the aGrp field.
+<span class="lineNum">     126 </span>                :            :          */
+<span class="lineNum">     127 </span>     [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         switch (aGrp) {</span>
+<span class="lineNum">     128 </span>                :            :                 /* Virtual Terminal Objects */
+<span class="lineNum">     129 </span>                :<span class="lineNoCov">          0 :         case (112): this-&gt;ReadVto(arIter, Group112Var0::Inst()); break;</span>
+<span class="lineNum">     130 </span>                :<span class="lineNoCov">          0 :         case (113): this-&gt;ReadVto(arIter, Group113Var0::Inst()); break;</span>
+<span class="lineNum">     131 </span>                :            : 
+<span class="lineNum">     132 </span>                :            :         default:
+<span class="lineNum">     133 </span>                :            :                 /*
+<span class="lineNum">     134 </span>                :            :                 * If we reach this point, then we don't yet support this object type.
+<span class="lineNum">     135 </span>                :            :                 */
+<span class="lineNum">     136 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 ERROR_BLOCK(LEV_WARNING,</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>][<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span>][<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 25 was not executed"> # </span><span class="branchNoExec" title="Branch 26 was not executed"> # </span>][<span class="branchNoExec" title="Branch 28 was not executed"> # </span><span class="branchNoExec" title="Branch 29 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 34 was not executed"> # </span><span class="branchNoExec" title="Branch 35 was not executed"> # </span>]
+<span class="lineNum">     137 </span>                :            :                             &quot;Group: &quot; &lt;&lt; aGrp &lt;&lt; &quot; &quot;
+<span class="lineNum">     138 </span>                :            :                             &quot;Var: &quot; &lt;&lt; aVar &lt;&lt; &quot; &quot;
+<span class="lineNum">     139 </span>                :            :                             &quot;does not map to a data type&quot;, MERR_UNSUPPORTED_OBJECT_TYPE);
+<span class="lineNum">     140 </span>                :<span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     141 </span>                :            :         }
+<a name="142"><span class="lineNum">     142 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     143 </span>                :            : 
+<span class="lineNum">     144 </span>                :<span class="lineNoCov">          0 : void ResponseLoader::ReadVto(HeaderReadIterator&amp; arIter, SizeByVariationObject* apObj)</span>
+<span class="lineNum">     145 </span>                :            : {
+<span class="lineNum">     146 </span>                :            :         /* Get an iterator to the object data */
+<span class="lineNum">     147 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         ObjectReadIterator objIter = arIter.BeginRead();</span>
+<span class="lineNum">     148 </span>                :            : 
+<span class="lineNum">     149 </span>                :            :         /* Copy the object data to a VtoData instance */
+<span class="lineNum">     150 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         VtoData data;</span>
+<span class="lineNum">     151 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :         data.Copy(*objIter, arIter-&gt;GetVariation());</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     152 </span>                :            : 
+<span class="lineNum">     153 </span>                :            :         /* Determine the Virtual Terminal port/channel number */
+<span class="lineNum">     154 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         size_t index = objIter-&gt;Index();</span>
+<span class="lineNum">     155 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(index &gt; std::numeric_limits&lt;uint8_t&gt;::max()) {</span>
+<span class="lineNum">     156 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 LOG_BLOCK(LEV_WARNING, &quot;Ignoring VTO index that exceeds bit width of uint8_t: &quot; &lt;&lt; index);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 19 was not executed"> # </span><span class="branchNoExec" title="Branch 20 was not executed"> # </span>][<span class="branchNoExec" title="Branch 25 was not executed"> # </span><span class="branchNoExec" title="Branch 26 was not executed"> # </span>]
+<span class="lineNum">     157 </span>                :            :         }
+<span class="lineNum">     158 </span>                :            :         else {
+<span class="lineNum">     159 </span>                :<span class="lineNoCov">          0 :                 uint8_t channel = static_cast&lt;uint8_t&gt;(index);</span>
+<span class="lineNum">     160 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 Transaction t(mpVtoReader);</span>
+<span class="lineNum">     161 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 this-&gt;mpVtoReader-&gt;Update(data, channel);</span>
+<span class="lineNum">     162 </span>                :            :         }
+<span class="lineNum">     163 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     164 </span>                :            : 
+<span class="lineNum">     165 </span>                :            : }
+<span class="lineNum">     166 </span>                :            : 
+<span class="lineNum">     167 </span>                :            : /* vim: set ts=4 sw=4: */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

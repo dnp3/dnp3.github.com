@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/include/opendnp3/IChannel.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/include/opendnp3</a> - IChannel.h<span style="font-size: 80%;"> (source / <a href="IChannel.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryLo">50.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #ifndef __I_CHANNEL_H_
+<span class="lineNum">      30 </span>                :            : #define __I_CHANNEL_H_
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :            : #include &quot;MasterStackConfig.h&quot;
+<span class="lineNum">      33 </span>                :            : #include &quot;SlaveStackConfig.h&quot;
+<span class="lineNum">      34 </span>                :            : #include &quot;LogTypes.h&quot;
+<span class="lineNum">      35 </span>                :            : #include &quot;ChannelStates.h&quot;
+<span class="lineNum">      36 </span>                :            : #include &quot;DestructorHook.h&quot;
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :            : #include &lt;functional&gt;
+<span class="lineNum">      39 </span>                :            : 
+<span class="lineNum">      40 </span>                :            : namespace opendnp3
+<span class="lineNum">      41 </span>                :            : {
+<span class="lineNum">      42 </span>                :            : 
+<span class="lineNum">      43 </span>                :            : class IDataObserver;
+<span class="lineNum">      44 </span>                :            : class IMaster;
+<span class="lineNum">      45 </span>                :            : class IOutstation;
+<span class="lineNum">      46 </span>                :            : class ICommandHandler;
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :            : /**
+<span class="lineNum">      49 </span>                :            : * Represents a communication channel upon which masters and outstations can be bound.
+<span class="lineNum">      50 </span>                :            : * To add a master to a communication channel, where pClient is a channel pointer IChannel*\n
+<span class="lineNum">      51 </span>                :            : * Returns a pointer to the running master
+<span class="lineNum">      52 </span>                :            : \code
+<span class="lineNum">      53 </span>                :            :         IMaster* pMaster = pClient-&gt;AddMaster(
+<span class="lineNum">      54 </span>                :            :                 &quot;master&quot;,                                             // stack name
+<span class="lineNum">      55 </span>                :            :                 LOG_LEVEL,                                              // log filter level
+<span class="lineNum">      56 </span>                :            :                 PrintingDataObserver::Inst(),   // callback for data processing
+<span class="lineNum">      57 </span>                :            :                 stackConfig                                             // stack configuration
+<span class="lineNum">      58 </span>                :            :         );
+<span class="lineNum">      59 </span>                :            : \endcode
+<span class="lineNum">      60 </span>                :            : * To add an outstation to a communication channel, where pServer is a channel pointer IChannel*\n
+<span class="lineNum">      61 </span>                :            : * Returns a pointer to the running outstation
+<span class="lineNum">      62 </span>                :            : \code
+<span class="lineNum">      63 </span>                :            :         IOutstation* pOutstation = pServer-&gt;AddOutstation(
+<span class="lineNum">      64 </span>                :            :                 &quot;outstation&quot;,                                                         // stack name
+<span class="lineNum">      65 </span>                :            :                 LOG_LEVEL,                                                                      // log filter level
+<span class="lineNum">      66 </span>                :            :                 SuccessCommandHandler::Inst(),                          // callback for command requests
+<span class="lineNum">      67 </span>                :            :                 stackConfig                                                                     // stack configuration
+<span class="lineNum">      68 </span>                :            :         );
+<a name="69"><span class="lineNum">      69 </span>                :            : \endcode</a>
+<span class="lineNum">      70 </span>                :            : */
+<span class="lineNum">      71 </span>                :<span class="lineCov">          1 : class IChannel : public DestructorHook</span>
+<span class="lineNum">      72 </span>                :            : {
+<a name="73"><span class="lineNum">      73 </span>                :            : public:</a>
+<span class="lineNum">      74 </span>                :            : 
+<span class="lineNum">      75 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 1 time"> + </span>]:<span class="lineCov">          1 :         virtual ~IChannel() {}</span>
+<span class="lineNum">      76 </span>                :            : 
+<span class="lineNum">      77 </span>                :            :         /**
+<span class="lineNum">      78 </span>                :            :         * Synchronously shutdown the channel.
+<span class="lineNum">      79 </span>                :            :         */
+<span class="lineNum">      80 </span>                :            :         virtual void Shutdown() = 0;
+<span class="lineNum">      81 </span>                :            : 
+<span class="lineNum">      82 </span>                :            :         /**
+<span class="lineNum">      83 </span>                :            :         * Add a listener for changes to the channel state. All callbacks come from the thread pool.
+<span class="lineNum">      84 </span>                :            :         * An immediate callback will be made with the current state.
+<span class="lineNum">      85 </span>                :            :         *
+<span class="lineNum">      86 </span>                :            :         * @param aListener Functor to callback with the state enumeration
+<span class="lineNum">      87 </span>                :            :         */
+<span class="lineNum">      88 </span>                :            :         virtual void AddStateListener(std::function&lt;void (ChannelState)&gt; aListener) = 0;
+<span class="lineNum">      89 </span>                :            : 
+<span class="lineNum">      90 </span>                :            : #ifndef OPENDNP3_NO_MASTER
+<span class="lineNum">      91 </span>                :            : 
+<span class="lineNum">      92 </span>                :            :         /**
+<span class="lineNum">      93 </span>                :            :         * Add a master to the channel
+<span class="lineNum">      94 </span>                :            :         *
+<span class="lineNum">      95 </span>                :            :         * @param arLoggerId Name that will be used in all log messages
+<span class="lineNum">      96 </span>                :            :         * @param aLevel Lowest log level that will be recorded
+<span class="lineNum">      97 </span>                :            :         * @param apPublisher Callback object for all received measurements
+<span class="lineNum">      98 </span>                :            :         * @param arCfg Configuration object that controls how the master behaves
+<span class="lineNum">      99 </span>                :            :         * @return interface representing the running master
+<span class="lineNum">     100 </span>                :            :         */
+<span class="lineNum">     101 </span>                :            :         virtual IMaster* AddMaster(     const std::string&amp; arLoggerId,
+<span class="lineNum">     102 </span>                :            :                                         FilterLevel aLevel,
+<span class="lineNum">     103 </span>                :            :                                         IDataObserver* apPublisher,
+<span class="lineNum">     104 </span>                :            :                                         const MasterStackConfig&amp; arCfg) = 0;
+<span class="lineNum">     105 </span>                :            : 
+<span class="lineNum">     106 </span>                :            : #endif
+<span class="lineNum">     107 </span>                :            : 
+<span class="lineNum">     108 </span>                :            :         /**
+<span class="lineNum">     109 </span>                :            :         * Add an outstation to the channel
+<span class="lineNum">     110 </span>                :            :         *
+<span class="lineNum">     111 </span>                :            :         * @param arLoggerId Name that will be used in all log messages
+<span class="lineNum">     112 </span>                :            :         * @param aLevel Lowest log level that will be recorded
+<span class="lineNum">     113 </span>                :            :         * @param apCmdHandler Callback object for handling command requests
+<span class="lineNum">     114 </span>                :            :         * @param arCfg Configuration object that controls how the outstation behaves
+<span class="lineNum">     115 </span>                :            :         * @return interface representing the running outstations
+<span class="lineNum">     116 </span>                :            :         */
+<span class="lineNum">     117 </span>                :            :         virtual IOutstation* AddOutstation(     const std::string&amp; arLoggerId,
+<span class="lineNum">     118 </span>                :            :                                                 FilterLevel aLevel,
+<span class="lineNum">     119 </span>                :            :                                                 ICommandHandler* apCmdHandler,
+<span class="lineNum">     120 </span>                :            :                                                 const SlaveStackConfig&amp; arCfg) = 0;
+<span class="lineNum">     121 </span>                :            : };
+<span class="lineNum">     122 </span>                :            : 
+<span class="lineNum">     123 </span>                :            : }
+<span class="lineNum">     124 </span>                :            : 
+<span class="lineNum">     125 </span>                :            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

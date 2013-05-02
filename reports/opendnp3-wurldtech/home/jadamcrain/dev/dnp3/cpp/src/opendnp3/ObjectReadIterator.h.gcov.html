@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/src/opendnp3/ObjectReadIterator.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/src/opendnp3</a> - ObjectReadIterator.h<span style="font-size: 80%;"> (source / <a href="ObjectReadIterator.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">31</td>
+            <td class="headerCovTableEntryLo">25.8 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryLo">44.4 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #ifndef __OBJECT_READ_ITERATOR_H_
+<span class="lineNum">      30 </span>                :            : #define __OBJECT_READ_ITERATOR_H_
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :            : #include &lt;opendnp3/Types.h&gt;
+<span class="lineNum">      35 </span>                :            : #include &lt;opendnp3/ObjectInterfaces.h&gt;
+<span class="lineNum">      36 </span>                :            : #include &lt;opendnp3/Visibility.h&gt;
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :            : #include &quot;HeaderReadIterator.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;ObjectHeader.h&quot;
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :            : namespace opendnp3
+<span class="lineNum">      42 </span>                :            : {
+<span class="lineNum">      43 </span>                :            : 
+<span class="lineNum">      44 </span>                :            : class DLL_LOCAL ObjectInfo
+<span class="lineNum">      45 </span>                :            : {
+<span class="lineNum">      46 </span>                :            :         friend class ObjectReadIterator;
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :            :         ObjectInfo(size_t aIndex, size_t aStart) : mIndex(aIndex), mStart(aStart)
+<a name="49"><span class="lineNum">      49 </span>                :            :         {}</a>
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :<span class="lineCov">         40 :         ObjectInfo() : mIndex(0), mStart(0)</span>
+<span class="lineNum">      52 </span>                :<span class="lineCov">         40 :         {}</span>
+<span class="lineNum">      53 </span>                :            : 
+<a name="54"><span class="lineNum">      54 </span>                :            : public:</a>
+<span class="lineNum">      55 </span>                :            : 
+<span class="lineNum">      56 </span>                :<span class="lineNoCov">          0 :         size_t Index() const {</span>
+<a name="57"><span class="lineNum">      57 </span>                :<span class="lineNoCov">          0 :                 return mIndex;</span></a>
+<span class="lineNum">      58 </span>                :            :         }
+<span class="lineNum">      59 </span>                :<span class="lineNoCov">          0 :         size_t Start() const {</span>
+<span class="lineNum">      60 </span>                :<span class="lineNoCov">          0 :                 return mStart;</span>
+<span class="lineNum">      61 </span>                :            :         }
+<span class="lineNum">      62 </span>                :            : 
+<span class="lineNum">      63 </span>                :            : private:
+<span class="lineNum">      64 </span>                :            : 
+<span class="lineNum">      65 </span>                :            :         size_t mIndex;          // the objects device-based index
+<span class="lineNum">      66 </span>                :            :         size_t mStart;          // used in conjunction with bitfield objects only,
+<span class="lineNum">      67 </span>                :            : };
+<span class="lineNum">      68 </span>                :            : 
+<span class="lineNum">      69 </span>                :            : /**
+<span class="lineNum">      70 </span>                :            :  * An iterator that clients can use to loop over the object data in an
+<span class="lineNum">      71 </span>                :            :  * APDU object.  This class is usually used in conjunction with the
+<span class="lineNum">      72 </span>                :            :  * HeaderReadIterator class.
+<span class="lineNum">      73 </span>                :            : */
+<span class="lineNum">      74 </span>                :            : class DLL_LOCAL ObjectReadIterator
+<span class="lineNum">      75 </span>                :            : {
+<span class="lineNum">      76 </span>                :            :         friend class HeaderReadIterator;
+<span class="lineNum">      77 </span>                :            : 
+<span class="lineNum">      78 </span>                :            : public:
+<span class="lineNum">      79 </span>                :            : 
+<span class="lineNum">      80 </span>                :            :         bool HasData() {
+<span class="lineNum">      81 </span>                :            :                 return mHasData;
+<span class="lineNum">      82 </span>                :            :         }
+<span class="lineNum">      83 </span>                :            :         const ObjectInfo* operator-&gt;() const;
+<span class="lineNum">      84 </span>                :            :         const uint8_t* operator*() const;
+<span class="lineNum">      85 </span>                :            : 
+<a name="86"><span class="lineNum">      86 </span>                :            :         const ObjectReadIterator&amp; operator++();   //prefix version</a>
+<span class="lineNum">      87 </span>                :            :         const ObjectReadIterator operator++(int); //postfix version
+<span class="lineNum">      88 </span>                :<span class="lineCov">         28 :         const HeaderInfo&amp; Header() {</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">         28 :                 return mHeaderInfo;</span>
+<a name="90"><span class="lineNum">      90 </span>                :            :         }</a>
+<span class="lineNum">      91 </span>                :            : 
+<span class="lineNum">      92 </span>                :<span class="lineCov">         48 :         size_t Count() const {</span>
+<a name="93"><span class="lineNum">      93 </span>                :<span class="lineCov">         48 :                 return mHeaderInfo.GetCount();</span></a>
+<span class="lineNum">      94 </span>                :            :         }
+<span class="lineNum">      95 </span>                :<span class="lineCov">         40 :         bool IsEnd() const {</span>
+<span class="lineNum">      96 </span>                :<span class="lineCov">         40 :                 return mCurrentObjectNum &gt;= Count();</span>
+<span class="lineNum">      97 </span>                :            :         }
+<span class="lineNum">      98 </span>                :            : 
+<span class="lineNum">      99 </span>                :            : private:
+<span class="lineNum">     100 </span>                :            : 
+<span class="lineNum">     101 </span>                :            :         ObjectReadIterator(const HeaderInfo&amp; arInfo, const uint8_t* apBuffer, bool aHasData);
+<span class="lineNum">     102 </span>                :            :         HeaderInfo mHeaderInfo;
+<span class="lineNum">     103 </span>                :            :         size_t mCurrentObjectNum;
+<span class="lineNum">     104 </span>                :            :         ObjectInfo mInfo;
+<span class="lineNum">     105 </span>                :            :         const uint8_t* mpPrefixPos;
+<span class="lineNum">     106 </span>                :            :         const uint8_t* mpPosition;
+<span class="lineNum">     107 </span>                :            :         const uint8_t* mpBuffer;
+<span class="lineNum">     108 </span>                :            :         bool mHasData;
+<span class="lineNum">     109 </span>                :            : 
+<span class="lineNum">     110 </span>                :            :         void SetObjectInfo();
+<span class="lineNum">     111 </span>                :            : 
+<span class="lineNum">     112 </span>                :            :         //private helpers
+<span class="lineNum">     113 </span>                :            :         size_t CalcIndex();
+<span class="lineNum">     114 </span>                :            :         size_t CalcCountIndex(QualifierCode aCode, const uint8_t* apPrefixPos);
+<span class="lineNum">     115 </span>                :            :         size_t CalcObjSize(const uint8_t* apPrefixPos);
+<a name="116"><span class="lineNum">     116 </span>                :            : };</a>
+<span class="lineNum">     117 </span>                :            : 
+<span class="lineNum">     118 </span>                :<span class="lineNoCov">          0 : inline const ObjectInfo* ObjectReadIterator::operator-&gt;() const</span>
+<span class="lineNum">     119 </span>                :            : {
+<span class="lineNum">     120 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(this-&gt;IsEnd()) {</span>
+<span class="lineNum">     121 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;&quot;, ALERR_ITERATOR_OUT_OF_BOUNDS);</span>
+<span class="lineNum">     122 </span>                :            :         }
+<span class="lineNum">     123 </span>                :<span class="lineNoCov">          0 :         return &amp;mInfo;</span>
+<a name="124"><span class="lineNum">     124 </span>                :            : }</a>
+<span class="lineNum">     125 </span>                :            : 
+<span class="lineNum">     126 </span>                :<span class="lineNoCov">          0 : inline const uint8_t* ObjectReadIterator::operator*() const</span>
+<span class="lineNum">     127 </span>                :            : {
+<span class="lineNum">     128 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(this-&gt;IsEnd()) {</span>
+<span class="lineNum">     129 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;&quot;, ALERR_ITERATOR_OUT_OF_BOUNDS);</span>
+<span class="lineNum">     130 </span>                :            :         }
+<span class="lineNum">     131 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(!mHasData) {</span>
+<span class="lineNum">     132 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;&quot;, ALERR_ITERATOR_NO_DATA);</span>
+<span class="lineNum">     133 </span>                :            :         }
+<span class="lineNum">     134 </span>                :<span class="lineNoCov">          0 :         return mpPosition;</span>
+<a name="135"><span class="lineNum">     135 </span>                :            : }</a>
+<span class="lineNum">     136 </span>                :            : 
+<span class="lineNum">     137 </span>                :<span class="lineNoCov">          0 : inline const ObjectReadIterator&amp; ObjectReadIterator::operator++()</span>
+<span class="lineNum">     138 </span>                :            : {
+<span class="lineNum">     139 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(this-&gt;IsEnd()) {</span>
+<span class="lineNum">     140 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 MACRO_THROW_EXCEPTION_WITH_CODE(Exception, &quot;&quot;, ALERR_ITERATOR_OUT_OF_BOUNDS);</span>
+<span class="lineNum">     141 </span>                :            :         }
+<span class="lineNum">     142 </span>                :            : 
+<span class="lineNum">     143 </span>                :<span class="lineNoCov">          0 :         ++mCurrentObjectNum;</span>
+<span class="lineNum">     144 </span>                :            : 
+<span class="lineNum">     145 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if(!this-&gt;IsEnd()) {</span>
+<span class="lineNum">     146 </span>                :            :                 //Don't advance the prefix position if the object is a bitfield
+<span class="lineNum">     147 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if(mHeaderInfo.GetObjectType() != OT_BITFIELD) {</span>
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :                         mpPrefixPos += mHeaderInfo.GetPrefixSize() + this-&gt;CalcObjSize(mpPrefixPos);</span>
+<span class="lineNum">     149 </span>                :            :                 }
+<span class="lineNum">     150 </span>                :            : 
+<span class="lineNum">     151 </span>                :<span class="lineNoCov">          0 :                 this-&gt;SetObjectInfo();</span>
+<span class="lineNum">     152 </span>                :            :         }
+<span class="lineNum">     153 </span>                :            : 
+<span class="lineNum">     154 </span>                :<span class="lineNoCov">          0 :         return (*this);</span>
+<span class="lineNum">     155 </span>                :            : }
+<span class="lineNum">     156 </span>                :            : 
+<span class="lineNum">     157 </span>                :            : inline const ObjectReadIterator ObjectReadIterator::operator++(int)
+<span class="lineNum">     158 </span>                :            : {
+<span class="lineNum">     159 </span>                :            :         ObjectReadIterator tmp(*this);
+<span class="lineNum">     160 </span>                :            :         ++(*this);
+<span class="lineNum">     161 </span>                :            :         return tmp;
+<span class="lineNum">     162 </span>                :            : }
+<span class="lineNum">     163 </span>                :            : 
+<span class="lineNum">     164 </span>                :            : }
+<span class="lineNum">     165 </span>                :            : 
+<span class="lineNum">     166 </span>                :            : /* vim: set ts=4 sw=4: */
+<span class="lineNum">     167 </span>                :            : 
+<span class="lineNum">     168 </span>                :            : #endif
+<span class="lineNum">     169 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

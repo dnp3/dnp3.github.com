@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/src/opendnp3/VtoTransmitTask.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/src/opendnp3</a> - VtoTransmitTask.cpp<span style="font-size: 80%;"> (source / <a href="VtoTransmitTask.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">31</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">74</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #include &quot;VtoTransmitTask.h&quot;
+<span class="lineNum">      30 </span>                :            : 
+<span class="lineNum">      31 </span>                :            : #include &lt;opendnp3/Logger.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &quot;LoggableMacros.h&quot;
+<span class="lineNum">      33 </span>                :            : #include &quot;APDU.h&quot;
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            : namespace opendnp3
+<a name="36"><span class="lineNum">      36 </span>                :            : {</a>
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :<span class="lineNoCov">          0 : void VtoTransmitTask::ConfigureRequest(APDU&amp; arAPDU)</span>
+<span class="lineNum">      39 </span>                :            : {
+<span class="lineNum">      40 </span>                :            :         /*
+<span class="lineNum">      41 </span>                :            :          *  Masters never request confirmed data. The response from the
+<span class="lineNum">      42 </span>                :            :          *  slave is all that's required for reliable delivery.
+<span class="lineNum">      43 </span>                :            :          */
+<span class="lineNum">      44 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         arAPDU.Set(mUseNonStandardCode ? FC_PROPRIETARY_VTO_TRANSFER : FC_WRITE);</span>
+<span class="lineNum">      45 </span>                :            : 
+<span class="lineNum">      46 </span>                :<span class="lineNoCov">          0 :         const size_t MAX_VTO_EVENTS = 7;</span>
+<span class="lineNum">      47 </span>                :            :         /* Get all of the data objects in the buffer. */
+<span class="lineNum">      48 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         size_t numObjects = this-&gt;mBuffer.Select(PC_ALL_EVENTS, MAX_VTO_EVENTS);</span>
+<span class="lineNum">      49 </span>                :            : 
+<span class="lineNum">      50 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         LOG_BLOCK(LEV_INTERPRET, &quot;VtoTransmitTask Sending: &quot; &lt;&lt; numObjects &lt;&lt; &quot; of &quot; &lt;&lt; this-&gt;mBuffer.Size());</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 19 was not executed"> # </span><span class="branchNoExec" title="Branch 20 was not executed"> # </span>][<span class="branchNoExec" title="Branch 23 was not executed"> # </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 26 was not executed"> # </span><span class="branchNoExec" title="Branch 27 was not executed"> # </span>][<span class="branchNoExec" title="Branch 32 was not executed"> # </span><span class="branchNoExec" title="Branch 33 was not executed"> # </span>]
+<span class="lineNum">      51 </span>                :            : 
+<span class="lineNum">      52 </span>                :            :         /* If there are no objects to write, skip the remainder. */
+<span class="lineNum">      53 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if (numObjects == 0) {</span>
+<span class="lineNum">      54 </span>                :            :                 return;
+<span class="lineNum">      55 </span>                :            :         }
+<span class="lineNum">      56 </span>                :            : 
+<span class="lineNum">      57 </span>                :            :         /*
+<span class="lineNum">      58 </span>                :            :          * Loop through the selected data and add corresponding objects to
+<span class="lineNum">      59 </span>                :            :          * the arAPDU instance.
+<span class="lineNum">      60 </span>                :            :          */
+<span class="lineNum">      61 </span>                :<span class="lineNoCov">          0 :         VtoDataEventIter vto = this-&gt;mBuffer.Begin();</span>
+<span class="lineNum">      62 </span>                :            : 
+<span class="lineNum">      63 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         for (size_t i = 0; i &lt; numObjects; ++i) {</span>
+<span class="lineNum">      64 </span>                :            :                 /* Insert a new object into the APDU message. */
+<span class="lineNum">      65 </span>                :            :                 IndexedWriteIterator itr = arAPDU.WriteIndexed(
+<span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 :                                                    Group112Var0::Inst(),</span>
+<span class="lineNum">      67 </span>                :<span class="lineNoCov">          0 :                                                    vto-&gt;mValue.GetSize(),</span>
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :                                                    vto-&gt;mIndex</span>
+<span class="lineNum">      69 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                                            );</span>
+<span class="lineNum">      70 </span>                :            : 
+<span class="lineNum">      71 </span>                :            :                 /*
+<span class="lineNum">      72 </span>                :            :                  * Check to see if the APDU fragment has enough room for the
+<span class="lineNum">      73 </span>                :            :                  * data segment.  If the fragment is full, return out of this
+<span class="lineNum">      74 </span>                :            :                  * function and let the fragment send.
+<span class="lineNum">      75 </span>                :            :                  */
+<span class="lineNum">      76 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if (itr.IsEnd()) {</span>
+<span class="lineNum">      77 </span>                :            :                         return;
+<span class="lineNum">      78 </span>                :            :                 }
+<span class="lineNum">      79 </span>                :            : 
+<span class="lineNum">      80 </span>                :            :                 /* Set the object index */
+<span class="lineNum">      81 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 itr.SetIndex(vto-&gt;mIndex);</span>
+<span class="lineNum">      82 </span>                :            : 
+<span class="lineNum">      83 </span>                :            :                 /* Write the data to the APDU message */
+<span class="lineNum">      84 </span>                :<span class="lineNoCov">          0 :                 Group112Var0::Inst()-&gt;Write(</span>
+<span class="lineNum">      85 </span>                :            :                         *itr,
+<span class="lineNum">      86 </span>                :<span class="lineNoCov">          0 :                         vto-&gt;mValue.GetSize(),</span>
+<span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 :                         vto-&gt;mValue.mpData</span>
+<span class="lineNum">      88 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 );</span>
+<span class="lineNum">      89 </span>                :            : 
+<span class="lineNum">      90 </span>                :            :                 /* Mark the data segment as being written */
+<span class="lineNum">      91 </span>                :<span class="lineNoCov">          0 :                 vto-&gt;mWritten = true;</span>
+<span class="lineNum">      92 </span>                :            : 
+<span class="lineNum">      93 </span>                :            :                 /* Move to the next data segment in the buffer */
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 :                 ++vto;</span>
+<span class="lineNum">      95 </span>                :            :         }
+<a name="96"><span class="lineNum">      96 </span>                :            : }</a>
+<span class="lineNum">      97 </span>                :            : 
+<span class="lineNum">      98 </span>                :<span class="lineNoCov">          0 : TaskResult VtoTransmitTask::_OnPartialResponse(const APDU&amp; arAPDU)</span>
+<span class="lineNum">      99 </span>                :            : {
+<span class="lineNum">     100 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         LOG_BLOCK(LEV_ERROR,</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 20 was not executed"> # </span><span class="branchNoExec" title="Branch 21 was not executed"> # </span>][<span class="branchNoExec" title="Branch 23 was not executed"> # </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 29 was not executed"> # </span><span class="branchNoExec" title="Branch 30 was not executed"> # </span>]
+<span class="lineNum">     101 </span>                :            :                   &quot;Non fin responses not allowed for task: &quot;
+<span class="lineNum">     102 </span>                :            :                   &lt;&lt; this-&gt;Name());
+<span class="lineNum">     103 </span>                :            : 
+<span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 :         return TR_CONTINUE;</span>
+<a name="105"><span class="lineNum">     105 </span>                :            : }</a>
+<span class="lineNum">     106 </span>                :            : 
+<span class="lineNum">     107 </span>                :<span class="lineNoCov">          0 : TaskResult VtoTransmitTask::_OnFinalResponse(const APDU&amp; arAPDU)</span>
+<span class="lineNum">     108 </span>                :            : {
+<span class="lineNum">     109 </span>                :            : 
+<span class="lineNum">     110 </span>                :            :         /* Remove the written data from the buffer */
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 :         this-&gt;mBuffer.ClearWrittenEvents();</span>
+<span class="lineNum">     112 </span>                :            : 
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :         this-&gt;mBuffer.Deselect();</span>
+<span class="lineNum">     114 </span>                :            : 
+<span class="lineNum">     115 </span>                :<span class="lineNoCov">          0 :         return TR_SUCCESS;</span>
+<a name="116"><span class="lineNum">     116 </span>                :            : }</a>
+<span class="lineNum">     117 </span>                :            : 
+<span class="lineNum">     118 </span>                :<span class="lineNoCov">          0 : void VtoTransmitTask::OnFailure()</span>
+<span class="lineNum">     119 </span>                :            : {
+<span class="lineNum">     120 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         LOG_BLOCK(LEV_INTERPRET, &quot;VtoTransmitTask Failed deselecting&quot;);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 22 was not executed"> # </span><span class="branchNoExec" title="Branch 23 was not executed"> # </span>]
+<span class="lineNum">     121 </span>                :            :         /* Put the written data back onto the buffer */
+<span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 :         this-&gt;mBuffer.Deselect();</span>
+<span class="lineNum">     123 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     124 </span>                :            : 
+<span class="lineNum">     125 </span>                :            : }
+<span class="lineNum">     126 </span>                :            : 
+<span class="lineNum">     127 </span>                :            : /* vim: set ts=4 sw=4: */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/include/opendnp3/IOutstation.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/include/opendnp3</a> - IOutstation.h<span style="font-size: 80%;"> (source / <a href="IOutstation.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryLo">50.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : //</a>
+<span class="lineNum">       2 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       3 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       4 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       5 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       6 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       7 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       8 </span>                :            : //
+<span class="lineNum">       9 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      10 </span>                :            : //
+<span class="lineNum">      11 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      12 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      13 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      14 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      15 </span>                :            : // limitations under the License.
+<span class="lineNum">      16 </span>                :            : //
+<span class="lineNum">      17 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      18 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      19 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      20 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      21 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      22 </span>                :            : // License at
+<span class="lineNum">      23 </span>                :            : //
+<span class="lineNum">      24 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      25 </span>                :            : //
+<span class="lineNum">      26 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      27 </span>                :            : //
+<span class="lineNum">      28 </span>                :            : #ifndef __I_OUTSTATION_H_
+<span class="lineNum">      29 </span>                :            : #define __I_OUTSTATION_H_
+<span class="lineNum">      30 </span>                :            : 
+<span class="lineNum">      31 </span>                :            : #include &quot;IStack.h&quot;
+<span class="lineNum">      32 </span>                :            : 
+<span class="lineNum">      33 </span>                :            : namespace opendnp3
+<span class="lineNum">      34 </span>                :            : {
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :            : class IDataObserver;
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :            : /**
+<span class="lineNum">      39 </span>                :            : * Interface representing a running outstation.
+<span class="lineNum">      40 </span>                :            : * To get a data observer interface to load measurements on the outstation:-
+<span class="lineNum">      41 </span>                :            : \code
+<span class="lineNum">      42 </span>                :            :         IDataObserver* pDataObserver = pOutstation-&gt;GetDataObserver()
+<span class="lineNum">      43 </span>                :            : \endcode
+<span class="lineNum">      44 </span>                :            : */
+<span class="lineNum">      45 </span>                :            : class IOutstation : public IStack
+<a name="46"><span class="lineNum">      46 </span>                :            : {</a>
+<a name="47"><span class="lineNum">      47 </span>                :            : public:</a>
+<span class="lineNum">      48 </span>                :<span class="lineCov">          1 :     IOutstation(Logger* apLogger, boost::asio::io_service* apService): IStack(apLogger, apService) {}</span>
+<span class="lineNum">      49 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 1 time"> + </span>]:<span class="lineCov">          1 :     virtual ~IOutstation() {}</span>
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :            :     /**
+<span class="lineNum">      52 </span>                :            :     * Get a data observer interface to load measurements on the outstation
+<span class="lineNum">      53 </span>                :            :     * @return Inteface used to load measurements into the outstation
+<span class="lineNum">      54 </span>                :            :     */
+<span class="lineNum">      55 </span>                :            :     virtual IDataObserver* GetDataObserver() = 0;
+<span class="lineNum">      56 </span>                :            : };
+<span class="lineNum">      57 </span>                :            : 
+<span class="lineNum">      58 </span>                :            : }
+<span class="lineNum">      59 </span>                :            : 
+<span class="lineNum">      60 </span>                :            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

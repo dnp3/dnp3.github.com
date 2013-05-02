@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /home/jadamcrain/dev/dnp3/cpp/src/opendnp3/VtoRouter.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">home/jadamcrain/dev/dnp3/cpp/src/opendnp3</a> - VtoRouter.h<span style="font-size: 80%;"> (source / <a href="VtoRouter.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-05-01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : </a>
+<span class="lineNum">       2 </span>                :            : //
+<span class="lineNum">       3 </span>                :            : // Licensed to Green Energy Corp (www.greenenergycorp.com) under one or
+<span class="lineNum">       4 </span>                :            : // more contributor license agreements. See the NOTICE file distributed
+<span class="lineNum">       5 </span>                :            : // with this work for additional information regarding copyright ownership.
+<span class="lineNum">       6 </span>                :            : // Green Energy Corp licenses this file to you under the Apache License,
+<span class="lineNum">       7 </span>                :            : // Version 2.0 (the &quot;License&quot;); you may not use this file except in
+<span class="lineNum">       8 </span>                :            : // compliance with the License.  You may obtain a copy of the License at
+<span class="lineNum">       9 </span>                :            : //
+<span class="lineNum">      10 </span>                :            : // http://www.apache.org/licenses/LICENSE-2.0
+<span class="lineNum">      11 </span>                :            : //
+<span class="lineNum">      12 </span>                :            : // Unless required by applicable law or agreed to in writing, software
+<span class="lineNum">      13 </span>                :            : // distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="lineNum">      14 </span>                :            : // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="lineNum">      15 </span>                :            : // See the License for the specific language governing permissions and
+<span class="lineNum">      16 </span>                :            : // limitations under the License.
+<span class="lineNum">      17 </span>                :            : //
+<span class="lineNum">      18 </span>                :            : // This file was forked on 01/01/2013 by Automatak, LLC and modifications
+<span class="lineNum">      19 </span>                :            : // have been made to this file. Automatak, LLC licenses these modifications to
+<span class="lineNum">      20 </span>                :            : // you under the GNU Affero General Public License Version 3.0
+<span class="lineNum">      21 </span>                :            : // (the &quot;Additional License&quot;). You may not use these modifications except in
+<span class="lineNum">      22 </span>                :            : // compliance with the additional license. You may obtain a copy of the Additional
+<span class="lineNum">      23 </span>                :            : // License at
+<span class="lineNum">      24 </span>                :            : //
+<span class="lineNum">      25 </span>                :            : // http://www.gnu.org/licenses/agpl.html
+<span class="lineNum">      26 </span>                :            : //
+<span class="lineNum">      27 </span>                :            : // Contact Automatak, LLC for a commercial license to these modifications
+<span class="lineNum">      28 </span>                :            : //
+<span class="lineNum">      29 </span>                :            : #ifndef __VTO_ROUTER_H_
+<span class="lineNum">      30 </span>                :            : #define __VTO_ROUTER_H_
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :            : #include &lt;queue&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;deque&gt;
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            : #include &quot;IHandlerAsync.h&quot;
+<span class="lineNum">      36 </span>                :            : #include &quot;PhysicalLayerMonitor.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;CopyableBuffer.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;VtoDataInterface.h&quot;
+<span class="lineNum">      39 </span>                :            : 
+<span class="lineNum">      40 </span>                :            : #include &lt;opendnp3/Visibility.h&gt;
+<span class="lineNum">      41 </span>                :            : 
+<span class="lineNum">      42 </span>                :            : namespace opendnp3
+<span class="lineNum">      43 </span>                :            : {
+<span class="lineNum">      44 </span>                :            : 
+<span class="lineNum">      45 </span>                :            : class IPhysicalLayerAsync;
+<span class="lineNum">      46 </span>                :            : class IExecutor;
+<span class="lineNum">      47 </span>                :            : class VtoReader;
+<span class="lineNum">      48 </span>                :            : class VtoWriter;
+<span class="lineNum">      49 </span>                :            : struct VtoRouterSettings;
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :            : /**
+<span class="lineNum">      52 </span>                :            :  * helper object that allows us to serialize data and up/down communication events into
+<a name="53"><span class="lineNum">      53 </span>                :            :  * the same data stream</a>
+<span class="lineNum">      54 </span>                :            :  */
+<span class="lineNum">      55 </span>                :<span class="lineNoCov">          0 : class DLL_LOCAL VtoMessage</span>
+<span class="lineNum">      56 </span>                :            : {
+<a name="57"><span class="lineNum">      57 </span>                :            : public:</a>
+<span class="lineNum">      58 </span>                :            : 
+<span class="lineNum">      59 </span>                :<span class="lineNoCov">          0 :         VtoMessage(VtoDataType aType) :</span>
+<span class="lineNum">      60 </span>                :<span class="lineNoCov">          0 :                 type(aType), data() {}</span>
+<a name="61"><span class="lineNum">      61 </span>                :            : </a>
+<span class="lineNum">      62 </span>                :            : 
+<span class="lineNum">      63 </span>                :<span class="lineNoCov">          0 :         VtoMessage(VtoDataType aType, const uint8_t* apBuffer, size_t aBufferSize) :</span>
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :                 type(aType), data(apBuffer, aBufferSize) {}</span>
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>                :            :         VtoDataType    type;
+<span class="lineNum">      67 </span>                :            :         CopyableBuffer data;
+<span class="lineNum">      68 </span>                :            : };
+<span class="lineNum">      69 </span>                :            : 
+<span class="lineNum">      70 </span>                :            : 
+<span class="lineNum">      71 </span>                :            : /**
+<span class="lineNum">      72 </span>                :            :  * Base Class used to route data between a VTO channel (made up of both a
+<span class="lineNum">      73 </span>                :            :  * VtoWriter and VtoReader instance) and an IPhysicalLayerAsync
+<span class="lineNum">      74 </span>                :            :  * instance.
+<span class="lineNum">      75 </span>                :            :  *
+<span class="lineNum">      76 </span>                :            :  * @code
+<span class="lineNum">      77 </span>                :            :  *                                           +--&gt; [VtoReader]
+<span class="lineNum">      78 </span>                :            :  *                                           |
+<span class="lineNum">      79 </span>                :            :  * [IPhysicalLayerAsync] &lt;--&gt; [VtoRouter] &lt;--+
+<span class="lineNum">      80 </span>                :            :  *                                           |
+<span class="lineNum">      81 </span>                :            :  *                                           +--&gt; [VtoWriter]
+<span class="lineNum">      82 </span>                :            :  * @endcode
+<span class="lineNum">      83 </span>                :            :  *
+<span class="lineNum">      84 </span>                :            :  * The VtoRouter instance provides the necessary IVtoCallbacks hooks
+<span class="lineNum">      85 </span>                :            :  * that the VtoReader will use. The base vtorouter provides the machinery
+<span class="lineNum">      86 </span>                :            :  * to route data to and from the dnp connection and the lets the concrete
+<span class="lineNum">      87 </span>                :            :  * implementations set policy on when to start and stop the reconnecting
+<a name="88"><span class="lineNum">      88 </span>                :            :  * behavior.</a>
+<span class="lineNum">      89 </span>                :            :  */
+<span class="lineNum">      90 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]:<span class="lineNoCov">          0 : class DLL_LOCAL VtoRouter : public PhysicalLayerMonitor, public IVtoCallbacks</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span>][<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span>]
+<span class="lineNum">      91 </span>                :            : {
+<span class="lineNum">      92 </span>                :            : public:
+<span class="lineNum">      93 </span>                :            : 
+<span class="lineNum">      94 </span>                :            :         /**
+<span class="lineNum">      95 </span>                :            :          * Create a new VtoRouter instance.  Prior to using this
+<span class="lineNum">      96 </span>                :            :          * instance, make sure to register both a IPhysicalLayerAsync
+<span class="lineNum">      97 </span>                :            :          * and a VtoWriter using SetPhysicalLayer() and
+<span class="lineNum">      98 </span>                :            :          * SetVtoWriter(), respectively.
+<span class="lineNum">      99 </span>                :            :          *
+<span class="lineNum">     100 </span>                :            :          * @param arSettings    Settings for the router including the DNP3 Virtual Terminal port (channel id)
+<span class="lineNum">     101 </span>                :            :          * @param apLogger              the Logger that the instance should use for log messages
+<span class="lineNum">     102 </span>                :            :          * @param apWriter      Interface that the router will use to write vto objects
+<span class="lineNum">     103 </span>                :            :          * @param apPhysLayer   PhysicalLayer interface to which the router is bound
+<span class="lineNum">     104 </span>                :            :          *
+<span class="lineNum">     105 </span>                :            :          * @return                              a new VtoRouter instance
+<span class="lineNum">     106 </span>                :            :          */
+<span class="lineNum">     107 </span>                :            :         VtoRouter(const VtoRouterSettings&amp; arSettings, Logger* apLogger, IVtoWriter* apWriter, IPhysicalLayerAsync* apPhysLayer);
+<span class="lineNum">     108 </span>                :            : 
+<span class="lineNum">     109 </span>                :            :         /**
+<span class="lineNum">     110 </span>                :            :          * Receives data from the VTO channel and forwards it to the
+<span class="lineNum">     111 </span>                :            :          * IPhysicalLayerAsync instance associated with this VtoRouter.
+<span class="lineNum">     112 </span>                :            :          * Implements IVtoCallbacks::OnVtoDataReceived().
+<span class="lineNum">     113 </span>                :            :          *
+<span class="lineNum">     114 </span>                :            :          * @param apData                The data received from the VTO stream
+<span class="lineNum">     115 </span>                :            :          * @param aLength               The length of the data received (in
+<span class="lineNum">     116 </span>                :            :          *                                              bytes)
+<span class="lineNum">     117 </span>                :            :          */
+<span class="lineNum">     118 </span>                :            :         void OnVtoDataReceived(const VtoData&amp; arData);
+<span class="lineNum">     119 </span>                :            : 
+<span class="lineNum">     120 </span>                :            :         /**
+<span class="lineNum">     121 </span>                :            :          * Called when the VTO data buffer size changes (startup and
+<span class="lineNum">     122 </span>                :            :          * successuly transmission).
+<span class="lineNum">     123 </span>                :            :          */
+<span class="lineNum">     124 </span>                :            :         void OnBufferAvailable();
+<span class="lineNum">     125 </span>                :            : 
+<span class="lineNum">     126 </span>                :            :         IExecutor* GetExecutor(); //TODO this is kind of hack at the moment
+<span class="lineNum">     127 </span>                :            : 
+<span class="lineNum">     128 </span>                :            : 
+<span class="lineNum">     129 </span>                :            : protected:
+<span class="lineNum">     130 </span>                :            : 
+<span class="lineNum">     131 </span>                :            :         void CheckForPhysRead();
+<span class="lineNum">     132 </span>                :            :         void CheckForPhysWrite();
+<span class="lineNum">     133 </span>                :            :         void CheckForVtoWrite();
+<span class="lineNum">     134 </span>                :            : 
+<span class="lineNum">     135 </span>                :            :         // Implement AsyncPhysLayerMonitor
+<span class="lineNum">     136 </span>                :            : 
+<span class="lineNum">     137 </span>                :            :         void OnPhysicalLayerOpenSuccessCallback();
+<span class="lineNum">     138 </span>                :            : 
+<span class="lineNum">     139 </span>                :            :         void OnPhysicalLayerOpenFailureCallback();
+<span class="lineNum">     140 </span>                :            : 
+<span class="lineNum">     141 </span>                :            :         void OnPhysicalLayerCloseCallback();
+<span class="lineNum">     142 </span>                :            : 
+<span class="lineNum">     143 </span>                :            :         /**
+<span class="lineNum">     144 </span>                :            :          * Receives data from the physical layer and forwards it to the
+<span class="lineNum">     145 </span>                :            :          * VtoWriter.
+<span class="lineNum">     146 </span>                :            :          *
+<span class="lineNum">     147 </span>                :            :          * @param apData                The data received from the physical
+<span class="lineNum">     148 </span>                :            :          *                                              layer
+<span class="lineNum">     149 </span>                :            :          * @param aLength               The length of the data received (in
+<span class="lineNum">     150 </span>                :            :          *                                              bytes)
+<span class="lineNum">     151 </span>                :            :          */
+<span class="lineNum">     152 </span>                :            :         void _OnReceive(const uint8_t* apData, size_t aLength);
+<span class="lineNum">     153 </span>                :            : 
+<span class="lineNum">     154 </span>                :            :         /**
+<span class="lineNum">     155 </span>                :            :          * Implements IUpperLayer::_OnSendSuccess(), which was
+<span class="lineNum">     156 </span>                :            :          * inherited via IHandlerAsync.  Called when an asynchronous
+<span class="lineNum">     157 </span>                :            :          * transmission to the physical layer was successful.
+<span class="lineNum">     158 </span>                :            :          */
+<span class="lineNum">     159 </span>                :            :         void _OnSendSuccess();
+<span class="lineNum">     160 </span>                :            : 
+<span class="lineNum">     161 </span>                :            :         /**
+<span class="lineNum">     162 </span>                :            :          * Implements IUpperLayer::_OnSendFailure(), which was
+<span class="lineNum">     163 </span>                :            :          * inherited via IHandlerAsync.  Called when an asynchronous
+<span class="lineNum">     164 </span>                :            :          * transmission to the physical layer was not successful.
+<span class="lineNum">     165 </span>                :            :          */
+<span class="lineNum">     166 </span>                :            :         void _OnSendFailure();
+<span class="lineNum">     167 </span>                :            : 
+<span class="lineNum">     168 </span>                :            :         virtual void DoVtoRemoteConnectedChanged(bool aOpened) = 0;
+<span class="lineNum">     169 </span>                :            :         virtual void SetLocalConnected(bool aConnected) = 0;
+<span class="lineNum">     170 </span>                :            : 
+<span class="lineNum">     171 </span>                :            :         //return true if should be processed, false otherwise
+<span class="lineNum">     172 </span>                :            :         virtual bool CheckIncomingVtoData(const VtoData&amp; arData) = 0;
+<span class="lineNum">     173 </span>                :            : 
+<span class="lineNum">     174 </span>                :            :         void FlushBuffers();
+<span class="lineNum">     175 </span>                :            :         void NotifyRemoteSideOfState(bool aConnected);
+<span class="lineNum">     176 </span>                :            : 
+<span class="lineNum">     177 </span>                :            : private:
+<span class="lineNum">     178 </span>                :            : 
+<span class="lineNum">     179 </span>                :            :         /**
+<span class="lineNum">     180 </span>                :            :          * The VtoWriter instance that will be used to send the data
+<span class="lineNum">     181 </span>                :            :          * that is received by the IPhysicalLayerAsync instance to the
+<span class="lineNum">     182 </span>                :            :          * VTO endpoint.
+<span class="lineNum">     183 </span>                :            :          */
+<span class="lineNum">     184 </span>                :            :         IVtoWriter* mpVtoWriter;
+<span class="lineNum">     185 </span>                :            : 
+<span class="lineNum">     186 </span>                :            :         /**
+<span class="lineNum">     187 </span>                :            :          * The transmit buffer for Vto -&gt; physical layer.  The data that
+<span class="lineNum">     188 </span>                :            :          * is put into this buffer was originally received via VTO.
+<span class="lineNum">     189 </span>                :            :          */
+<span class="lineNum">     190 </span>                :            :         std::queue&lt;VtoData&gt; mPhysLayerTxBuffer;
+<span class="lineNum">     191 </span>                :            : 
+<span class="lineNum">     192 </span>                :            :         /**
+<span class="lineNum">     193 </span>                :            :          * The transmit message buffer for vto actions (OPEN/CLOSE/DATA) from physical layer -&gt; Vto.
+<span class="lineNum">     194 </span>                :            :          * The data that is put into this buffer was originally received from the physical layer.
+<span class="lineNum">     195 </span>                :            :          */
+<span class="lineNum">     196 </span>                :            :         std::deque&lt;VtoMessage&gt; mVtoTxBuffer;
+<span class="lineNum">     197 </span>                :            : 
+<span class="lineNum">     198 </span>                :            :         /**
+<span class="lineNum">     199 </span>                :            :          * Buffer used to read from the physical layer
+<span class="lineNum">     200 </span>                :            :          */
+<span class="lineNum">     201 </span>                :            :         CopyableBuffer mReadBuffer;
+<span class="lineNum">     202 </span>                :            : 
+<span class="lineNum">     203 </span>                :            :         /**
+<span class="lineNum">     204 </span>                :            :          * Buffer used to write to the physical layer
+<span class="lineNum">     205 </span>                :            :          */
+<span class="lineNum">     206 </span>                :            :         VtoData mWriteData;
+<span class="lineNum">     207 </span>                :            : 
+<span class="lineNum">     208 </span>                :            : };
+<span class="lineNum">     209 </span>                :            : 
+<span class="lineNum">     210 </span>                :            : }
+<span class="lineNum">     211 </span>                :            : 
+<span class="lineNum">     212 </span>                :            : /* vim: set ts=4 sw=4: */
+<span class="lineNum">     213 </span>                :            : 
+<span class="lineNum">     214 </span>                :            : #endif
+<span class="lineNum">     215 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
