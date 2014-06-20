@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Frequently Asked Questions &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="next" title="Introduction to DNP3" href="../dnp3-intro/index.html" />
+    <link rel="prev" title="Table of Contents" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dnp3-intro/index.html" title="Introduction to DNP3"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Table of Contents"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="frequently-asked-questions">
+<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<p><strong>Which is the license for the library? Can I use it on closed source projects?</strong></p>
+<p>All source code in the main repository is licensed under the <a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Version 2</a>. You may use the library in closed-source derivative works, however, you must still honor the minimal requirements of the license. For example, when you redistribute your derivative work it must contain a copy of the license and a notification.</p>
+<p><strong>Has opendnp3 been tested for compliance?</strong></p>
+<p>The outstation is tested using the latest level 2 conformance procedures before every release. This involves our own tools and at least one 3rd party test harness. Be advised that only devices (products) are suitable for listing as &#8220;compliant&#8221; on the DNP.org website. Automatak offers compliance testing on your product as a service, or you can use a 3rd party. Self-testing will soon be disallowed by the DNP user group.</p>
+<p><strong>Which DNP3-compliant systems has been opendnp3 been shown to work with?</strong></p>
+<p>Too many to name, but the list includes products from SEL, GE, ABB, Novatech, and Alstom. We have also used the simulation tools from TMW and ASE. Opendnp3 users have found and reported
+non-conformant behavior in 3rd party implementations much more frequently than issues in the opendnp3 stack.</p>
+<p><strong>Which are the differences between the 1.1.x and the 2.0.x series? Are both completely functional DNP3 implementations?</strong></p>
+<p>Yes, both are functional. The many differences are recorded in the <a class="reference external" href="http://github.com/automatak/dnp3/blob/2.0.x/CHANGELOG.markdown">change log</a>. The biggest differences are:</p>
+<ul class="simple">
+<li>The core library doesn&#8217;t use STL, dynamic allocation, or any features of the C++ std library. It is suitable for embedded systems and runs on Atmel AVR and ARM cortex.</li>
+<li>There is a Platform Abstraction Layer (PAL) that allows for ports to platforms other than those supported by ASIO.</li>
+<li>The dnp3 server wrapper library (asiodnp3) uses the header-only version of ASIO and does not require the BOOST C++ libraries.</li>
+<li>The tests have been ported to Catch++</li>
+<li>The library has a faster and safer application layer parsing mechanism</li>
+</ul>
+<p><strong>The project is written in C++ but there are bindings for Java and C#. Which languages/IDEs/Operating System do you encourage to use when developing an opendnp3 application?</strong></p>
+<p>This information is covered in the <a class="reference internal" href="../opendnp3-intro/platforms.html#platforms-label"><em>Supported platforms</em></a> section.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Table of Contents</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../dnp3-intro/index.html"
+                        title="next chapter">Introduction to DNP3</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/faq/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dnp3-intro/index.html" title="Introduction to DNP3"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Table of Contents"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

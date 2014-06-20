@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Components &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="next" title="Diretory structure" href="directories.html" />
+    <link rel="prev" title="Emphasis on testing" href="../opendnp3-intro/testing.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="directories.html" title="Diretory structure"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../opendnp3-intro/testing.html" title="Emphasis on testing"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="components">
+<h1>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h1>
+<p>Opendnp3 has a modular architecture to allow it to adapt to a number of platforms and languages. The following graph show the major modules that comprise the opendnp3 project. Descriptions of each module are provided below the graph.</p>
+<p><strong>Related Topics</strong></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="directories.html">Diretory structure</a></li>
+</ul>
+</div>
+<p><strong>Key</strong></p>
+<ul class="simple">
+<li><strong>Arrows</strong> represent a depency, i.e. &#8220;A depends on B&#8221; or &#8220;A requires B&#8221;</li>
+<li><strong>Plain-text</strong> nodes represent toolchain requirements</li>
+<li><strong>Ellipses</strong> represent a system or 3rd party library</li>
+<li><strong>Rectangles</strong> represent a library in the opendnp3 project</li>
+<li><strong>Greyed</strong> components can be used with microcontrollers without an OS</li>
+<li><strong>Diamonds</strong> represent executable programs / firmware</li>
+<li><strong>Dashed</strong> components are abstract, i.e. things you have to write yourself</li>
+</ul>
+<p class="graphviz">
+<img src="../_images/graphviz-8bd2fec56773cdc6dba47c8daf2557d15ef93d1b.png" alt="digraph foo {	
+	
+	cxx [label=&quot;C++11 compiler&quot;, shape = plaintext];
+	cstdlib [label=&quot;C standard lib&quot;, shape=ellipse, style = filled, fillcolor = grey];
+
+	openpal [label=&quot;openpal&quot;, shape=rectange, style = filled, fillcolor = grey];
+	mcupal [label=&quot;MCU PAL&quot;, shape=rectange, style = dotted, fillcolor = grey];
+	asio [label=&quot;ASIO library&quot;, shape=ellipse];
+	asiopal [label=&quot;asiopal&quot;, shape=rectange];
+	
+	mcuapp [label=&quot;C++ (MCU)&quot;, shape=diamond, style = dotted, fillcolor = grey];
+		
+	cxxstdlib [label=&quot;C++11 standard lib&quot;, shape=ellipse];
+	
+	opendnp3 [label=&quot;opendnp3&quot;, shape=rectange, style = filled, fillcolor = grey];
+	asiodnp3 [label=&quot;asiodnp3&quot;, shape=rectange];
+
+	cppapp [label=&quot;C++ (OS)&quot;, style = dotted, shape=diamond];
+
+	dotnet [label=&quot;.NET bindings&quot;, shape=rectange];
+	java [label=&quot;Java bindings&quot;, shape=rectange];
+
+	dotnetapp [label=&quot;.NET&quot;, style = dotted, shape=diamond];
+	simulator [label=&quot;Test Harness&quot;, shape=diamond];
+	javaapp [label=&quot;Java&quot;, style = dotted, shape=diamond];
+
+	dotnet-&gt;asiodnp3;
+	java-&gt;asiodnp3;
+
+	dotnetapp-&gt;dotnet;
+	simulator-&gt;dotnet;
+	javaapp-&gt;java;
+
+	openpal-&gt;cxx;
+	openpal-&gt;cstdlib;
+	mcupal-&gt;openpal;
+	mcuapp-&gt;mcupal;
+	mcuapp-&gt;opendnp3;
+	opendnp3-&gt;openpal;
+
+	asiopal-&gt;cxxstdlib;
+	asiopal-&gt;asio;
+	asiodnp3-&gt;asiopal;
+	cppapp-&gt;asiodnp3;
+	asiopal-&gt;openpal;
+	asiodnp3-&gt;opendnp3;
+	
+}" />
+</p>
+<p><strong>openpal</strong></p>
+<p>PAL stands for Platform Abstraction Layer. It provides a number of abstract services that can be used to build protocol stacks in a platform independent fashion. There is nothing DNP3-specific about openpal. It could be used to build other protocol stacks. These services include:</p>
+<ul class="simple">
+<li>Abstract communication channels (IPhysicalLayer)</li>
+<li>Abstract executor (IExecutor) that provides a way to post events, get timestamps, and start/cancel software timers</li>
+</ul>
+<p>Openpal also provides buffer wrappers (read/write), statically-allocated container types, big/litte endian parsers for various integer/float types. Any opendnp3 program must have a concrete implementation of the PAL to execute. The library has no dependencies on STL, dynamic allocation, or the C++ standard library. It is suitable for deeply embedded systems.</p>
+<p><strong>opendnp3</strong></p>
+<p>This is the core dnp3 library providing implementations of both outstation and masters. It uses the interfaces provided in openpal, and is therefore platform independent. It has the same characteristics as openpal and can run on microcontroller platforms with a C++11 compiler.</p>
+<p><strong>asiopal</strong></p>
+<p>An implementation of the PAL for platforms with an operating systems. It uses ASIO to provide cross platform networking and serial port support. Each instance of IExecutor is on it&#8217;s own &#8220;strand&#8221; allowing this PAL to transparently run via a thread pool. This is the component that gives opendnp3 such great scalability on multi-core systems.</p>
+<p><strong>asiodnp3</strong></p>
+<p>This library presents a high-level interface to opendnp3 based on components of the asiopal. Almost every project running on an operating system should use the this library as its entry point. The C++ demos are built based on this library.</p>
+<p><strong>.NET Bindings</strong></p>
+<p>This is actually 2 libraries, a pure C# library of interfaces and a mixed-mode assemly written in C++/CLI. Together they comprise the .NET bindings and with an interface that roughly mirrors asiodnp3 but with more idiomatic .NET semantics.</p>
+<p><strong>Java Bindings</strong></p>
+<p>This is actually 2 libraries, a pure Java library (build with Maven) of interfaces and a JNI-based shared library that implements the native functions. Together they comprise the Java bindings and have an interface that roughly mirrors asiodnp3 but with more idiomatic Java semantics.</p>
+<p><strong>Test Harness</strong></p>
+<p>This is a standalone winforms application written in C#. It provides functionality similar to the test harnesses from TMW &amp; ASE. It has a modular architecture that can be extended to write device simulators. It serves the dual purpose of providing a useful tool to the community and demoing the capabilities of the underlying library.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../opendnp3-intro/testing.html"
+                        title="previous chapter">Emphasis on testing</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="directories.html"
+                        title="next chapter">Diretory structure</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/layout/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="directories.html" title="Diretory structure"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../opendnp3-intro/testing.html" title="Emphasis on testing"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

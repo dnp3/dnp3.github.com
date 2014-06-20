@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Building on Linux &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="up" title="Building" href="index.html" />
+    <link rel="next" title="Building on Windows" href="building-windows.html" />
+    <link rel="prev" title="Prerequisites on Windows" href="prerequisites-windows.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="building-windows.html" title="Building on Windows"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="prerequisites-windows.html" title="Prerequisites on Windows"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Building</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="building-on-linux">
+<h1>Building on Linux<a class="headerlink" href="#building-on-linux" title="Permalink to this headline">¶</a></h1>
+<p>The build process on Linux should be very familiar.</p>
+<p>The default prefix is set for Ubuntu or Fedora (/usr) so you may need to adjust this for another Linux distribution so that headers and libraries get sent to the right place.</p>
+<p>To build and install the libraries and demo applications:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>autoreconf -i -f
+<span class="nv">$ </span>./configure
+<span class="nv">$ </span>make -j &lt;cores&gt;
+<span class="nv">$ </span>sudo make install
+</pre></div>
+</div>
+<p>To build the unit tests:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>make check
+</pre></div>
+</div>
+<p><strong>Configuring for Clang</strong></p>
+<p>Using Clang  is identical, except with the following argument in the configure step.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./configure <span class="nv">CXX</span><span class="o">=</span><span class="s1">&#39;clang++&#39;</span> <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s1">&#39;-std=c++11 -stdlib=libc++&#39;</span>
+</pre></div>
+</div>
+<p><strong>Code coverage with GCC/GCOV/LCOV</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./configure <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;--coverage -g -O0&quot;</span> <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;--coverage -g -O0&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>make check
+<span class="nv">$ </span>./dnp3test
+<span class="nv">$ </span>./openpaltest
+</pre></div>
+</div>
+<p>now generate the info file with lcov</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>lcov -c -d ./ -b ./ -o coverage.info
+</pre></div>
+</div>
+<p>and then the html versions:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>genhtml coverage.info -o test_html
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="prerequisites-windows.html"
+                        title="previous chapter">Prerequisites on Windows</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="building-windows.html"
+                        title="next chapter">Building on Windows</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/building/building-linux.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="building-windows.html" title="Building on Windows"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="prerequisites-windows.html" title="Prerequisites on Windows"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Building</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

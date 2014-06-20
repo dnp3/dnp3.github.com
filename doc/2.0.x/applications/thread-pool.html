@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Manager and the thread pool &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="up" title="Writing Applications" href="index.html" />
+    <link rel="next" title="Creating channels" href="creating-channels.html" />
+    <link rel="prev" title="Writing Applications" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="creating-channels.html" title="Creating channels"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Writing Applications"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Writing Applications</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="manager-and-the-thread-pool">
+<h1>Manager and the thread pool<a class="headerlink" href="#manager-and-the-thread-pool" title="Permalink to this headline">¶</a></h1>
+<p>Opendnp3 applications on an operating system start with an instance of the <em>asiodnp3::DNP3Manager</em> class. It&#8217;s the starting point for adding communication channels, tapping into the logging sub-system, etc. The manager class is given a concurreny hint when it is constructed. This tells the stack how many threads to allocate to its thread pool. Even though the underlying stack is completely asynchronous and uses all non-blocking calls, the thread pool allows the stack to scale up and stay responsive when there are many concurrent sessions. Even when a callback to users code is slow, the other connections keep doing work. Here is the simplest possible program that instantiates a managers. The rest of the tutorials will assume you have this basic infrastructure.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;asiodnp3/DNP3Manager.h&gt;</span>
+<span class="cp">#include &lt;thread&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="c1">// hardware_concurrency() gives hint of number of hardware thread contexts</span>
+  <span class="n">asiodnp3</span><span class="o">::</span><span class="n">DNP3Manager</span> <span class="n">manager</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="o">::</span><span class="n">hardware_concurrency</span><span class="p">());</span>
+
+  <span class="c1">// create communication channels</span>
+  <span class="p">.....</span>
+
+  <span class="c1">// add masters / outstations to the communication channels</span>
+  <span class="p">.....</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Writing Applications</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="creating-channels.html"
+                        title="next chapter">Creating channels</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/applications/thread-pool.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="creating-channels.html" title="Creating channels"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Writing Applications"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Writing Applications</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

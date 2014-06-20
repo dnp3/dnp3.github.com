@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Monitoring communication health &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="up" title="Writing Applications" href="index.html" />
+    <link rel="next" title="Embedded Systems" href="../embedded/index.html" />
+    <link rel="prev" title="Monitoring channels" href="monitoring-channels.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../embedded/index.html" title="Embedded Systems"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="monitoring-channels.html" title="Monitoring channels"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Writing Applications</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="monitoring-communication-health">
+<h1>Monitoring communication health<a class="headerlink" href="#monitoring-communication-health" title="Permalink to this headline">¶</a></h1>
+<p>Most of the time your master or outstation is communicating just fine with the outside world. Sometimes, however, there are conformance issues or mis-configurations that cause the two sides not to communicate. The most common case for this is when the link layer addresses are not set correctly. Opendnp3 provides a coarse communication health callback for the stack that is different from the channel.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">enum</span> <span class="n">StackState</span> <span class="p">{</span>
+        <span class="c1">/// Online and communicating</span>
+        <span class="n">SS_COMMS_UP</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="c1">/// Communication has been lost</span>
+        <span class="n">SS_COMMS_DOWN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="c1">/// Communication health is unknown</span>
+        <span class="n">SS_UNKNOWN</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Just call <em>AddStateListener</em> on your master or outstation interface. Binding a listener is done idiomatically for each language. You may bind a state listener at any time. All callbacks will come from the underlying thread pool and you will always receive the current state immediately after you bind the listener. You never have to &#8216;ask&#8217; for the current state. In the following examples, assume that we already acquired a stack interface (master or outstation) from a channel. The callbacks here just print the state to console, but you can react to it however you like. You might display it to a user or write it to a database. It&#8217;s important to remember, however, that your callbacks should be short. During the callback, the thread from the pool that runs that stack can&#8217;t do any other work. If you need to do any kind of long running or blocking operation like writing the state to a database, it&#8217;s best to marshal the event to a different thread.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// C++11 using a lambda</span>
+<span class="n">pStack</span><span class="o">-&gt;</span><span class="n">AddStateListener</span><span class="p">([](</span><span class="n">StackState</span> <span class="n">state</span><span class="p">){</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;stack state: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ConvertStackStateToString</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">// Java using an anonymous inner class</span>
+<span class="n">stack</span><span class="o">.</span><span class="na">addStateListener</span><span class="o">(</span><span class="k">new</span> <span class="n">StackStateListener</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStateChange</span><span class="o">(</span><span class="n">StackState</span> <span class="n">state</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Stack state: &quot;</span> <span class="o">+</span> <span class="n">state</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">});</span>
+</pre></div>
+</div>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">// c# using a lambda</span>
+<span class="n">stack</span><span class="p">.</span><span class="n">AddStateListener</span><span class="p">(</span><span class="n">state</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Stack state: &quot;</span> <span class="p">+</span> <span class="n">state</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="monitoring-channels.html"
+                        title="previous chapter">Monitoring channels</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../embedded/index.html"
+                        title="next chapter">Embedded Systems</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/applications/monitoring-communication-health.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../embedded/index.html" title="Embedded Systems"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="monitoring-channels.html" title="Monitoring channels"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Writing Applications</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

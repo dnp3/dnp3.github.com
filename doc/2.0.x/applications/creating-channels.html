@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating channels &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="up" title="Writing Applications" href="index.html" />
+    <link rel="next" title="Creating a master" href="creating-a-master.html" />
+    <link rel="prev" title="Manager and the thread pool" href="thread-pool.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="creating-a-master.html" title="Creating a master"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="thread-pool.html" title="Manager and the thread pool"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Writing Applications</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="creating-channels">
+<h1>Creating channels<a class="headerlink" href="#creating-channels" title="Permalink to this headline">¶</a></h1>
+<p>The opendnp3 library uses an abstract communication channel interface to send bytes &#8220;over the wire&#8221;. Opendnp3 supports TCP client/server and serial communications currently, but UDP and TLS encrypted TCP will be added in the near future.</p>
+<p>The manager that you created previously is now ready to have some channels bound to it. Adding a channel to the manager does not open it immediately. If it&#8217;s TCP socket or serial port it won&#8217;t try to open until you bind an outstation or master and enable the stack. A TCP server won&#8217;t listen for connections yet either. Here&#8217;s an example of how you go about adding a TCP client. Assume we have a DNP3Manager called &#8216;manager&#8217;:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">auto</span> <span class="n">pClient</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="n">AddTCPClient</span><span class="p">(</span>
+  <span class="s">&quot;tcpclient&quot;</span><span class="p">,</span>               <span class="c1">// name used in log messages</span>
+  <span class="n">filters</span><span class="o">::</span><span class="n">NORMAL</span><span class="p">,</span>           <span class="c1">// lowest log level of messages</span>
+  <span class="n">TimeDuration</span><span class="o">::</span><span class="n">Seconds</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>  <span class="c1">// minimum delay for connection rety</span>
+  <span class="n">TimeDuration</span><span class="o">::</span><span class="n">Minutes</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>  <span class="c1">// maximum delay for connection rety</span>
+  <span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>               <span class="c1">// host name (DNS resolved) or ip address of remote endpoint</span>
+  <span class="mi">20000</span><span class="p">);</span>                    <span class="c1">// port remote endpoint is listening on</span>
+</pre></div>
+</div>
+<p>The methods for adding a server channel or a serial port are very similar.</p>
+<p><strong>Exponential Backoff</strong></p>
+<p>All channels specify two timing paramters for the minimum and maximum connection retry times. The channels use an exponential backoff strategy to retries. If you don&#8217;t want exponential backoff, just set the minimum and maximum to the same value.</p>
+<p>For instance if you set the minimum to <em>TimeDuration::Seconds(3)</em> and the maximum to <em>TimeDuration::Seconds(40)</em> a series of failed connections would have the following time gaps between attempts.</p>
+<p>3, 6, 12, 24, 40, 40, .....</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="thread-pool.html"
+                        title="previous chapter">Manager and the thread pool</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="creating-a-master.html"
+                        title="next chapter">Creating a master</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/applications/creating-channels.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="creating-a-master.html" title="Creating a master"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="thread-pool.html" title="Manager and the thread pool"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Writing Applications</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
