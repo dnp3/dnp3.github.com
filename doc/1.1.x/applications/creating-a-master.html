@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating a master &mdash; Definitive Guide to opendnp3 1.1.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 1.1.x documentation" href="../index.html" />
+    <link rel="up" title="Writing Applications" href="index.html" />
+    <link rel="next" title="Creating an outstation" href="creating-an-outstation.html" />
+    <link rel="prev" title="Writing Applications" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="creating-an-outstation.html" title="Creating an outstation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Writing Applications"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 1.1.x documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Writing Applications</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="creating-a-master">
+<h1>Creating a master<a class="headerlink" href="#creating-a-master" title="Permalink to this headline">¶</a></h1>
+<p>A master in OpenDNP3 is a component that communicates with a single outstation via a communication channel. You may see this term used in other places to refer to a collection of such components communicating with multiple outstations. When more than one master is bound to a single communication channel, it is called a multidrop configuration. This refers to the way in which an RS-485 serial network is chained from device to device. Opendnp3 will let you add multiple masters / outstations to any communication channel, regardless of he underlying transport. You could even bind a master to a TCP server and reverse the normal connection direction. Opendnp3 doesn&#8217;t care.</p>
+<p>To add a master to a communication channel you call the <em>AddMaster</em> method on the channel interface:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// C++</span>
+<span class="n">MasterStackConfig</span> <span class="n">stackConfig</span><span class="p">;</span>  <span class="c1">// initialized with defaults</span>
+
+<span class="n">IMaster</span><span class="o">*</span> <span class="n">pMaster</span> <span class="o">=</span> <span class="n">pChannel</span><span class="o">-&gt;</span><span class="n">AddMaster</span><span class="p">(</span>
+  <span class="s">&quot;master&quot;</span><span class="p">,</span>                     <span class="c1">// stack name</span>
+  <span class="n">LEV_INFO</span><span class="p">,</span>                     <span class="c1">// log filter level</span>
+  <span class="n">PrintingDataObserver</span><span class="o">::</span><span class="n">Inst</span><span class="p">(),</span> <span class="c1">// see below</span>
+  <span class="n">stackConfig</span>                   <span class="c1">// stack configuration</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Just the same as when we created a channel, we provide a string ID for the logger and a log level. The <em>MasterStackConfig</em> class provides the master with all of its configuration. It tells the master how to behave, what scans to do, and what features to enable or disable on the outstation. A description of what each parameter does is provided in the code documentation for the class. The method returns an interface that represents the master. It contains sub-interfaces for doing things like issuing controls.</p>
+<p>By now you&#8217;ve probably noticed that I haven&#8217;t described what the <em>PrintingDataObserver::Inst()</em> call is all about. This parameter is the call back interface that the application must provide to receive measurements as they are received from the outstation. The singleton above simply prints all measurements received to the console. The instance provided by your application will do something more interesting by implementing the <em>IDataObserver</em> interface.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">// Java</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">DataObserver</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">start</span><span class="o">();</span>
+    <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="n">BinaryInput</span> <span class="n">meas</span><span class="o">,</span> <span class="kt">long</span> <span class="n">index</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="n">AnalogInput</span> <span class="n">meas</span><span class="o">,</span> <span class="kt">long</span> <span class="n">index</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="n">Counter</span> <span class="n">meas</span><span class="o">,</span> <span class="kt">long</span> <span class="n">index</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="n">BinaryOutputStatus</span> <span class="n">meas</span><span class="o">,</span> <span class="kt">long</span> <span class="n">index</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="n">AnalogOutputStatus</span> <span class="n">meas</span><span class="o">,</span> <span class="kt">long</span> <span class="n">index</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">end</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The master will call start() prior to any calls to update(X) and will call end() last. The master does this for each application layer fragment containing measurement data received from the outstation, allowing you to individually handle them. If the master does an integrity poll and receives a 4 fragment response, the data observer will be called 4 times with a complete start()/update(X)/end() cycle.</p>
+<p>It is important to remember that while the master is calling you back with measurement updates, it can&#8217;t do any other work like react to control requests. It&#8217;s OK to do a little work like translating the data types, etc during the callbacks, but it&#8217;s best to offload any blocking I/O like writing to a database to another thread.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Writing Applications</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="creating-an-outstation.html"
+                        title="next chapter">Creating an outstation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/applications/creating-a-master.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="creating-an-outstation.html" title="Creating an outstation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Writing Applications"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 1.1.x documentation</a> &raquo;</li>
+          <li><a href="index.html" >Writing Applications</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

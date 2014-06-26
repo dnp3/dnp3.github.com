@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Prerequisites on Windows &mdash; Definitive Guide to opendnp3 1.1.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 1.1.x documentation" href="../index.html" />
+    <link rel="up" title="Building" href="index.html" />
+    <link rel="next" title="Building on Linux" href="building-on-linux.html" />
+    <link rel="prev" title="Prerequisites on Linux" href="prerequisites-on-linux.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="building-on-linux.html" title="Building on Linux"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="prerequisites-on-linux.html" title="Prerequisites on Linux"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 1.1.x documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Building</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="prerequisites-on-windows">
+<h1>Prerequisites on Windows<a class="headerlink" href="#prerequisites-on-windows" title="Permalink to this headline">¶</a></h1>
+<p><strong>Visual Studio 2013 Express (free)</strong></p>
+<p>This ships with VC++11 and support for all the C++11 goodness. No plugins or anything are required and you can likely even use an express edition for C++.</p>
+<p><strong>Boost</strong></p>
+<p>Installing Boost is pretty easy once you have VS installed. You can actually use the installer from [BoostPro](<a class="reference external" href="http://www.boostpro.com/download/">http://www.boostpro.com/download/</a>). Otherwise, you can build from source by following the directions [here](<a class="reference external" href="http://www.boost.org/doc/libs/1_53_0/more/getting_started/windows.html">http://www.boost.org/doc/libs/1_53_0/more/getting_started/windows.html</a>). Just be aware that you don&#8217;t need all of boost if you want to save some time. When it comes time to run bjam.exe, your command line should look something like this:</p>
+<div class="highlight-bat"><div class="highlight"><pre>bjam.exe toolset<span class="o">=</span>msvc --with-system --with-test --with-date_time
+</pre></div>
+</div>
+<p>If you&#8217;re doing a 64bit build, you can set this option with the &#8220;address-model=64&#8221; setting.</p>
+<p>You can put the headers and libraries anywhere you like, but you must define two environment variables that Visual Studio will be looking for:</p>
+<div class="highlight-bat"><div class="highlight"><pre>BOOST_HOME <span class="o">=</span> <span class="p">&lt;</span><span class="n">path</span> to the directory of the boost distribution<span class="p">&gt;</span>
+<span class="n">BOOST_LIB</span> <span class="o">=</span> <span class="p">&lt;</span><span class="n">path</span> where the boost libraries were built or deployed&gt;
+</pre></div>
+</div>
+<p><strong>Java (optional)</strong></p>
+<p>If you don&#8217;t want to build the java binding just unload the dnp3java project from your solution. If you do, set the JAVA_HOME environment variable so that the compiler can find the JNI includes.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="prerequisites-on-linux.html"
+                        title="previous chapter">Prerequisites on Linux</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="building-on-linux.html"
+                        title="next chapter">Building on Linux</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/building/prerequisites-on-windows.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="building-on-linux.html" title="Building on Linux"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="prerequisites-on-linux.html" title="Prerequisites on Linux"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 1.1.x documentation</a> &raquo;</li>
+          <li><a href="index.html" >Building</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
