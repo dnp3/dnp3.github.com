@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building on Windows &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    <title>Windows Build &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
     <link rel="up" title="Building" href="index.html" />
-    <link rel="next" title="Writing Applications" href="../applications/index.html" />
-    <link rel="prev" title="Building on Linux" href="building-linux.html" /> 
+    <link rel="next" title="How opendnp3 maps to DNP3 objects" href="../mapping/index.html" />
+    <link rel="prev" title="Linux Build" href="building-linux.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,10 +37,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../applications/index.html" title="Writing Applications"
+          <a href="../mapping/index.html" title="How opendnp3 maps to DNP3 objects"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="building-linux.html" title="Building on Linux"
+          <a href="building-linux.html" title="Linux Build"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Building</a> &raquo;</li> 
@@ -52,10 +52,11 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="building-on-windows">
-<h1>Building on Windows<a class="headerlink" href="#building-on-windows" title="Permalink to this headline">¶</a></h1>
-<p>If you&#8217;ve installed boost and set the three environment variables BOOST_INCLUDE, BOOST_LIB, and JAVA_HOME (optional) as described [[here|Prerequisites-on-windows]] the solution file should build without incident.</p>
-<p>The default configuration on windows is to build the core C++ library as a static library. A shared library dll (opendnp3java.dll) is built for the Java bindings. .NET assemblies (also dll) are built for the .NET wrappers.</p>
+  <div class="section" id="windows-build">
+<h1>Windows Build<a class="headerlink" href="#windows-build" title="Permalink to this headline">¶</a></h1>
+<p>Opendnp3, the .NET bindings, and the graphical simulator may all be built using the supplied Visual Studio 2013 solution file.</p>
+<p>Your SLN file references the ASIO_HOME environment variable, so don&#8217;t forget to set it.</p>
+<p>The default configuration on windows is to build the core C++ library as a static library.</p>
 </div>
 
 
@@ -69,10 +70,10 @@
             </a></p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="building-linux.html"
-                        title="previous chapter">Building on Linux</a></p>
+                        title="previous chapter">Linux Build</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../applications/index.html"
-                        title="next chapter">Writing Applications</a></p>
+  <p class="topless"><a href="../mapping/index.html"
+                        title="next chapter">How opendnp3 maps to DNP3 objects</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/building/building-windows.txt"
@@ -102,10 +103,10 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../applications/index.html" title="Writing Applications"
+          <a href="../mapping/index.html" title="How opendnp3 maps to DNP3 objects"
              >next</a> |</li>
         <li class="right" >
-          <a href="building-linux.html" title="Building on Linux"
+          <a href="building-linux.html" title="Linux Build"
              >previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
           <li><a href="index.html" >Building</a> &raquo;</li> 
@@ -113,7 +114,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

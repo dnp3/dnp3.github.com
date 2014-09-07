@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Platform Abstraction Layer (PAL) &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="next" title="ASIO PAL" href="asiopal.html" />
+    <link rel="prev" title="Handling control requests" href="../applications/receiving-control-requests.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="asiopal.html" title="ASIO PAL"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../applications/receiving-control-requests.html" title="Handling control requests"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="platform-abstraction-layer-pal">
+<h1>Platform Abstraction Layer (PAL)<a class="headerlink" href="#platform-abstraction-layer-pal" title="Permalink to this headline">¶</a></h1>
+<p>Opendnp3 uses a Platform Abstraction Layer (PAL) to maintain portability. The PAL provides a number of services in the form of interfaces. The openpal library combines these interfaces with a number of utility classes useful for writing protocol stacks including serialization routines, statically allocated container types, and a general purpose logging facility. The openpal library has the following directory structure.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="o">/</span><span class="n">openpal</span>            <span class="c1">// openpal library source root</span>
+  <span class="o">/</span><span class="n">channel</span>          <span class="c1">// defines an abstract communication channel</span>
+      <span class="o">/</span><span class="n">container</span>        <span class="c1">// various reusable statically-sized container types used by opendnp3</span>
+      <span class="o">/</span><span class="n">executor</span>         <span class="c1">// defines an abstract event queuing service and software timer facility</span>
+      <span class="o">/</span><span class="n">logging</span>          <span class="c1">// a general purpose logging facility with pluggable backends</span>
+      <span class="o">/</span><span class="n">serialization</span>    <span class="c1">// provides little and big endian serializations routines configurable (-DOPENPAL_FLIP_ENDIAN)</span>
+      <span class="o">/</span><span class="n">util</span>             <span class="c1">// various utility functions and classes</span>
+</pre></div>
+</div>
+<p>The most important interfaces are found in openpal/executor:</p>
+<ul class="simple">
+<li>openpal::IExecutor - Interface used to queue events to be executed asynchronously. These events can be run ASAP (Post) or can be scheduled (Start) as timers.</li>
+<li>openpal::ITimer - Interface that represents a pending timer expiration. This is what is returned from the IExecutor::Start methods.</li>
+</ul>
+<p>For common operating systems, the asiopal library implements the interfaces in the PAL using the ASIO library for cross-platforms sockets, serial ports, timers, etc. If your OS isn&#8217;t supported by ASIO or you want to run opendnp3 on a bare-metal system, you&#8217;ll have to implement the PAL yourself.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="asiopal.html">ASIO PAL</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../applications/receiving-control-requests.html"
+                        title="previous chapter">Handling control requests</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="asiopal.html"
+                        title="next chapter">ASIO PAL</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/pal-impl/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="asiopal.html" title="ASIO PAL"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../applications/receiving-control-requests.html" title="Handling control requests"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -50,15 +50,16 @@
 <div class="line"><br /></div>
 </div>
 <img alt="_images/opendnp3.png" src="_images/opendnp3.png" />
-<p id="google-group">The Definitive Guide to <a class="reference external" href="http://www.automatak.com/opendnp3">opendnp3</a> 2.0.0-RC1</p>
-<p>You may not redistribute this documentation in any form without written consent.</p>
+<p>The Definitive Guide to <a class="reference external" href="http://www.automatak.com/opendnp3">opendnp3</a> 2.0.0-RC3</p>
+<p>This documentation is a WIP towards the 2.0.0 final release. It may contain inconsistencies from porting it from the 1.1.x branch.</p>
+<p>Join the <a class="reference external" href="http://groups.google.com/group/automatak-dnp3">Google Group</a> to post questions and receive updates. Help there is provided on a &#8220;as time permits&#8221; basis.</p>
+<p>If you need dedicated commercial support, custom integration services, or compliance/security testing contact <a class="reference external" href="http://www.automatak.com">Automatak</a>.</p>
+<p>If the library does not contain a feature that you need for your device or application, please consider sponsoring the addition. We&#8217;d be happy to add standards-based additions under contract.</p>
 <p>Authors:</p>
 <ul class="simple">
 <li>Adam Crain</li>
 <li>Pablo Giudice</li>
 </ul>
-<p>Join the <a class="reference external" href="http://groups.google.com/group/automatak-dnp3">Google Group</a> to post questions and receive updates. Help there is provided on a &#8220;as time permits&#8221; basis.</p>
-<p>If you need dedicated commercial support, custom integration services, or compliance/security testing contact <a class="reference external" href="http://www.automatak.com">Automatak</a>.</p>
 <div class="section" id="table-of-contents">
 <h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
@@ -71,47 +72,50 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="opendnp3-intro/index.html">What is opendnp3?</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="opendnp3-intro/platforms.html">Supported platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opendnp3-intro/subsets.html">Level Subset Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opendnp3-intro/scalable.html">Event-driven scalability</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opendnp3-intro/testing.html">Emphasis on testing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="layout/index.html">Components</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="layout/directories.html">Diretory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layout/directories.html">Directory structure</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="building/index.html">Building</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="building/prerequisites.html">Prerequisites (all plaforms)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="building/prerequisites-linux.html">Prerequisites on Linux</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="building/clang-debian-install.html">Installing Clang (Debian)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building/prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building/building-linux.html">Linux Build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building/building-windows.html">Windows Build</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="building/prerequisites-windows.html">Prerequisites on Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="building/building-linux.html">Building on Linux</a></li>
-<li class="toctree-l2"><a class="reference internal" href="building/building-windows.html">Building on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapping/index.html">How opendnp3 maps to DNP3 objects</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mapping/control-types.html">Control types and modes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="applications/index.html">Writing Applications</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="applications/index.html">Writing DNP3 Applications</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="applications/thread-pool.html">Manager and the thread pool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="applications/creating-channels.html">Creating channels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="applications/creating-a-master.html">Creating a master</a></li>
-<li class="toctree-l2"><a class="reference internal" href="applications/creating-an-outstation.html">Creating an outstation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="applications/loading-measurements.html">Loading measurements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="applications/control-types.html">Control types and modes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="applications/making-control-requests.html">Making control requests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="applications/monitoring-channels.html">Monitoring channels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="applications/monitoring-communication-health.html">Monitoring communication health</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications/channels.html">Communication channels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applications/monitoring-channels.html">Monitoring channels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applications/masters.html">Master API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applications/receiving-measurements.html">Receiving measurements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/making-control-requests.html">Making control requests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applications/outstations.html">Outstation API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applications/loading-measurements.html">Loading measurements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/receiving-control-requests.html">Handling control requests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pal-impl/index.html">Platform Abstraction Layer (PAL)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pal-impl/asiopal.html">ASIO PAL</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="embedded/index.html">Embedded Systems</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="embedded/linux.html">Embedded Linux</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="bindings/index.html">Language Bindings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bindings/java/index.html">Java Support</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="bindings/java/deploying-the-dll-on-windows.html">Deploying the .dll on windows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="bindings/java/deploying-the-so-on-linux.html">Deploying the .so on linux</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="embedded/atmega2560.html">Atmega 2560</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a><ul>
@@ -170,7 +174,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

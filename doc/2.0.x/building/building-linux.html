@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building on Linux &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    <title>Linux Build &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
     <link rel="up" title="Building" href="index.html" />
-    <link rel="next" title="Building on Windows" href="building-windows.html" />
-    <link rel="prev" title="Prerequisites on Windows" href="prerequisites-windows.html" /> 
+    <link rel="next" title="Windows Build" href="building-windows.html" />
+    <link rel="prev" title="Prerequisites" href="prerequisites.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,10 +37,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="building-windows.html" title="Building on Windows"
+          <a href="building-windows.html" title="Windows Build"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="prerequisites-windows.html" title="Prerequisites on Windows"
+          <a href="prerequisites.html" title="Prerequisites"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Building</a> &raquo;</li> 
@@ -52,9 +52,12 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="building-on-linux">
-<h1>Building on Linux<a class="headerlink" href="#building-on-linux" title="Permalink to this headline">¶</a></h1>
-<p>The build process on Linux should be very familiar.</p>
+  <div class="section" id="linux-build">
+<h1>Linux Build<a class="headerlink" href="#linux-build" title="Permalink to this headline">¶</a></h1>
+<p>The build process on Linux follows the standard autotools conventions. The project does not redistribute the configure script, so you need to run autoreconf as described below.</p>
+<p><strong>GNU autotools</strong></p>
+<p>You&#8217;ll need g++, autoconf, and libtool</p>
+<p>Don&#8217;t forget to define the ASIO_HOME environment variable.</p>
 <p>The default prefix is set for Ubuntu or Fedora (/usr) so you may need to adjust this for another Linux distribution so that headers and libraries get sent to the right place.</p>
 <p>To build and install the libraries and demo applications:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>autoreconf -i -f
@@ -63,8 +66,10 @@
 <span class="nv">$ </span>sudo make install
 </pre></div>
 </div>
-<p>To build the unit tests:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>make check
+<p>To build and run the unit tests:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>make check -j &lt;cores&gt;
+<span class="nv">$ </span>./dnp3test
+<span class="nv">$ </span>./openpaltest
 </pre></div>
 </div>
 <p><strong>Configuring for Clang</strong></p>
@@ -101,11 +106,11 @@
               <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="prerequisites-windows.html"
-                        title="previous chapter">Prerequisites on Windows</a></p>
+  <p class="topless"><a href="prerequisites.html"
+                        title="previous chapter">Prerequisites</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="building-windows.html"
-                        title="next chapter">Building on Windows</a></p>
+                        title="next chapter">Windows Build</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/building/building-linux.txt"
@@ -135,10 +140,10 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="building-windows.html" title="Building on Windows"
+          <a href="building-windows.html" title="Windows Build"
              >next</a> |</li>
         <li class="right" >
-          <a href="prerequisites-windows.html" title="Prerequisites on Windows"
+          <a href="prerequisites.html" title="Prerequisites"
              >previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
           <li><a href="index.html" >Building</a> &raquo;</li> 
@@ -146,7 +151,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

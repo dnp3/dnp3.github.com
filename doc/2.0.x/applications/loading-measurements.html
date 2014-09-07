@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
-    <link rel="up" title="Writing Applications" href="index.html" />
-    <link rel="next" title="Control types and modes" href="control-types.html" />
-    <link rel="prev" title="Creating an outstation" href="creating-an-outstation.html" /> 
+    <link rel="up" title="Outstation API" href="outstations.html" />
+    <link rel="next" title="Handling control requests" href="receiving-control-requests.html" />
+    <link rel="prev" title="Outstation API" href="outstations.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,13 +37,14 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="control-types.html" title="Control types and modes"
+          <a href="receiving-control-requests.html" title="Handling control requests"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="creating-an-outstation.html" title="Creating an outstation"
+          <a href="outstations.html" title="Outstation API"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Writing Applications</a> &raquo;</li> 
+          <li><a href="index.html" >Writing DNP3 Applications</a> &raquo;</li>
+          <li><a href="outstations.html" accesskey="U">Outstation API</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -54,6 +55,7 @@
             
   <div class="section" id="loading-measurements">
 <h1>Loading measurements<a class="headerlink" href="#loading-measurements" title="Permalink to this headline">¶</a></h1>
+<p><strong>TODO - This section needs a rewrite for 2.0.x</strong></p>
 <p>Measurement loading also uses <em>IDataObserver</em>, but in the opposite direction. Instead of receiving measurements, you&#8217;ll be making the calls. You can obtain this interface from the interface you got when you created your outstation:</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// C++</span>
 <span class="n">IDataObserver</span><span class="o">*</span> <span class="n">pDataObserver</span> <span class="o">=</span> <span class="n">pOutstation</span><span class="o">-&gt;</span><span class="n">GetDataObserver</span><span class="p">();</span>
@@ -93,11 +95,11 @@
               <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="creating-an-outstation.html"
-                        title="previous chapter">Creating an outstation</a></p>
+  <p class="topless"><a href="outstations.html"
+                        title="previous chapter">Outstation API</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="control-types.html"
-                        title="next chapter">Control types and modes</a></p>
+  <p class="topless"><a href="receiving-control-requests.html"
+                        title="next chapter">Handling control requests</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/applications/loading-measurements.txt"
@@ -127,18 +129,19 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="control-types.html" title="Control types and modes"
+          <a href="receiving-control-requests.html" title="Handling control requests"
              >next</a> |</li>
         <li class="right" >
-          <a href="creating-an-outstation.html" title="Creating an outstation"
+          <a href="outstations.html" title="Outstation API"
              >previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Writing Applications</a> &raquo;</li> 
+          <li><a href="index.html" >Writing DNP3 Applications</a> &raquo;</li>
+          <li><a href="outstations.html" >Outstation API</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

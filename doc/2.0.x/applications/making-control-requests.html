@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
-    <link rel="up" title="Writing Applications" href="index.html" />
-    <link rel="next" title="Monitoring channels" href="monitoring-channels.html" />
-    <link rel="prev" title="Control types and modes" href="control-types.html" /> 
+    <link rel="up" title="Master API" href="masters.html" />
+    <link rel="next" title="Outstation API" href="outstations.html" />
+    <link rel="prev" title="Receiving measurements" href="receiving-measurements.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,13 +37,14 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="monitoring-channels.html" title="Monitoring channels"
+          <a href="outstations.html" title="Outstation API"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="control-types.html" title="Control types and modes"
+          <a href="receiving-measurements.html" title="Receiving measurements"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Writing Applications</a> &raquo;</li> 
+          <li><a href="index.html" >Writing DNP3 Applications</a> &raquo;</li>
+          <li><a href="masters.html" accesskey="U">Master API</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -54,7 +55,8 @@
             
   <div class="section" id="making-control-requests">
 <h1>Making control requests<a class="headerlink" href="#making-control-requests" title="Permalink to this headline">¶</a></h1>
-<p>Application code can <em>issue</em> a control request using the <em>CommandProcessor</em> interface provided by the Master interface. You can learn about the different control types and operation modes in <a class="reference internal" href="control-types.html#control-types-and-modes"><em>Control types and modes</em></a></p>
+<p><strong>TODO - This section needs a rewrite for 2.0.x</strong></p>
+<p>Application code can <em>issue</em> a control request using the <em>CommandProcessor</em> interface provided by the Master interface. You can learn about the different control types and operation modes in <a class="reference internal" href="../mapping/control-types.html#control-types-and-modes"><em>Control types and modes</em></a></p>
 <div class="highlight-java"><div class="highlight"><pre><span class="c1">// Java</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CommandProcessor</span> <span class="o">{</span>
 
@@ -85,11 +87,11 @@
               <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="control-types.html"
-                        title="previous chapter">Control types and modes</a></p>
+  <p class="topless"><a href="receiving-measurements.html"
+                        title="previous chapter">Receiving measurements</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="monitoring-channels.html"
-                        title="next chapter">Monitoring channels</a></p>
+  <p class="topless"><a href="outstations.html"
+                        title="next chapter">Outstation API</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/applications/making-control-requests.txt"
@@ -119,18 +121,19 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="monitoring-channels.html" title="Monitoring channels"
+          <a href="outstations.html" title="Outstation API"
              >next</a> |</li>
         <li class="right" >
-          <a href="control-types.html" title="Control types and modes"
+          <a href="receiving-measurements.html" title="Receiving measurements"
              >previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Writing Applications</a> &raquo;</li> 
+          <li><a href="index.html" >Writing DNP3 Applications</a> &raquo;</li>
+          <li><a href="masters.html" >Master API</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

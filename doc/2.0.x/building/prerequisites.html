@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Prerequisites (all plaforms) &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    <title>Prerequisites &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,7 +26,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
     <link rel="up" title="Building" href="index.html" />
-    <link rel="next" title="Prerequisites on Linux" href="prerequisites-linux.html" />
+    <link rel="next" title="Linux Build" href="building-linux.html" />
     <link rel="prev" title="Building" href="index.html" /> 
   </head>
   <body>
@@ -37,7 +37,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="prerequisites-linux.html" title="Prerequisites on Linux"
+          <a href="building-linux.html" title="Linux Build"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Building"
@@ -52,26 +52,17 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="prerequisites-all-plaforms">
-<h1>Prerequisites (all plaforms)<a class="headerlink" href="#prerequisites-all-plaforms" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
 <p><strong>C++11</strong></p>
 <p>The core library is written in a lightweight subset of C++11. This makes the code more compact, easier to understand, and easier to maintain.
 You&#8217;ll need a C++11 compiler like G++, Clang, or MSVC++.</p>
 <p><strong>Standalone ASIO</strong></p>
-<p>You&#8217;ll need the header-only (non-BOOST) version of <cite>ASIO &lt;http://think-async.com/&gt;</cite> &gt;= 1.10.2.
-Create an environment variable called ASIO_HOME and point it to your install location if it isn&#8217;t installed into your build path automatically.</p>
+<p>You&#8217;ll need the header-only (non-BOOST) version of <a class="reference external" href="http://think-async.com/">ASIO</a> &gt;= 1.10.2.
+Create an environment variable called ASIO_HOME and point it to the include sudirectory of the ASIO distribution, e.g.:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">ASIO_HOME</span> <span class="o">=</span> &lt;path to <span class="s1">&#39;include&#39;</span> directory of ASIO&gt;
 </pre></div>
 </div>
-<p><strong>Java (optional)</strong></p>
-<p>If you want to build the java bindings shared library you need at least JDK 1.6. For either build system to find the jni headers you need to define the JAVA_HOME environment variable:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">JAVA_HOME</span> <span class="o">=</span> &lt;root directory of the jdk installation&gt;
-</pre></div>
-</div>
-<p>On windows this might be something like:</p>
-<p><strong>C:\Program Files (x86)\Java\jdk1.xxx</strong></p>
-<p>On linux this might be something like:</p>
-<p><strong>/usr/lib/jvm/java-7-oracle</strong></p>
 </div>
 
 
@@ -87,8 +78,8 @@ Create an environment variable called ASIO_HOME and point it to your install loc
   <p class="topless"><a href="index.html"
                         title="previous chapter">Building</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="prerequisites-linux.html"
-                        title="next chapter">Prerequisites on Linux</a></p>
+  <p class="topless"><a href="building-linux.html"
+                        title="next chapter">Linux Build</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/building/prerequisites.txt"
@@ -118,7 +109,7 @@ Create an environment variable called ASIO_HOME and point it to your install loc
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="prerequisites-linux.html" title="Prerequisites on Linux"
+          <a href="building-linux.html" title="Linux Build"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Building"
@@ -129,7 +120,7 @@ Create an environment variable called ASIO_HOME and point it to your install loc
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

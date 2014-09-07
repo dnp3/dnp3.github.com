@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
-    <link rel="up" title="Writing Applications" href="index.html" />
-    <link rel="next" title="Making control requests" href="making-control-requests.html" />
-    <link rel="prev" title="Loading measurements" href="loading-measurements.html" /> 
+    <link rel="up" title="How opendnp3 maps to DNP3 objects" href="index.html" />
+    <link rel="next" title="Writing DNP3 Applications" href="../applications/index.html" />
+    <link rel="prev" title="How opendnp3 maps to DNP3 objects" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,13 +37,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="making-control-requests.html" title="Making control requests"
+          <a href="../applications/index.html" title="Writing DNP3 Applications"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="loading-measurements.html" title="Loading measurements"
+          <a href="index.html" title="How opendnp3 maps to DNP3 objects"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Writing Applications</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">How opendnp3 maps to DNP3 objects</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,10 +60,10 @@
 <ul class="simple">
 <li>AnalogOutputInt32 - 32-bit signed integer, Group 41 Variation 1</li>
 <li>AnalogOutputInt16 - 16-bit signed integer, Group 41 Variation 2</li>
-<li>AnalogOutputFloat32 - 32-bit single presicion floating point, Group 41 Variation 3</li>
-<li>AnalogOutputDouble64 - 64-bit double presicion floating point, Group 41 Variation 4</li>
+<li>AnalogOutputFloat32 - 32-bit single precision floating point, Group 41 Variation 3</li>
+<li>AnalogOutputDouble64 - 64-bit double precision floating point, Group 41 Variation 4</li>
 </ul>
-<p>Independent of the control type you are requesting, is the mode of operation. DNP3 provdes 3 modes of operation:</p>
+<p>Independent of the control type you are requesting, is the mode of operation. DNP3 provides 3 modes of operation:</p>
 <ul class="simple">
 <li>SelectBeforeOperate (SBO) - In this mode, the master sends two separate requests to the outstation with a SELECT function code followed by an OPERATE function code and identical data payloads. The outstation responds to each request. The master waits for the select response before operating. This is a safety precaution to avoid erroneous operations. It is somewhat antiquated over today&#8217;s IP networks, but is still quite common in production.</li>
 <li>DirectOperate (DO) - In this mode, the master sends a single DIRECT_OPERATE request to the outstation and the control is performed immediately. The outstation responds to the request with a status enumeration.</li>
@@ -81,14 +81,14 @@
               <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="loading-measurements.html"
-                        title="previous chapter">Loading measurements</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">How opendnp3 maps to DNP3 objects</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="making-control-requests.html"
-                        title="next chapter">Making control requests</a></p>
+  <p class="topless"><a href="../applications/index.html"
+                        title="next chapter">Writing DNP3 Applications</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/applications/control-types.txt"
+    <li><a href="../_sources/mapping/control-types.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -115,18 +115,18 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="making-control-requests.html" title="Making control requests"
+          <a href="../applications/index.html" title="Writing DNP3 Applications"
              >next</a> |</li>
         <li class="right" >
-          <a href="loading-measurements.html" title="Loading measurements"
+          <a href="index.html" title="How opendnp3 maps to DNP3 objects"
              >previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Writing Applications</a> &raquo;</li> 
+          <li><a href="index.html" >How opendnp3 maps to DNP3 objects</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

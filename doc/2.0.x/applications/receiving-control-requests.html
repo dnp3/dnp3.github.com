@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Handling control requests &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="up" title="Outstation API" href="outstations.html" />
+    <link rel="next" title="Platform Abstraction Layer (PAL)" href="../pal-impl/index.html" />
+    <link rel="prev" title="Loading measurements" href="loading-measurements.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../pal-impl/index.html" title="Platform Abstraction Layer (PAL)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="loading-measurements.html" title="Loading measurements"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Writing DNP3 Applications</a> &raquo;</li>
+          <li><a href="outstations.html" accesskey="U">Outstation API</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="handling-control-requests">
+<h1>Handling control requests<a class="headerlink" href="#handling-control-requests" title="Permalink to this headline">¶</a></h1>
+<p><strong>TODO - This section needs a rewrite for 2.0.x</strong></p>
+<p>By now you&#8217;ve probably noticed that I haven&#8217;t described what the <em>SuccessCommandHandler::Inst()</em> call is all about. This parameter is the call back interface that the application must provide to handle control requests from a master. The singleton above simply silently acknowledges all requests. The instance provided by your application will do something more interesting by implementing the <em>ICommandHandler</em> interface. If you are unfamiliar with control types and modes of operation you should read <a class="reference internal" href="../mapping/control-types.html#control-types-and-modes"><em>Control types and modes</em></a></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">// Java</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CommandHandler</span> <span class="o">{</span>
+
+    <span class="n">CommandStatus</span> <span class="nf">select</span><span class="o">(</span><span class="n">ControlRelayOutputBlock</span> <span class="n">command</span><span class="o">,</span> <span class="kt">long</span> <span class="n">index</span><span class="o">);</span>
+    <span class="n">CommandStatus</span> <span class="nf">select</span><span class="o">(</span><span class="n">AnalogOutputInt32</span> <span class="n">command</span><span class="o">,</span> <span class="kt">long</span> <span class="n">index</span><span class="o">);</span>
+
+    <span class="c1">// .. more signatures follow</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The interface has a method signature for each mode of operation and control type pair. This allows you to individually decide how and what to support in your outstation. It may seem like a lot of work, but just remember that the 4 AnalogOutput types all refer to the same output, just with a different variation from the master.</p>
+<p><strong>How to handle SELECT</strong></p>
+<p>You may have noticed the select signatures.  The outstation stack needs to know what indices you will handle if a valid Select-before-Operate (SBO) sequence occurs when it receives the SELECT request. You shouldn&#8217;t perform the control in this callback, just do all the validation you would normally do before. If you would handle the control on that index if the function code was an Operate, then return SUCCESS. In rare cases, some outstations might prepare to do a control, i.e. if something needs to be warmed up just in case a valid operate follows the select.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="loading-measurements.html"
+                        title="previous chapter">Loading measurements</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../pal-impl/index.html"
+                        title="next chapter">Platform Abstraction Layer (PAL)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/applications/receiving-control-requests.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../pal-impl/index.html" title="Platform Abstraction Layer (PAL)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="loading-measurements.html" title="Loading measurements"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Writing DNP3 Applications</a> &raquo;</li>
+          <li><a href="outstations.html" >Outstation API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

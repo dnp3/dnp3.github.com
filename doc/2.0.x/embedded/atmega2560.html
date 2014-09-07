@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Emphasis on testing &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    <title>Atmega 2560 &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
-    <link rel="up" title="What is opendnp3?" href="index.html" />
-    <link rel="next" title="Components" href="../layout/index.html" />
-    <link rel="prev" title="Event-driven scalability" href="scalable.html" /> 
+    <link rel="up" title="Embedded Systems" href="index.html" />
+    <link rel="next" title="Contributing" href="../contributing/index.html" />
+    <link rel="prev" title="Embedded Linux" href="linux.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,13 +37,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../layout/index.html" title="Components"
+          <a href="../contributing/index.html" title="Contributing"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="scalable.html" title="Event-driven scalability"
+          <a href="linux.html" title="Embedded Linux"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">What is opendnp3?</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">Embedded Systems</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -52,16 +52,28 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="emphasis-on-testing">
-<span id="testing-label"></span><h1>Emphasis on testing<a class="headerlink" href="#emphasis-on-testing" title="Permalink to this headline">¶</a></h1>
-<p>Opendnp3 aims to be a correct, robust, secure, and conformant implementation of the standard. To meet these goals, we do the following types of testing an analysis.</p>
+  <div class="section" id="atmega-2560">
+<h1>Atmega 2560<a class="headerlink" href="#atmega-2560" title="Permalink to this headline">¶</a></h1>
+<p>The atmega 2560 chipset is an 8-bit AVR microcontroller. It has very limited resources:</p>
+<div class="highlight-bash"><div class="highlight"><pre>SRAM <span class="o">(</span>Kbytes<span class="o">)</span>:  8
+Flash <span class="o">(</span>Kbytes<span class="o">)</span>: 256Kbytes
+Max. Operating Freq. <span class="o">(</span>MHz<span class="o">)</span>:  16 MHz
+</pre></div>
+</div>
+<p>The chipset is used in the popular <a class="reference external" href="http://arduino.cc/en/Main/arduinoBoardMega">Arduino Mega</a> hobby board. We do not use the Arduino toolchain or <em>Wiring</em> programming language in this example. The Arduino Mega is just a convenient evaluation board for testing opendnp3.</p>
+<p>The example project is located in the <strong>./embedded/atmelavr</strong> subdirectory of the distribution. Atmel Studio &gt;= 6.2 is required to open and compile the library. There are no other dependencies. You will also need a programmer like the AVRISP mkII to program the board.</p>
+<p>The program is a good example of implementing the PAL for a microntroller.</p>
 <ul class="simple">
-<li><strong>Unit testing</strong> is the cornerstone of opendnp3. We follow the &#8220;write the test to prove the bug exists&#8221; approach to debugging and regression prevention. The test suite has over 400 individual tests for the core libraries.</li>
-<li><strong>Conformance testing</strong> is a type of functional testing used to ensure we are compliant to the DNP3 standard. We have our own tools (external in Scala) that implement the test proceedures and we use at least one third-part test harness prior to every major release.</li>
-<li><strong>Static analysis</strong> is an important technique for finding  defects in non-executing source code. We use Coverity Scan (free for OSS) and the Clang static analyzer to clean up any issues before releases.  We have also done occasional spot checks with PVS Studio.</li>
-<li><strong>Fuzzing</strong> is an essential technique for finding input validation flaws.  We have reported more <a class="reference external" href="http://www.automatak.com/robus/">defects</a> in DNP3 implementations than any research group. The <a class="reference external" href="http://www.automatak.com/aegis/">Aegis Fuzzer</a> demonstrated the vulnerability of existing DNP3 implementations. We have also done spot checks with the tools from Codenomicon and Wurldtech.</li>
-<li><strong>Dynamic Analysis</strong> is used to monitor running programs for defects. We use Valgrind in conjunction with our unit test suite and fuzzer before every release.</li>
+<li>Level 2 (nearly level 3) outstation with unsolicited support</li>
+<li>Dynamic memory allocation only during initialization</li>
+<li>Interrupt-driven hardware timer with a 10ms period to multiplexes the software timers</li>
+<li>Interrupt-driven non-blocking USART tx/tx</li>
+<li>Makes use of the AVR&#8217;s light sleep mode between interrupts</li>
+<li>Max APDU rx/t/x sizes turned down to 249 bytes</li>
+<li>Logging stripped to reduce size (-DOPENPAL_STRIP_LOGGING)</li>
 </ul>
+<p>The demo doesn&#8217;t do very much. It assigns a toggling binary value to one of five binary inputs every few seconds and reports the free amount of RAM.</p>
+<p>You can also send LATCH_ON / LATCH_OFF control relay output block to index 0 and the board will set the PORTB LED.</p>
 </div>
 
 
@@ -74,14 +86,14 @@
               <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="scalable.html"
-                        title="previous chapter">Event-driven scalability</a></p>
+  <p class="topless"><a href="linux.html"
+                        title="previous chapter">Embedded Linux</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../layout/index.html"
-                        title="next chapter">Components</a></p>
+  <p class="topless"><a href="../contributing/index.html"
+                        title="next chapter">Contributing</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/opendnp3-intro/testing.txt"
+    <li><a href="../_sources/embedded/atmega2560.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -108,13 +120,13 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../layout/index.html" title="Components"
+          <a href="../contributing/index.html" title="Contributing"
              >next</a> |</li>
         <li class="right" >
-          <a href="scalable.html" title="Event-driven scalability"
+          <a href="linux.html" title="Embedded Linux"
              >previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >What is opendnp3?</a> &raquo;</li> 
+          <li><a href="index.html" >Embedded Systems</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

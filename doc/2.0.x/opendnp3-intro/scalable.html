@@ -27,7 +27,7 @@
     <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
     <link rel="up" title="What is opendnp3?" href="index.html" />
     <link rel="next" title="Emphasis on testing" href="testing.html" />
-    <link rel="prev" title="Supported platforms" href="platforms.html" /> 
+    <link rel="prev" title="Level Subset Support" href="subsets.html" /> 
   </head>
   <body>
     <div class="related">
@@ -40,7 +40,7 @@
           <a href="testing.html" title="Emphasis on testing"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="platforms.html" title="Supported platforms"
+          <a href="subsets.html" title="Level Subset Support"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">What is opendnp3?</a> &raquo;</li> 
@@ -66,15 +66,7 @@ Opendnp3 uses 100% event based I/O taking advantage of your OS&#8217;s best sock
 This means that your CPU doesn&#8217;t churn while your program is idle and you don&#8217;t have to make a trade-off between latency and CPU usage.
 Opendnp3 achieves this efficiency by using <a class="reference external" href="http://think-async.com/">ASIO</a> to handle all timers and I/O requests.
 If you&#8217;re curious how your specific platform implements the asynchronous I/O have a look <a class="reference external" href="http://think-async.com/Asio/asio-1.10.2/doc/asio/using.html">here</a>.</p>
-<p>One way to understand why this is so important is to consider how your computer does work concurrently.
-You can only truly do as many things concurrently as you have threads or cores.
-Your operating system must then fake concurrency for the extra threads by multi-tasking using interrupts to force switches between them.
-Many active threads leads to excessive <a class="reference external" href="http://en.wikipedia.org/wiki/Context_switch">context switching</a> and memory usage.
-A more efficient methodology is to only use the number of threads that your system can actually run concurrently, aka a thread pool sized to the native concurrency of your system.
-The magic trick is then to NEVER BLOCK any of them so that they&#8217;re all always doing useful work as fast as they can.
-This leads to efficient CPU utilization, lower memory usage, and lower average latency for servicing requests under load.
-Opendnp3 uses 100% non-blocking I/O under the hood.
-That&#8217;s why it scales so well. Many systems in the industry have a hard time bringing up and maintaining more than a couple hundred socket connections.
+<p>Many SCADA masters have a hard time bringing up and maintaining more than a couple hundred socket connections.
 Opendnp3 easily scales right up to the operating system limit, all while using a small amount of CPU and RAM.</p>
 </div>
 
@@ -88,8 +80,8 @@ Opendnp3 easily scales right up to the operating system limit, all while using a
               <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="platforms.html"
-                        title="previous chapter">Supported platforms</a></p>
+  <p class="topless"><a href="subsets.html"
+                        title="previous chapter">Level Subset Support</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="testing.html"
                         title="next chapter">Emphasis on testing</a></p>
@@ -125,7 +117,7 @@ Opendnp3 easily scales right up to the operating system limit, all while using a
           <a href="testing.html" title="Emphasis on testing"
              >next</a> |</li>
         <li class="right" >
-          <a href="platforms.html" title="Supported platforms"
+          <a href="subsets.html" title="Level Subset Support"
              >previous</a> |</li>
         <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
           <li><a href="index.html" >What is opendnp3?</a> &raquo;</li> 
@@ -133,7 +125,7 @@ Opendnp3 easily scales right up to the operating system limit, all while using a
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

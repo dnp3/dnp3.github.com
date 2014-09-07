@@ -26,7 +26,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
     <link rel="up" title="What is opendnp3?" href="index.html" />
-    <link rel="next" title="Event-driven scalability" href="scalable.html" />
+    <link rel="next" title="Level Subset Support" href="subsets.html" />
     <link rel="prev" title="What is opendnp3?" href="index.html" /> 
   </head>
   <body>
@@ -37,7 +37,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="scalable.html" title="Event-driven scalability"
+          <a href="subsets.html" title="Level Subset Support"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="What is opendnp3?"
@@ -67,24 +67,7 @@
 The example applications and unit tests will run on the Raspberry Pi and Beagle Bone Black.
 These platforms are overkill, however, as the library will run on much more limited ARM-linux systems.</p>
 <p><strong>Microcontrollers without an OS</strong></p>
-<p>If you are willing to write a Platform Abstraction Layer (PAL), opendnp3 will run on a microcontroller.
-The project includes Atmel Studio solution demos for the following targets and attributes.</p>
-<ul class="simple">
-<li>Arduino Mega (Atmega2560)<ul>
-<li>Uses ~50% of progmem and ~50% SRAM (pre-execution)</li>
-<li>APDU buffer size reduced to 249 bytes</li>
-<li>logging stripped</li>
-<li>DNP3 over serial only</li>
-</ul>
-</li>
-<li>Arduino Due (AT91SAM3X8E)<ul>
-<li>Uses ~30% of progmem and &lt; 10% of the 96KB SRAM</li>
-<li>Full APDU buffer sizes (2K)</li>
-<li>logging intact and output to 2nd USART</li>
-<li>DNP3 over serial only</li>
-</ul>
-</li>
-</ul>
+<p>If you are willing to write a Platform Abstraction Layer (PAL, sometimes called a HAL elsewhere), opendnp3 might run on a microcontroller. Check out the <em>embedded</em> section for examples.</p>
 </div>
 
 
@@ -100,8 +83,8 @@ The project includes Atmel Studio solution demos for the following targets and a
   <p class="topless"><a href="index.html"
                         title="previous chapter">What is opendnp3?</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="scalable.html"
-                        title="next chapter">Event-driven scalability</a></p>
+  <p class="topless"><a href="subsets.html"
+                        title="next chapter">Level Subset Support</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/opendnp3-intro/platforms.txt"
@@ -131,7 +114,7 @@ The project includes Atmel Studio solution demos for the following targets and a
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="scalable.html" title="Event-driven scalability"
+          <a href="subsets.html" title="Level Subset Support"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="What is opendnp3?"
@@ -142,7 +125,7 @@ The project includes Atmel Studio solution demos for the following targets and a
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

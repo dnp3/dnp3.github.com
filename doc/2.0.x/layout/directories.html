@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Diretory structure &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    <title>Directory structure &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -52,8 +52,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="diretory-structure">
-<h1>Diretory structure<a class="headerlink" href="#diretory-structure" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="directory-structure">
+<h1>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h1>
 <p><strong>The main directories are organized by language and then by category</strong></p>
 <div class="highlight-java"><div class="highlight"><pre><span class="o">/</span><span class="n">cpp</span>                     <span class="c1">// root for all C++ source code</span>
   <span class="o">/</span><span class="n">libs</span>
@@ -68,7 +68,7 @@
     <span class="o">/</span><span class="n">openpaltests</span>        <span class="c1">// tests cases for openpal</span>
     <span class="o">/</span><span class="n">opendnp3tests</span>       <span class="c1">// test cases for opendnp3, asiopal, and asiodnp3</span>
     <span class="o">/</span><span class="n">apdufuzzer</span>          <span class="c1">// an &#39;in-memory&#39; fuzzer for the APDU parser</span>
-    <span class="o">/</span><span class="k">catch</span>               <span class="c1">// a redistribution of the Catch testing library</span>
+    <span class="o">/</span><span class="k">catch</span>               <span class="c1">// a redistribution of the Catch C++ unit testing framework</span>
 
 <span class="o">/</span><span class="n">dotnet</span>                  <span class="c1">// Microsoft .NET wrappers and applications</span>
   <span class="o">/</span><span class="n">bindings</span>
@@ -77,9 +77,11 @@
   <span class="o">/</span><span class="n">examples</span>
     <span class="o">/</span><span class="n">master</span>              <span class="c1">// example master application in C#</span>
     <span class="o">/</span><span class="n">outstation</span>          <span class="c1">// example outstation application in C#</span>
-  <span class="o">/</span><span class="n">simulator</span>
-    <span class="o">/</span><span class="n">Simulator</span>           <span class="c1">// Graphical Winform DNP3 Test Harness</span>
-    <span class="o">/</span><span class="n">SimulatorAPI</span>        <span class="c1">// API for writing simulator modules</span>
+  <span class="o">/</span><span class="n">Simulator</span>             <span class="c1">// parent directory for the graphical simulator</span>
+    <span class="o">/...</span>                 <span class="c1">// subdirectories of the simulator component undocumted at this time</span>
+
+ <span class="o">/</span><span class="n">embedded</span>               <span class="c1">// Examples of microcontroller ports</span>
+   <span class="o">/</span><span class="n">atmelavr</span>             <span class="c1">// Outstation on atmega2560 (Arduino Mega)</span>
 </pre></div>
 </div>
 <p><strong>other directories</strong></p>
@@ -146,7 +148,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Automatak LLC.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

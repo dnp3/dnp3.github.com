@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Receiving measurements &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="up" title="Master API" href="masters.html" />
+    <link rel="next" title="Making control requests" href="making-control-requests.html" />
+    <link rel="prev" title="Master API" href="masters.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="making-control-requests.html" title="Making control requests"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="masters.html" title="Master API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Writing DNP3 Applications</a> &raquo;</li>
+          <li><a href="masters.html" accesskey="U">Master API</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="receiving-measurements">
+<h1>Receiving measurements<a class="headerlink" href="#receiving-measurements" title="Permalink to this headline">¶</a></h1>
+<p><strong>Seqence of Events (SOE)</strong></p>
+<p>The primary purpose of DNP3 is deliver a sequence of events (measurement history) from outstation to master. When creating a master, you must supply an instance of the <em>ISOEHandler</em> interface. The <em>PrintingSOEHandler</em> singleton provided above simply prints all measurements received to the console. The instance provided by your application will do something more interesting like loading to a database, handing off to a protocol translation routine, or simply logging to file.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ISOEHandler</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ITransactable</span>
+<span class="p">{</span>
+  <span class="nl">public:</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">LoadStatic</span><span class="p">(</span><span class="k">const</span> <span class="n">IterableBuffer</span><span class="o">&lt;</span><span class="n">IndexedValue</span><span class="o">&lt;</span><span class="n">Binary</span><span class="p">,</span> <span class="kt">uint16_t</span><span class="o">&gt;&gt;&amp;</span> <span class="n">meas</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">LoadStatic</span><span class="p">(</span><span class="k">const</span> <span class="n">IterableBuffer</span><span class="o">&lt;</span><span class="n">IndexedValue</span><span class="o">&lt;</span><span class="n">DoubleBitBinary</span><span class="p">,</span> <span class="kt">uint16_t</span><span class="o">&gt;&gt;&amp;</span> <span class="n">meas</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="c1">// more types follow ...</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">LoadEvent</span><span class="p">(</span><span class="k">const</span> <span class="n">IterableBuffer</span><span class="o">&lt;</span><span class="n">IndexedValue</span><span class="o">&lt;</span><span class="n">Binary</span><span class="p">,</span> <span class="kt">uint16_t</span><span class="o">&gt;&gt;&amp;</span> <span class="n">meas</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">LoadEvent</span><span class="p">(</span><span class="k">const</span> <span class="n">IterableBuffer</span><span class="o">&lt;</span><span class="n">IndexedValue</span><span class="o">&lt;</span><span class="n">DoubleBitBinary</span><span class="p">,</span> <span class="kt">uint16_t</span><span class="o">&gt;&gt;&amp;</span> <span class="n">meas</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="c1">// more types follow ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The master will call ITransactable::Start() prior to any calls to LoadX(X) and will call ITransactable::End() last. The master does this for each application layer fragment containing measurement data received from the outstation, allowing you to individually handle them. If the master does an integrity poll and receives a 4 fragment response, the SOE handler will be called 4 times with a complete Start()/Load(X)/End() cycle.</p>
+<p>It is important to remember that while the master is calling you back with measurement updates, it can&#8217;t do any other work like react to user requests (e.g. controls). It&#8217;s OK to do a little work like translating the data types, etc during the callbacks, but it&#8217;s best to offload any blocking I/O like writing to a database to another thread.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="masters.html"
+                        title="previous chapter">Master API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="making-control-requests.html"
+                        title="next chapter">Making control requests</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/applications/receiving-measurements.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="making-control-requests.html" title="Making control requests"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="masters.html" title="Master API"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Writing DNP3 Applications</a> &raquo;</li>
+          <li><a href="masters.html" >Master API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

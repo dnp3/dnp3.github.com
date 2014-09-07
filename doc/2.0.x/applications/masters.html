@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Master API &mdash; Definitive Guide to opendnp3 2.0.0-RC1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Definitive Guide to opendnp3 2.0.0-RC1 documentation" href="../index.html" />
+    <link rel="up" title="Writing DNP3 Applications" href="index.html" />
+    <link rel="next" title="Receiving measurements" href="receiving-measurements.html" />
+    <link rel="prev" title="Monitoring channels" href="monitoring-channels.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="receiving-measurements.html" title="Receiving measurements"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="monitoring-channels.html" title="Monitoring channels"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Writing DNP3 Applications</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="master-api">
+<h1>Master API<a class="headerlink" href="#master-api" title="Permalink to this headline">¶</a></h1>
+<p>A master in Opendnp3 is a component that communicates with a single outstation via a communication channel. You may see this term used in other places to refer to a collection of such components communicating with multiple outstations. When more than one master is bound to a single communication channel, it is called a multidrop configuration. This refers to the way in which an RS-485 serial network is chained from device to device. Opendnp3 will let you add multiple masters / outstations to any communication channel, regardless of he underlying transport. You could even bind a master to a TCP server and reverse the normal connection direction. Just like the honey badger, Opendnp3 doesn&#8217;t care.</p>
+<p>To add a master to a communication channel you call the <em>AddMaster</em> method on the channel interface:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">MasterStackConfig</span> <span class="n">stackConfig</span><span class="p">;</span>  <span class="c1">// initialized with defaults</span>
+
+<span class="c1">// you can optionally override these defaults like setting the application layer response timeout ...</span>
+<span class="n">stackConfig</span><span class="p">.</span><span class="n">master</span><span class="p">.</span><span class="n">responseTimeout</span> <span class="o">=</span> <span class="n">TimeDuration</span><span class="o">::</span><span class="n">Seconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">// ... or you can override the default link layer settings</span>
+<span class="n">stackConfig</span><span class="p">.</span><span class="n">link</span><span class="p">.</span><span class="n">LocalAddr</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">stackConfig</span><span class="p">.</span><span class="n">link</span><span class="p">.</span><span class="n">RemoteAddr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="n">IMaster</span><span class="o">*</span> <span class="n">pMaster</span> <span class="o">=</span> <span class="n">pClient</span><span class="o">-&gt;</span><span class="n">AddMaster</span><span class="p">(</span>
+                        <span class="s">&quot;master&quot;</span><span class="p">,</span>                        <span class="c1">// alias for logging</span>
+                        <span class="n">PrintingSOEHandler</span><span class="o">::</span><span class="n">Inst</span><span class="p">(),</span>      <span class="c1">// callback for data processing, this single just prints to measurements to console</span>
+                        <span class="n">asiopal</span><span class="o">::</span><span class="n">UTCTimeSource</span><span class="o">::</span><span class="n">Inst</span><span class="p">(),</span>  <span class="c1">// UTC time source for time synchronization, this one just pulls from system clock</span>
+                        <span class="n">stackConfig</span>                      <span class="c1">// stack configuration</span>
+                    <span class="p">);</span>
+</pre></div>
+</div>
+<p>Just the same as when we created a channel, we provide an alias for the logger and a log level. The <em>MasterStackConfig</em> instance provides all of the configuration. It defines the default master behavior. A description of what each parameter does is provided in the code documentation for the class. The method returns an interface that represents the master.  It contains sub-interfaces for doing things like issuing controls.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="receiving-measurements.html">Receiving measurements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making-control-requests.html">Making control requests</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/automatak_logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="monitoring-channels.html"
+                        title="previous chapter">Monitoring channels</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="receiving-measurements.html"
+                        title="next chapter">Receiving measurements</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/applications/masters.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="receiving-measurements.html" title="Receiving measurements"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="monitoring-channels.html" title="Monitoring channels"
+             >previous</a> |</li>
+        <li><a href="../index.html">Definitive Guide to opendnp3 2.0.0-RC1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Writing DNP3 Applications</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Automatak LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
