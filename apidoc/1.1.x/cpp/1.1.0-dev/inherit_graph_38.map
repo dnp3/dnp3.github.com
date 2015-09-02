@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$dd/dc8/structopendnp3_1_1_point_record.html" title="opendnp3::PointRecord" alt="" coords="7,5,175,35"/>
-<area shape="rect" id="node3" href="$df/d53/structopendnp3_1_1_event_point_record.html" title="Configuration type that has a PointClass member." alt="" coords="224,5,429,35"/>
-<area shape="rect" id="node5" href="$d5/de5/structopendnp3_1_1_deadband_point_record.html" title="DeadbandPointRecords have a parameter for controlling eventing tolerances." alt="" coords="477,5,712,35"/>
-</map>

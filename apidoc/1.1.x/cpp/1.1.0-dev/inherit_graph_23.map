@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$d7/d3e/classopendnp3_1_1_i_command_handler.html" title="Interface used to dispatch SELECT / OPERATE / DIRECT OPERATE (Binary/Analog output) from the outstati..." alt="" coords="7,5,220,35"/>
-<area shape="rect" id="node3" href="$da/d39/classopendnp3_1_1_simple_command_handler.html" title="Mock ICommandHandler used for examples and demos." alt="" coords="271,5,524,35"/>
-<area shape="rect" id="node5" href="$d9/dea/classopendnp3_1_1_success_command_handler.html" title="opendnp3::SuccessCommandHandler" alt="" coords="573,5,837,35"/>
-</map>

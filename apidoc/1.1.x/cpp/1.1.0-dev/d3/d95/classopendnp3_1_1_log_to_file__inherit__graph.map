@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$df/d97/classopendnp3_1_1_log_entry_circular_buffer.html" title="Circular buffer used to store log messages temporarily, i.e." alt="" coords="151,227,385,520"/>
-<area shape="rect" id="node4" href="$d1/d0b/classopendnp3_1_1_i_log_base.html" title="Callback interface for log messages." alt="" coords="5,41,157,143"/>
-<area shape="rect" id="node6" href="$d9/dde/classopendnp3_1_1_subject_base.html" title="Helper class designed to be used with private inheritance." alt="" coords="181,6,355,178"/>
-<area shape="rect" id="node8" href="$df/d25/classopendnp3_1_1_uncopyable.html" title="Inherited classes will not have default copy/assignment." alt="" coords="379,23,547,161"/>
-<area shape="rect" id="node10" href="$d9/d9d/classopendnp3_1_1_threadable.html" title="Objects inherited from this class will implement a Run() function." alt="" coords="409,244,575,503"/>
-</map>

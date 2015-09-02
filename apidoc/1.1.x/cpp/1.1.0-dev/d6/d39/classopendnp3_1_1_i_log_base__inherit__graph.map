@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$df/d97/classopendnp3_1_1_log_entry_circular_buffer.html" title="Circular buffer used to store log messages temporarily, i.e." alt="" coords="5,157,240,451"/>
-<area shape="rect" id="node7" href="$d8/df6/classopendnp3_1_1_log_to_stdio.html" title="Singleton class that prints all log messages to the console." alt="" coords="264,209,427,399"/>
-<area shape="rect" id="node5" href="$d6/d54/classopendnp3_1_1_log_to_file.html" title="Logging backend that uses a buffer and thread to do a non&#45;blocking writeof all the log entries to a t..." alt="" coords="48,499,197,723"/>
-</map>

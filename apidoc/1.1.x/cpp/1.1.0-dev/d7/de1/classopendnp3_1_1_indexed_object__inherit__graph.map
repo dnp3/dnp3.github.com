@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node5" href="$d2/d89/classopendnp3_1_1_bitfield_object.html" title="{opendnp3::BitfieldObject\n||+ GetSize()\l+ GetType()\l+ Read()\l+ Write()\l+ Zero()\l+ StaticRead()\l+ StaticWrite()\l}" alt="" coords="5,411,184,600"/>
-<area shape="rect" id="node7" href="$d5/de7/classopendnp3_1_1_fixed_object.html" title="{opendnp3::FixedObject\n||+ GetSize()\l+ GetType()\l}" alt="" coords="208,454,373,557"/>
-<area shape="rect" id="node13" href="$de/ddc/classopendnp3_1_1_size_by_variation_object.html" title="Represents a byte stream object whose size is encoded by its variation." alt="" coords="397,445,632,565"/>
-<area shape="rect" id="node2" href="$dc/d45/classopendnp3_1_1_object_base.html" title="A class that represents a very generic DNP3 object." alt="" coords="208,5,373,229"/>
-<area shape="rect" id="node9" href="$d1/d73/classopendnp3_1_1_stream_object.html" title="{opendnp3::StreamObject\&lt; T \&gt;\n||+ HasQuality()\l+ Read()\l+ Write()\l}" alt="" coords="181,648,400,768"/>
-<area shape="rect" id="node11" href="$d4/d59/classopendnp3_1_1_command_object.html" title="{opendnp3::CommandObject\&lt; T \&gt;\n||+ GetValueBytes()\l}" alt="" coords="172,816,409,901"/>
-</map>

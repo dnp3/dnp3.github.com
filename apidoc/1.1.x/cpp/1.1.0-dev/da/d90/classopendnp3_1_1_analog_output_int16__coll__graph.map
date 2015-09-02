@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$de/d0e/classopendnp3_1_1_analog_output.html" title="{opendnp3::AnalogOutput\&lt; int16_t \&gt;\n|+ mStatus\l# mValue\l|+ AnalogOutput()\l+ GetValue()\l+ ToString()\l}" alt="" coords="93,363,349,501"/>
-<area shape="rect" id="node8" href="$de/d0e/classopendnp3_1_1_analog_output.html" title="The object to represent a setpoint request from the master." alt="" coords="112,158,331,295"/>
-<area shape="rect" id="node6" href="$d2/d54/classint16__t.html" title="{int16_t\n||}" alt="" coords="355,184,421,269"/>
-</map>

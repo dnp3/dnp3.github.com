@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$da/d78/_d_n_p3_manager_8h.html" title="cpp/include/opendnp3/DNP3Manager.h" alt="" coords="5,83,275,112"/>
-<area shape="rect" id="node5" href="$de/d13/_i_stack_8h.html" title="cpp/include/opendnp3/IStack.h" alt="" coords="299,83,515,112"/>
-<area shape="rect" id="node7" href="$d7/d59/_i_master_8h.html" title="cpp/include/opendnp3/IMaster.h" alt="" coords="35,160,259,189"/>
-<area shape="rect" id="node9" href="$d7/dc5/_i_outstation_8h.html" title="cpp/include/opendnp3/IOutstation.h" alt="" coords="283,160,531,189"/>
-<area shape="rect" id="node11" href="$d9/da3/_i_vto_endpoint_8h.html" title="cpp/include/opendnp3/IVtoEndpoint.h" alt="" coords="555,160,813,189"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$d1/d0b/classopendnp3_1_1_i_log_base.html" title="Callback interface for log messages." alt="" coords="17,112,169,141"/>
-<area shape="rect" id="node3" href="$df/d97/classopendnp3_1_1_log_entry_circular_buffer.html" title="Circular buffer used to store log messages temporarily, i.e." alt="" coords="231,59,465,88"/>
-<area shape="rect" id="node7" href="$d8/df6/classopendnp3_1_1_log_to_stdio.html" title="Singleton class that prints all log messages to the console." alt="" coords="267,112,429,141"/>
-<area shape="rect" id="node5" href="$d6/d54/classopendnp3_1_1_log_to_file.html" title="Logging backend that uses a buffer and thread to do a non&#45;blocking writeof all the log entries to a t..." alt="" coords="516,112,665,141"/>
-<area shape="rect" id="node8" href="$d9/dde/classopendnp3_1_1_subject_base.html" title="Helper class designed to be used with private inheritance." alt="" coords="7,5,180,35"/>
-<area shape="rect" id="node10" href="$d9/d9d/classopendnp3_1_1_threadable.html" title="Objects inherited from this class will implement a Run() function." alt="" coords="265,165,431,195"/>
-<area shape="rect" id="node12" href="$df/d25/classopendnp3_1_1_uncopyable.html" title="Inherited classes will not have default copy/assignment." alt="" coords="9,59,177,88"/>
-</map>

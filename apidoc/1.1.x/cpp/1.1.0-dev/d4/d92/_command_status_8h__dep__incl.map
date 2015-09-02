@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$da/dc4/_analog_output_8h.html" title="cpp/include/opendnp3/AnalogOutput.h" alt="" coords="365,83,632,112"/>
-<area shape="rect" id="node11" href="$d1/d02/_command_response_8h.html" title="cpp/include/opendnp3/CommandResponse.h" alt="" coords="656,83,963,112"/>
-<area shape="rect" id="node14" href="$df/dfe/_control_relay_output_block_8h.html" title="cpp/include/opendnp3/ControlRelayOutputBlock.h" alt="" coords="8,83,341,112"/>
-<area shape="rect" id="node5" href="$d0/d91/_i_command_handler_8h.html" title="cpp/include/opendnp3/ICommandHandler.h" alt="" coords="27,160,323,189"/>
-<area shape="rect" id="node9" href="$d5/d47/_i_command_processor_8h.html" title="cpp/include/opendnp3/ICommandProcessor.h" alt="" coords="347,160,656,189"/>
-<area shape="rect" id="node7" href="$d4/d23/_simple_command_handler_8h.html" title="cpp/include/opendnp3/SimpleCommandHandler.h" alt="" coords="5,237,344,267"/>
-</map>

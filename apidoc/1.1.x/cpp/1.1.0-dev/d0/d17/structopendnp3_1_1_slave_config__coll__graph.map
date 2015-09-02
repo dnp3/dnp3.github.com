@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$d0/d84/structopendnp3_1_1_grp_var.html" title="Group/Variation pair." alt="" coords="5,243,144,363"/>
-<area shape="rect" id="node6" href="$d0/de9/classopendnp3_1_1_i_stack_observer.html" title="{opendnp3::IStackObserver\n||+ ~IStackObserver()\l+ OnStateChange()\l}" alt="" coords="168,251,357,354"/>
-<area shape="rect" id="node14" href="$d1/dce/structopendnp3_1_1_event_max_config.html" title="Configuration of max event counts." alt="" coords="704,225,899,380"/>
-<area shape="rect" id="node17" href="$dc/d80/structopendnp3_1_1_class_mask.html" title="Structure that holds settings information for the Class1, Class2, Class3 events." alt="" coords="1079,208,1239,397"/>
-</map>

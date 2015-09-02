@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node5" href="$d6/d5f/classopendnp3_1_1_typed_data_point.html" title="{opendnp3::TypedDataPoint\&lt; uint32_t \&gt;\n|+ MAX_VALUE\l+ MIN_VALUE\l# mValue\l|+ GetValue()\l+ operator==()\l+ SetValue()\l+ ShouldGenerateEvent()\l+ ToString()\l# TypedDataPoint()\l&#45; TypedDataPoint()\l}" alt="" coords="5,624,280,848"/>
-<area shape="rect" id="node9" href="$d6/d5f/classopendnp3_1_1_typed_data_point.html" title="{opendnp3::TypedDataPoint\&lt; double \&gt;\n|+ MAX_VALUE\l+ MIN_VALUE\l# mValue\l|+ GetValue()\l+ operator==()\l+ SetValue()\l+ ShouldGenerateEvent()\l+ ToString()\l# TypedDataPoint()\l&#45; TypedDataPoint()\l}" alt="" coords="304,624,571,848"/>
-<area shape="rect" id="node2" href="$d3/dab/classopendnp3_1_1_data_point.html" title="Base class shared by all of the DataPoint types." alt="" coords="167,6,324,282"/>
-<area shape="rect" id="node7" href="$de/d83/classopendnp3_1_1_counter.html" title="Counters are used for describing generally increasing values (non&#45;negative!)." alt="" coords="59,899,227,1053"/>
-<area shape="rect" id="node11" href="$dc/dd8/classopendnp3_1_1_analog.html" title="Analogs are used for variable data points that usuually reflect a real world value." alt="" coords="301,899,469,1053"/>
-<area shape="rect" id="node13" href="$d7/d24/classopendnp3_1_1_setpoint_status.html" title="Describes the last set value of the setpoint." alt="" coords="493,899,683,1053"/>
-</map>
